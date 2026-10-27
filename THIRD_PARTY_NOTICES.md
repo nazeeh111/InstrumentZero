@@ -10,4 +10,4 @@ InstrumentZero's code is MIT; that license does not replace data licenses.
 
 NumPy/SciPy use BSD-style licenses and are installed as dependencies. Optional development tools include Matplotlib (PSF-based) and pytest/Ruff/build (MIT). Preserve installed packages' notices if bundling an environment. FFmpeg decoded the OGG; no FFmpeg executable is redistributed.
 
-Bluesky, Bluesky Adaptive, PyVISA, PyMeasure, BoTorch, Phyphox, PaperVizAgent and brag informed the research or implementation route. Their source and experiment definitions are not vendored. The Phyphox client independently validates a public schema. Primary links and boundaries: [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md).
+Research references and implementation boundaries are documented in [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md). No third-party experiment definitions are vendored. The Phyphox client independently validates a public schema.

@@ -70,9 +70,3 @@ For a candidate h=[1,F] with independent variance R, covariance update is `C_new
 ## Acoustic second domain
 
 Use damped sinusoid or stationary sinusoid with offset, initialize frequency from SciPy spectral analysis, and fit with SciPy least squares. Detect insufficient duration, Nyquist violations, clipping, weak peak prominence, multiple strong peaks and nonstationarity. A largest FFT peak alone does not distinguish a fundamental from a harmonic. Report sample-clock uncertainty as a shared relative frequency floor. Non-overlapping windows can test repeatability but must not be passed off as independent recordings. An interval conditional on a sinusoid model does not establish that the model is physically correct.
-
-## Presentation capabilities investigated
-
-[PaperVizAgent](https://raw.githubusercontent.com/google-research/papervizagent/main/README.md), formerly PaperBanana, is an Apache-2.0 reference-driven illustration pipeline with model API configuration and image-generation calls. Its source describes demonstration rather than production use. Under this project's no-separately-billed-API constraint, do not provision keys. Use audited local SVG diagrams and charts rendered from actual benchmark outputs. No PaperVizAgent execution was attempted.
-
-[/brag](https://raw.githubusercontent.com/latent-spaces/brag/main/README.md) is a free agent skill for short project launch videos, with an output folder retaining plan/composition/share copy/video. The classic path uses Hyperframes, Node 22+ and FFmpeg; optional narration uses Kokoro. The local installed brag skill can be read later if video is built. Capture genuine working product flows and label replay/simulation. Do not add invented experimental success or synthetic “scientific footage.” No brag execution was attempted during this investigation.
