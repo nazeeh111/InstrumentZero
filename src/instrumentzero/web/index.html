@@ -8,17 +8,20 @@
   <title>INSTRUMENTZERO LAB · Scientific experiment compiler</title>
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
+  <script src="/acquisition.js" defer></script>
   <script src="/app.js" defer></script>
+  <script src="/validation.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to workspace</a>
   <aside class="sidebar">
     <a href="/" class="brand" aria-label="InstrumentZero Lab home"><img src="/mark.svg" width="34" height="34" alt=""><span>INSTRUMENT<span class="brand-zero">ZERO</span><small>THE MEASUREMENT WORKSPACE</small></span></a>
-    <div class="edition"><span class="status-dot"></span> LOCAL LAB <span>v0.1</span></div>
+    <div class="edition"><span class="status-dot"></span> LOCAL LAB <span>v0.2</span></div>
     <nav aria-label="Workspace views" class="view-nav">
       <button class="nav-item active" data-view="workspace" aria-current="page"><span class="nav-symbol">◫</span> Workspace <span>01</span></button>
       <button class="nav-item" data-view="protocol"><span class="nav-symbol">≡</span> Protocol <span>02</span></button>
       <button class="nav-item" data-view="evidence"><span class="nav-symbol">⊙</span> Evidence <span>03</span></button>
+      <button class="nav-item" data-view="validation"><span class="nav-symbol">↻</span> Replay & validation <span>04</span></button>
     </nav>
     <div class="sidebar-label">MEASUREMENT FAMILIES</div>
     <div class="domain-list" role="group" aria-label="Measurement family">
@@ -62,6 +65,19 @@
 
       <section id="protocol-view" class="view-panel" hidden><div class="section-banner"><div class="eyebrow">THE EXECUTABLE PROCEDURE</div><h2>Every assumption,<br>before every action.</h2><p>Compile the question in Workspace to generate a protocol for the selected family. Physical setup and load changes require human supervision.</p></div><div id="protocol-content" class="protocol-content"><p class="empty-copy">No protocol compiled yet.</p></div></section>
       <section id="evidence-view" class="view-panel" hidden><div class="section-banner"><div class="eyebrow">A RESULT IS MORE THAN A NUMBER</div><h2>Inspect its chain<br>of evidence.</h2><p>Source data, assumptions, calibration and limitations travel with the result. An export includes reproducible analysis materials.</p></div><div id="evidence-content"><p class="empty-copy">Analyze data to inspect provenance and model checks.</p></div></section>
+      <section id="validation-view" class="view-panel" hidden>
+        <div class="section-banner"><div class="eyebrow">RECORDED EVIDENCE / CONTROLLED SOFTWARE TESTS</div><h2>Replay the decision.<br>Inspect the reference.</h2><p>Real recorded responses are revealed after selection. Public calibration evidence and simulated acceptance tests retain their own limits.</p></div>
+        <div id="validation-message" role="status" aria-live="polite" class="message" hidden></div>
+        <section class="panel validation-card"><div class="panel-heading"><div><span class="eyebrow">01 / RECORDED STIFFNESS WORKFLOW</span><h2>An experiment, one observation at a time.</h2></div><span class="source-badge">RECORDED REPLAY</span></div>
+          <p class="validation-copy">Only the source's available actuator settings can be selected. The measured force at a future setting and the held-out reference responses are excluded from selection. No physical action occurs.</p>
+          <div class="replay-controls"><label>Selection policy<select id="replay-policy"><option value="information_gain">Gaussian stiffness design proxy</option><option value="endpoint">Conventional endpoint</option><option value="fixed_uniform">Fixed chronological order</option><option value="random">Random available record</option></select></label><label>Total observations<select id="replay-budget"><option>3</option><option selected>4</option><option>5</option></select></label><button class="button button-dark" id="replay-load">Start recorded replay ↗</button><button class="button button-outline" id="replay-export">Export replay ↗</button></div>
+          <div id="replay-stages" class="replay-stages"></div><div class="replay-body"><div><div id="replay-chart" role="img" aria-label="Revealed source observations" class="main-chart"></div><div id="replay-stage-detail" class="validation-copy"></div><button class="button button-orange" id="replay-next" disabled>Replay next stage →</button></div><div id="replay-summary" class="replay-summary"></div></div>
+        </section>
+        <section class="panel validation-card"><div class="panel-heading"><div><span class="eyebrow">02 / PTB CALIBRATED ACOUSTIC REFERENCE</span><h2>Two instruments. One recorded field.</h2></div><button class="button button-outline" id="ptb-export">Export calibrated evidence ↗</button></div><p class="validation-copy">The PTB source supplies calibrated sound-level surfaces from HiFUSPEx and a separate ultrasound level meter. The 20 kHz scene contains 1,089 paired positions. The scans were sequential, not simultaneous.</p>
+          <div id="ptb-metrics" class="validation-metrics"></div><div class="ptb-body"><div id="ptb-heatmap" role="img" aria-label="Measured minus reference sound-level differences"></div><div id="ptb-calibration" class="validation-copy"></div></div><div id="ptb-limits" class="validation-copy"></div>
+        </section>
+        <section class="panel validation-card"><div class="panel-heading"><div><span class="eyebrow">03 / SYNTHETIC SOFTWARE ACCEPTANCE</span><h2>Test the software. Keep the boundary.</h2></div><span class="source-badge">SIMULATION / MOCKS</span></div><div id="software-validation" class="validation-copy">Loading retained acceptance evidence…</div></section>
+      </section>
       <footer class="page-footer"><span>INSTRUMENTZERO / OPEN SCIENTIFIC SOFTWARE</span><span>Measure carefully. Report honestly.</span><a href="https://github.com/nazeeh111/InstrumentZero" target="_blank" rel="noreferrer">GitHub ↗</a></footer>
     </main>
   </div>

@@ -8,19 +8,29 @@
 
 InstrumentZero is a local scientific experiment compiler: supported questions become a procedure, a calibration contract, executable analysis, an uncertainty estimate, and a proposed next observation. Its Lab shows the assumptions beside the signal. It runs without an API key or paid model service.
 
-> **Research preview v0.1.** Working force–deflection and acoustic workflows, authentic recordings, a reproducible adaptive-design study, and exportable analysis. The compiler is bounded to these models. Physical camera/microphone capture and independently calibrated webcam stiffness have not been validated in this release. See [evidence and limits](docs/VALIDATION.md).
+> **v0.2: validation without physical equipment.** Public calibrated recordings, executable adaptive replay, 600 acoustic stress cases and 18 production acquisition checks extend the Lab. Recorded measurements, replay and simulations remain visibly distinct. [Validation evidence and remaining limits](docs/NO_EQUIPMENT_VALIDATION.md).
 
 ## From an ordinary question to a measurement
 
 **“How stiff is this spring?”** Supply known forces and calibrated video positions or an SI displacement CSV. Fit the unknown offset and compliance, propagate shared length/force calibration uncertainty, and convert a positive compliance interval into stiffness. Then compare feasible loads by expected variance reduction per second. A recommendation remains a proposal until someone actually makes the measurement.
 
-The controlled example estimates **80.68 N/m** for a simulated 80 N/m spring and proposes **2 N** as the next load. It is a labeled simulation. A recorded nickel-sensor example uses real loading/unloading observations and flags model inconsistency under explicitly assumed noise. Precision cannot rescue an incorrect model.
+The **recorded stiffness replay** starts from three source observations, selects an existing actuator setting before revealing its measured force, updates stiffness, then checks four held-out reference-force readings. On this small source experiment, error falls from **0.07186 to 0.04005 N RMSE**. A conventional endpoint choice ties the selector; another observation slightly worsens reference error. These are reused real records, not newly executed physical actions. [Run and reproduce the replay](docs/REPLAY_VALIDATION.md).
+
+![Actual recorded replay and held-out reference check](assets/validation-v0.2/held-out-reference.jpg)
+
+[Watch the recording-based validation walkthrough](https://github.com/nazeeh111/InstrumentZero/releases/download/v0.2.0/instrumentzero-validation-demo.mp4) · [Editable source](assets/validation-v0.2/)
+
+The separate controlled example estimates **80.68 N/m** for a simulated 80 N/m spring and proposes **2 N** as the next load. It is labeled synthetic. Fine-noise inference can reject the authentic nickel curve rather than certify an inconsistent model.
 
 ![Working Lab: model, residuals and a proposed next measurement](assets/lab-model-v0.1.jpg)
 
-[Watch the 20-second Lab walkthrough](https://github.com/nazeeh111/InstrumentZero/releases/download/v0.1.0/instrumentzero-demo.mp4) · [Editable walkthrough source](assets/launch-v0.1/)
+[Watch the original Lab walkthrough](https://github.com/nazeeh111/InstrumentZero/releases/download/v0.1.0/instrumentzero-demo.mp4) · [Editable source](assets/launch-v0.1/)
 
 **“What is this sound’s resonance?”** Import audio or deliberately record a microphone. The authentic CC0 tuning-fork example estimates approximately **440.21 Hz**. Its creator-stated 440 Hz label is a nominal comparison, not a traceable frequency certificate. Its envelope includes resolution, window variability and declared clock uncertainty; arbitrary-audio 95% coverage is not established.
+
+The new **PTB calibrated acoustic comparison** uses 1,089 matched recorded sound-level observations from HiFUSPEx and a separate reference instrument. It reproduces the published **0.71 dB mean difference / 5.95 dB twice spatial SD**. Both source microphones include pressure-sensitivity calibration metadata. That does not establish a sample-clock certificate or independently reconstructed raw-WAV-to-Pa conversion.
+
+![Actual source-calibrated acoustic reference comparison](examples/ptb-validation-v0.2/calibrated-reference.png)
 
 ## Run the Lab
 
@@ -64,6 +74,8 @@ flowchart LR
 instrumentzero demo stiffness
 instrumentzero demo stiffness --recorded
 instrumentzero demo acoustic
+instrumentzero replay --budget 4 --policy information_gain --export replay.zip
+instrumentzero validate-calibrated --export ptb-evidence.zip
 instrumentzero compile examples/stiffness-spec.json
 instrumentzero analyze examples/stiffness-spec.json examples/stiffness.csv --export spring.zip
 instrumentzero analyze examples/acoustic-spec.json data/tuning-fork-440Hz.wav --export resonance.zip
@@ -106,6 +118,11 @@ The [data inventory](docs/DATA.md) separates unchanged source files, conversions
 python -m pip install -e '.[dev]'
 python -m pytest -q
 python data/reproduce.py
+python data/calibrated-v2/verify.py
+node --test tests/browser-acquisition.mjs
+python scripts/validate_acquisition.py --output examples/my-acquisition-check
+python scripts/validate_acoustic.py --trials 100 --output examples/my-acoustic-check
+python scripts/validate_calibrated.py --output examples/my-ptb-check
 python scripts/validate_real.py --output examples/my-validation
 python scripts/benchmark.py --trials 150 --training-states 1500 --output benchmarks/my-run
 ```

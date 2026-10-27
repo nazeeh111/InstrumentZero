@@ -1,0 +1,22 @@
+Dataset of the high-frequency and ultrasound personal exposimeter (HiFUSPEx)
+validation scans performed in three simulated industrial sound fields.
+
+Authors: Michal Cieslak, Christoph Kling, Andrea Wolff
+Publisher: Physikalisch-Technische Bundesanstalt (PTB), 2022
+DOI: 10.7795/720.20211214
+https://oar.ptb.de/resources/show/10.7795/720.20211214
+
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Related primary paper: Cieslak M., Kling C., Wolff A. (2021).
+Development of a Personal Ultrasound Exposimeter for Occupational Health
+Monitoring. Int. J. Environ. Res. Public Health 18(24), 13289.
+https://doi.org/10.3390/ijerph182413289
+
+InstrumentZero selected a small subset of the archive on October 26, 2026.
+All retained files under hifuspex/ are unchanged. Original ZIP entry names,
+checksums and extraction method are recorded in provenance.json. InstrumentZero
+adds this documentation, verification code and independently recomputed summary
+statistics. These additions do not imply endorsement by the original authors.

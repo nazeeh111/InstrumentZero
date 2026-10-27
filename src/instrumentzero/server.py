@@ -5,12 +5,15 @@ import json
 import secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlsplit
 
+from . import __version__
 from .acoustic import analyze_audio, load_wav
+from .calibrated import calibrated_acoustic_validation, export_calibrated_package
 from .engine import analyze_stiffness, compile_experiment
 from .examples import acoustic_example, recorded_stiffness_example, stiffness_example
 from .export import export_package
+from .replay import export_replay_package, recorded_stiffness_replay
 from .spec import MeasurementError
 
 
@@ -48,7 +51,7 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
             path = urlsplit(self.path).path
             try:
                 if path == "/api/health":
-                    return self._send({"status": "ok", "version": "0.1.0", "device_connections": 0})
+                    return self._send({"status": "ok", "version": __version__, "device_connections": 0})
                 if path == "/api/session":
                     return self._send({"token": token})
                 if path == "/api/demo/stiffness":
@@ -63,9 +66,30 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
                         raise MeasurementError("Recorded acoustic fixture is absent.")
                     samples, rate = load_wav(paths[0])
                     return self._send({"samples": samples.tolist(), "sample_rate_hz": rate})
+                if path in {"/api/replay", "/api/replay/export"}:
+                    query = parse_qs(urlsplit(self.path).query)
+                    options = {"measurement_budget": int(query.get("budget", ["4"])[0]),
+                               "policy": query.get("policy", ["information_gain"])[0],
+                               "random_seed": int(query.get("seed", ["0"])[0])}
+                    if path.endswith("/export"):
+                        return self._send(export_replay_package(data_dir, **options), content_type="application/zip")
+                    return self._send(recorded_stiffness_replay(data_dir, **options))
+                if path == "/api/validation/ptb":
+                    return self._send(calibrated_acoustic_validation(data_dir))
+                if path == "/api/validation/ptb/export":
+                    return self._send(export_calibrated_package(data_dir), content_type="application/zip")
+                if path == "/api/validation/software":
+                    examples = data_dir.parent/"examples"
+                    acoustic = examples/"acoustic-acceptance-v0.2/results.json"
+                    acquisition = examples/"acquisition-acceptance-v0.2/results.json"
+                    return self._send({"acoustic": json.loads(acoustic.read_text()) if acoustic.is_file() else None,
+                                       "acquisition": json.loads(acquisition.read_text()) if acquisition.is_file() else None,
+                                       "physical_hardware_acceptance": "Not verified by these software tests"})
                 allowed = {"/": ("index.html", "text/html; charset=utf-8"),
                            "/index.html": ("index.html", "text/html; charset=utf-8"),
                            "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+                           "/acquisition.js": ("acquisition.js", "text/javascript; charset=utf-8"),
+                           "/validation.js": ("validation.js", "text/javascript; charset=utf-8"),
                            "/style.css": ("style.css", "text/css; charset=utf-8"),
                            "/mark.svg": ("mark.svg", "image/svg+xml"),
                            "/favicon.svg": ("favicon.svg", "image/svg+xml")}

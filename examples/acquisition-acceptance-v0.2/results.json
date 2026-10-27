@@ -1,0 +1,27 @@
+{
+  "evidence_kind": "synthetic_media_and_mocked_browser_software_acceptance",
+  "live_hardware_run": false,
+  "tests_passed": 18,
+  "counts": {
+    "tests": 18,
+    "pass": 18,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "node_version": "v24.14.0",
+  "source_sha256": {
+    "src/instrumentzero/web/acquisition.js": "fd4d6ff6ba99a008b121b7151f6da1abf14dcec6ce8e12a5b8bfdc1d06d93278",
+    "src/instrumentzero/web/app.js": "df0cf8cf49098345e7251f574a9e49aa82214b1e982c00d2b9e8906df3ac67df",
+    "tests/browser-acquisition.mjs": "5996c20e59f3bbf5e4ddae0c2f893050dc1cfc82b3bb493eaaefa7f514713135",
+    "scripts/validate_acquisition.py": "79fe584afc719c03f6e5d9f94e74fd6299f5ac6ff2b86d3a0baad0a42695e411"
+  },
+  "summary": "Shared marker/audio transforms and actual Lab capture entrypoints were exercised. Tests include stop/cancellation races, stale permissions, domain changes, lost markers, known synthetic positions, mono/stereo preparation and duration limits.",
+  "limits": [
+    "Synthetic frames and tones are not new physical measurements.",
+    "Mocked devices do not establish operating-system permission or hardware behavior.",
+    "Node audio mocks test the WebAudio adapter contract, not browser anti-alias filter quality.",
+    "Optical calibration, physical sample clocks, room response and independent physical accuracy remain unverified."
+  ]
+}

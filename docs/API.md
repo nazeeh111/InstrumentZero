@@ -35,6 +35,10 @@ Results contain `quantity`, `fit`, `calibration`, `warnings`, `assumptions`, `ne
 
 ## Local HTTP
 
+Recording-based v0.2 additions: `instrumentzero.replay.recorded_stiffness_replay(data_dir, measurement_budget=4, policy='information_gain')` executes source-record revelation and a held-out reference check; `export_replay_package` preserves its inputs/code/notices. Its finite covariance/information fields explicitly describe Gaussian design proxies, not moments of its one-degree-of-freedom Student-t inference distribution. `instrumentzero.calibrated.calibrated_acoustic_validation(data_dir)` compares the retained source-calibrated PTB sound-level matrices and inspects raw ADC spectra without inventing raw-to-Pa gains or a clock certificate. `export_calibrated_package` exports that complete source evidence.
+
+GET `/api/replay?budget=4&policy=information_gain&seed=0` and `/api/replay/export` use the same replay options. GET `/api/validation/ptb` and `/api/validation/ptb/export` use the retained calibrated source. GET `/api/validation/software` reads retained acceptance artifacts, labeled synthetic/mocked. These endpoints require the source fixtures alongside the installation; the cloned quickstart supplies them. The core wheel does not silently download third-party data.
+
 The Lab binds `127.0.0.1`. GET `/api/health`, `/api/session`, `/api/demo/stiffness`, `/api/demo/stiffness/recorded`, `/api/demo/acoustic` and `/api/demo/acoustic/samples`. POST `/api/compile` takes a specification; `/api/analyze` takes `{spec,rows}`; `/api/audio` takes `{spec,samples,sample_rate_hz}`; `/api/export` takes the same observation payload and returns ZIP bytes. Error responses contain `error` and a non-200 status.
 
 Same-origin browser POSTs are accepted. A non-browser client obtains the per-process `/api/session` token and sends `X-InstrumentZero-Token` with `Content-Type: application/json`. Host and Origin are validated. Requests are capped at 64 MiB; this single-user server is not designed for untrusted network exposure or concurrent heavy jobs.

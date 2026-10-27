@@ -1,0 +1,9 @@
+file 'selected-record.jpg'
+duration 5
+file 'revealed-record.jpg'
+duration 5
+file 'held-out-reference.jpg'
+duration 5
+file 'calibrated-reference.jpg'
+duration 5
+file 'calibrated-reference.jpg'

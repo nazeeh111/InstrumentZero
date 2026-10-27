@@ -1,0 +1,616 @@
+{
+  "domain": "stiffness",
+  "source_kind": "recorded replay",
+  "source_name": "Dera et al. nickel-sensor recorded loading/unloading",
+  "policy": "information_gain",
+  "measurement_budget": 4,
+  "live_hardware_run": false,
+  "environment": {
+    "python": "3.13.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "plan": {
+    "title": "Estimate stiffness from recorded actuator settings and calibrated-reference forces",
+    "compiler": "Bounded recorded force-on-displacement experiment compiler",
+    "identifiable": true,
+    "identifiability_scope": "Statistical slope at distinct calibrated actuator settings; full physical uncertainty remains unavailable",
+    "steps": [
+      "Freeze source/settings manifest and held-out unloading split",
+      "Check source units and estimate a residual-scale proxy from predeclared loading points1\u20133",
+      "Infer an initial conditional stiffness",
+      "Select an existing unrevealed setting by covariance gain",
+      "Reveal that recorded response once and update inference",
+      "Check held-out unloading reference forces after selection",
+      "Export raw bytes, stages and limitations"
+    ],
+    "execution": "recorded revelation; no physical actuation"
+  },
+  "calibration": {
+    "initial_point_ids": [
+      1,
+      2,
+      3
+    ],
+    "residual_scale_sd_n": 0.015889975960575745,
+    "residual_scale_degrees_of_freedom": 1,
+    "noise_estimate_frozen_before_selection": true,
+    "noise_basis": "Initial linear-model residual scatter, not repeated observations or a source noise certificate",
+    "length_scale_relative_sd_assumption": 0.01,
+    "force_scale_relative_sd_assumption": 0.005,
+    "scale_basis": "Declared shared sensitivity assumptions; not source-certified values"
+  },
+  "initial_result": {
+    "status": "conditional_recorded_estimate",
+    "physical_accuracy_verified": false,
+    "quantity": {
+      "name": "Force-on-actuator-displacement stiffness",
+      "value": 21419.29678170391,
+      "unit": "N/m",
+      "interval_95": [
+        14990.176733601058,
+        28087.61735235557
+      ],
+      "target_reached": false
+    },
+    "intercept_n": 0.048725564008667774,
+    "gaussian_design_covariance_proxy": [
+      [
+        0.0002072581247929908,
+        -5.658642941331556
+      ],
+      [
+        -5.658642941331556,
+        260127.62525275315
+      ]
+    ],
+    "slope_t_scale_n_per_m": 510.02708286203114,
+    "assumed_shared_scale_floor_n_per_m": 239.47501817066208,
+    "model_check": {
+      "initial_residual_sse_n2": 0.00025249133602767506,
+      "full_residual_sse_n2": 0.00025249133602767506,
+      "incremental_f_statistic": null,
+      "numerator_degrees_of_freedom": 0,
+      "denominator_degrees_of_freedom": 1,
+      "incremental_f_check_p": null,
+      "screen_passed": null,
+      "interpretation": "Orthogonal residual-increment F(n-3,1) check under iid Gaussian linear errors; unassessed for initial3, very low power with one denominator degree of freedom; no physical model validation"
+    },
+    "fit": {
+      "x": [
+        0.0,
+        2.121e-05,
+        4.405e-05
+      ],
+      "observed": [
+        0.042,
+        0.516,
+        0.986
+      ],
+      "predicted": [
+        0.048725564008667774,
+        0.5030288487486076,
+        0.992245587242725
+      ],
+      "residuals": [
+        -0.006725564008667771,
+        0.012971151251392365,
+        -0.006245587242725059
+      ],
+      "x_label": "Actuator-derived displacement / m",
+      "y_label": "Recorded reference force / N"
+    },
+    "samples": 3,
+    "observed_point_ids": [
+      1,
+      2,
+      3
+    ],
+    "design_proxy_method": "The finite covariance/gain fields are plug-in known-noise Gaussian design proxies. They are not the variance or mutual information of the Student-t(df=1) inference distribution, whose variance is infinite.",
+    "uncertainty_method": "Student-t slope draws using frozen initial noise estimate (one residual degree of freedom), plus shared declared length/force scale sensitivity; not total physical accuracy"
+  },
+  "result": {
+    "status": "conditional_recorded_estimate",
+    "physical_accuracy_verified": false,
+    "quantity": {
+      "name": "Force-on-actuator-displacement stiffness",
+      "value": 20234.522349594674,
+      "unit": "N/m",
+      "interval_95": [
+        17393.180746494836,
+        23192.83916427366
+      ],
+      "target_reached": false
+    },
+    "intercept_n": 0.06928627288726996,
+    "gaussian_design_covariance_proxy": [
+      [
+        0.0001440419296755934,
+        -2.015921665886264
+      ],
+      [
+        -2.015921665886264,
+        50222.263724122175
+      ]
+    ],
+    "slope_t_scale_n_per_m": 224.10324344846546,
+    "assumed_shared_scale_floor_n_per_m": 226.22883732966227,
+    "model_check": {
+      "initial_residual_sse_n2": 0.00025249133602767506,
+      "full_residual_sse_n2": 0.001940965016576303,
+      "incremental_f_statistic": 6.687253935570913,
+      "numerator_degrees_of_freedom": 1,
+      "denominator_degrees_of_freedom": 1,
+      "incremental_f_check_p": 0.23490634969475355,
+      "screen_passed": true,
+      "interpretation": "Orthogonal residual-increment F(n-3,1) check under iid Gaussian linear errors; unassessed for initial3, very low power with one denominator degree of freedom; no physical model validation"
+    },
+    "fit": {
+      "x": [
+        0.0,
+        2.121e-05,
+        4.405e-05,
+        9.53e-05
+      ],
+      "observed": [
+        0.042,
+        0.516,
+        0.986,
+        1.982
+      ],
+      "predicted": [
+        0.06928627288726996,
+        0.49846049192217295,
+        0.9606169823869154,
+        1.9976362528036424
+      ],
+      "residuals": [
+        -0.02728627288726996,
+        0.01753950807782706,
+        0.02538301761308459,
+        -0.015636252803642448
+      ],
+      "x_label": "Actuator-derived displacement / m",
+      "y_label": "Recorded reference force / N"
+    },
+    "samples": 4,
+    "observed_point_ids": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "design_proxy_method": "The finite covariance/gain fields are plug-in known-noise Gaussian design proxies. They are not the variance or mutual information of the Student-t(df=1) inference distribution, whose variance is infinite.",
+    "uncertainty_method": "Student-t slope draws using frozen initial noise estimate (one residual degree of freedom), plus shared declared length/force scale sensitivity; not total physical accuracy"
+  },
+  "stages": [
+    {
+      "stage": "initial_inference",
+      "source_kind": "recorded replay",
+      "revealed_point_ids": [
+        1,
+        2,
+        3
+      ],
+      "result": {
+        "status": "conditional_recorded_estimate",
+        "physical_accuracy_verified": false,
+        "quantity": {
+          "name": "Force-on-actuator-displacement stiffness",
+          "value": 21419.29678170391,
+          "unit": "N/m",
+          "interval_95": [
+            14990.176733601058,
+            28087.61735235557
+          ],
+          "target_reached": false
+        },
+        "intercept_n": 0.048725564008667774,
+        "gaussian_design_covariance_proxy": [
+          [
+            0.0002072581247929908,
+            -5.658642941331556
+          ],
+          [
+            -5.658642941331556,
+            260127.62525275315
+          ]
+        ],
+        "slope_t_scale_n_per_m": 510.02708286203114,
+        "assumed_shared_scale_floor_n_per_m": 239.47501817066208,
+        "model_check": {
+          "initial_residual_sse_n2": 0.00025249133602767506,
+          "full_residual_sse_n2": 0.00025249133602767506,
+          "incremental_f_statistic": null,
+          "numerator_degrees_of_freedom": 0,
+          "denominator_degrees_of_freedom": 1,
+          "incremental_f_check_p": null,
+          "screen_passed": null,
+          "interpretation": "Orthogonal residual-increment F(n-3,1) check under iid Gaussian linear errors; unassessed for initial3, very low power with one denominator degree of freedom; no physical model validation"
+        },
+        "fit": {
+          "x": [
+            0.0,
+            2.121e-05,
+            4.405e-05
+          ],
+          "observed": [
+            0.042,
+            0.516,
+            0.986
+          ],
+          "predicted": [
+            0.048725564008667774,
+            0.5030288487486076,
+            0.992245587242725
+          ],
+          "residuals": [
+            -0.006725564008667771,
+            0.012971151251392365,
+            -0.006245587242725059
+          ],
+          "x_label": "Actuator-derived displacement / m",
+          "y_label": "Recorded reference force / N"
+        },
+        "samples": 3,
+        "observed_point_ids": [
+          1,
+          2,
+          3
+        ],
+        "design_proxy_method": "The finite covariance/gain fields are plug-in known-noise Gaussian design proxies. They are not the variance or mutual information of the Student-t(df=1) inference distribution, whose variance is infinite.",
+        "uncertainty_method": "Student-t slope draws using frozen initial noise estimate (one residual degree of freedom), plus shared declared length/force scale sensitivity; not total physical accuracy"
+      }
+    },
+    {
+      "stage": "next_record_selected",
+      "source_kind": "recorded replay",
+      "status": "selected_existing_record",
+      "selection": {
+        "point": 5,
+        "displacement_m": 9.53e-05,
+        "cost_observations": 1,
+        "gaussian_stiffness_variance_reduction_proxy": 209905.361528631,
+        "gaussian_fractional_reduction_proxy_including_assumed_floor": 0.6611694153610922,
+        "gaussian_joint_information_proxy_nats": 0.9661980102638184,
+        "gaussian_stiffness_information_proxy_nats": 0.8223569740379282
+      },
+      "candidates": [
+        {
+          "point": 4,
+          "displacement_m": 6.966e-05,
+          "cost_observations": 1,
+          "gaussian_stiffness_variance_reduction_proxy": 166331.99172948362,
+          "gaussian_fractional_reduction_proxy_including_assumed_floor": 0.5239200415213231,
+          "gaussian_joint_information_proxy_nats": 0.6538680726922762,
+          "gaussian_stiffness_information_proxy_nats": 0.5100270364663858
+        },
+        {
+          "point": 5,
+          "displacement_m": 9.53e-05,
+          "cost_observations": 1,
+          "gaussian_stiffness_variance_reduction_proxy": 209905.361528631,
+          "gaussian_fractional_reduction_proxy_including_assumed_floor": 0.6611694153610922,
+          "gaussian_joint_information_proxy_nats": 0.9661980102638184,
+          "gaussian_stiffness_information_proxy_nats": 0.8223569740379282
+        }
+      ],
+      "reason": "Select only an unrevealed existing source record by known actuator setting; no new force or displacement is synthesized",
+      "physical_actuation": false
+    },
+    {
+      "stage": "record_revealed_and_inference_updated",
+      "source_kind": "recorded replay",
+      "observation": {
+        "point": 5,
+        "branch": "loading",
+        "displacement_m": 9.53e-05,
+        "stage_position_mm": 24.29208,
+        "reference_force_n": 1.982
+      },
+      "result": {
+        "status": "conditional_recorded_estimate",
+        "physical_accuracy_verified": false,
+        "quantity": {
+          "name": "Force-on-actuator-displacement stiffness",
+          "value": 20234.522349594674,
+          "unit": "N/m",
+          "interval_95": [
+            17393.180746494836,
+            23192.83916427366
+          ],
+          "target_reached": false
+        },
+        "intercept_n": 0.06928627288726996,
+        "gaussian_design_covariance_proxy": [
+          [
+            0.0001440419296755934,
+            -2.015921665886264
+          ],
+          [
+            -2.015921665886264,
+            50222.263724122175
+          ]
+        ],
+        "slope_t_scale_n_per_m": 224.10324344846546,
+        "assumed_shared_scale_floor_n_per_m": 226.22883732966227,
+        "model_check": {
+          "initial_residual_sse_n2": 0.00025249133602767506,
+          "full_residual_sse_n2": 0.001940965016576303,
+          "incremental_f_statistic": 6.687253935570913,
+          "numerator_degrees_of_freedom": 1,
+          "denominator_degrees_of_freedom": 1,
+          "incremental_f_check_p": 0.23490634969475355,
+          "screen_passed": true,
+          "interpretation": "Orthogonal residual-increment F(n-3,1) check under iid Gaussian linear errors; unassessed for initial3, very low power with one denominator degree of freedom; no physical model validation"
+        },
+        "fit": {
+          "x": [
+            0.0,
+            2.121e-05,
+            4.405e-05,
+            9.53e-05
+          ],
+          "observed": [
+            0.042,
+            0.516,
+            0.986,
+            1.982
+          ],
+          "predicted": [
+            0.06928627288726996,
+            0.49846049192217295,
+            0.9606169823869154,
+            1.9976362528036424
+          ],
+          "residuals": [
+            -0.02728627288726996,
+            0.01753950807782706,
+            0.02538301761308459,
+            -0.015636252803642448
+          ],
+          "x_label": "Actuator-derived displacement / m",
+          "y_label": "Recorded reference force / N"
+        },
+        "samples": 4,
+        "observed_point_ids": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "design_proxy_method": "The finite covariance/gain fields are plug-in known-noise Gaussian design proxies. They are not the variance or mutual information of the Student-t(df=1) inference distribution, whose variance is infinite.",
+        "uncertainty_method": "Student-t slope draws using frozen initial noise estimate (one residual degree of freedom), plus shared declared length/force scale sensitivity; not total physical accuracy"
+      }
+    },
+    {
+      "stage": "held_out_reference_check",
+      "source_kind": "recorded replay",
+      "initial": {
+        "held_out_points": 4,
+        "held_out_point_ids": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "rmse_reference_force_n": 0.07185605227653658,
+        "mean_prediction_error_n": 0.036431564598241754,
+        "max_absolute_reference_force_error_n": 0.13231345386407,
+        "predictions": [
+          {
+            "point": 12,
+            "displacement_m": 7.524e-05,
+            "reference_force_n": 1.528,
+            "predicted_force_n": 1.66031345386407
+          },
+          {
+            "point": 13,
+            "displacement_m": 4.668e-05,
+            "reference_force_n": 1.006,
+            "predicted_force_n": 1.0485783377786062
+          },
+          {
+            "point": 14,
+            "displacement_m": 2.028e-05,
+            "reference_force_n": 0.519,
+            "predicted_force_n": 0.48310890274162305
+          },
+          {
+            "point": 15,
+            "displacement_m": 0.0,
+            "reference_force_n": 0.042,
+            "predicted_force_n": 0.048725564008667774
+          }
+        ],
+        "verification": "Recorded held-out unloading reference observations; independent source force transducer, same specimen/setup; no complete uncertainty certificate",
+        "computed_after_all_selection": true
+      },
+      "final": {
+        "held_out_points": 4,
+        "held_out_point_ids": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "rmse_reference_force_n": 0.04005204265933657,
+        "mean_prediction_error_n": 0.014873542415360633,
+        "max_absolute_reference_force_error_n": 0.0637317344707733,
+        "predictions": [
+          {
+            "point": 12,
+            "displacement_m": 7.524e-05,
+            "reference_force_n": 1.528,
+            "predicted_force_n": 1.5917317344707733
+          },
+          {
+            "point": 13,
+            "displacement_m": 4.668e-05,
+            "reference_force_n": 1.006,
+            "predicted_force_n": 1.0138337761663494
+          },
+          {
+            "point": 14,
+            "displacement_m": 2.028e-05,
+            "reference_force_n": 0.519,
+            "predicted_force_n": 0.4796423861370499
+          },
+          {
+            "point": 15,
+            "displacement_m": 0.0,
+            "reference_force_n": 0.042,
+            "predicted_force_n": 0.06928627288726996
+          }
+        ],
+        "verification": "Recorded held-out unloading reference observations; independent source force transducer, same specimen/setup; no complete uncertainty certificate",
+        "computed_after_all_selection": true
+      }
+    }
+  ],
+  "observed_records": [
+    {
+      "point": 1,
+      "branch": "loading",
+      "displacement_m": 0.0,
+      "stage_position_mm": 24.38738,
+      "reference_force_n": 0.042
+    },
+    {
+      "point": 2,
+      "branch": "loading",
+      "displacement_m": 2.121e-05,
+      "stage_position_mm": 24.36617,
+      "reference_force_n": 0.516
+    },
+    {
+      "point": 3,
+      "branch": "loading",
+      "displacement_m": 4.405e-05,
+      "stage_position_mm": 24.34333,
+      "reference_force_n": 0.986
+    },
+    {
+      "point": 5,
+      "branch": "loading",
+      "displacement_m": 9.53e-05,
+      "stage_position_mm": 24.29208,
+      "reference_force_n": 1.982
+    }
+  ],
+  "unrevealed_available_settings": [
+    {
+      "point": 4,
+      "displacement_m": 6.966e-05,
+      "noise_sd_n": 0.015889975960575745
+    }
+  ],
+  "reference_check": {
+    "held_out_points": 4,
+    "held_out_point_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "rmse_reference_force_n": 0.04005204265933657,
+    "mean_prediction_error_n": 0.014873542415360633,
+    "max_absolute_reference_force_error_n": 0.0637317344707733,
+    "predictions": [
+      {
+        "point": 12,
+        "displacement_m": 7.524e-05,
+        "reference_force_n": 1.528,
+        "predicted_force_n": 1.5917317344707733
+      },
+      {
+        "point": 13,
+        "displacement_m": 4.668e-05,
+        "reference_force_n": 1.006,
+        "predicted_force_n": 1.0138337761663494
+      },
+      {
+        "point": 14,
+        "displacement_m": 2.028e-05,
+        "reference_force_n": 0.519,
+        "predicted_force_n": 0.4796423861370499
+      },
+      {
+        "point": 15,
+        "displacement_m": 0.0,
+        "reference_force_n": 0.042,
+        "predicted_force_n": 0.06928627288726996
+      }
+    ],
+    "verification": "Recorded held-out unloading reference observations; independent source force transducer, same specimen/setup; no complete uncertainty certificate",
+    "computed_after_all_selection": true
+  },
+  "initial_reference_check": {
+    "held_out_points": 4,
+    "held_out_point_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "rmse_reference_force_n": 0.07185605227653658,
+    "mean_prediction_error_n": 0.036431564598241754,
+    "max_absolute_reference_force_error_n": 0.13231345386407,
+    "predictions": [
+      {
+        "point": 12,
+        "displacement_m": 7.524e-05,
+        "reference_force_n": 1.528,
+        "predicted_force_n": 1.66031345386407
+      },
+      {
+        "point": 13,
+        "displacement_m": 4.668e-05,
+        "reference_force_n": 1.006,
+        "predicted_force_n": 1.0485783377786062
+      },
+      {
+        "point": 14,
+        "displacement_m": 2.028e-05,
+        "reference_force_n": 0.519,
+        "predicted_force_n": 0.48310890274162305
+      },
+      {
+        "point": 15,
+        "displacement_m": 0.0,
+        "reference_force_n": 0.042,
+        "predicted_force_n": 0.048725564008667774
+      }
+    ],
+    "verification": "Recorded held-out unloading reference observations; independent source force transducer, same specimen/setup; no complete uncertainty certificate",
+    "computed_after_all_selection": true
+  },
+  "provenance": {
+    "source_doi": "10.17632/syjkdyzmxj.1",
+    "license": "CC-BY-4.0",
+    "source_csv": "nickel-sensor/force_displacement.csv",
+    "source_sha256": "e0c0e36900d5483da2913b87e671d1ad435105217a81d66fb020df3f604122e4",
+    "selection_rule": "loading, actuator displacement<=0.0001m; initial sourcepoints1,2,3",
+    "validation_rule": "unloading, actuator displacement<=0.0001m; never used for design or fitting",
+    "random_seed": 0,
+    "inference_draw_seed": 73913,
+    "source_creators": [
+      "Wojciech J. Dera",
+      "Hanna Konopacka",
+      "Dariusz M. Jarz\u0105bek"
+    ]
+  },
+  "warnings": [
+    "Recorded replay only: no new live experiment, sensor connection or physical action occurred.",
+    "The five low-displacement loading records are one specimen's existing observations, not repeatable independent trials.",
+    "Candidate actuator settings are available metadata; future measured forces and all unloading responses are excluded from selection.",
+    "Initial three records supply only one residual degree of freedom. This is a residual-scale proxy, not a repeated-measurement noise calibration; noise/model diagnostics are weak.",
+    "Student-t(df=1) has infinite variance. Finite design covariance and information gains are plug-in Gaussian proxies, not moments or information of that inference distribution.",
+    "The 1% length and .5% force values are default sensitivity assumptions, not source calibration certificates; custom values are reported explicitly.",
+    "The source reports calibrated independent force-reference hardware but does not supply a complete uncertainty certificate or independent specimen-deflection sensor.",
+    "Actuator displacement can include slack/backlash. Loading/unloading reference disagreement remains real model error.",
+    "The source reports instability above about3N; this replay uses only recorded actuator settings<=0.1mm and grants no permission for physical loading.",
+    "Gaussian covariance-based selection depends on design history and noise, not measured response values; no outcome-adaptive physics discovery is claimed.",
+    "The ordinary product inference may reject linearity under its own stated fine-noise assumptions; this replay does not override that rejection."
+  ]
+}

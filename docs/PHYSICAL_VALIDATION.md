@@ -1,6 +1,6 @@
-# Supervised physical acceptance still required
+# Optional future physical acceptance
 
-The current release processes authentic external observations and checks held-out reference measurements. It does not establish actual-device camera/microphone acceptance or an independently calibrated webcam stiffness result. This checklist specifies the missing evidence; unchecked items are not completed experiments.
+The recording-based release validates public calibrated observations, recorded adaptive decisions and software acquisition invariants without requiring physical equipment. It does not establish actual-device camera/microphone acceptance or an independently calibrated webcam stiffness result. This optional future checklist describes how to extend that evidence; unchecked items are not completed experiments. See [the no-equipment validation report](NO_EQUIPMENT_VALIDATION.md) for completed work and explicit limits.
 
 ## Camera stiffness workflow
 

@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Abdul-Hadi
     given-names: Nazeeh
-version: 0.1.0
+version: 0.2.0
 date-released: 2026-10-26
 url: https://github.com/nazeeh111/InstrumentZero
 license: MIT

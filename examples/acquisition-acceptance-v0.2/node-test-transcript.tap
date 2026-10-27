@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: synthetic marker translation preserves known pixel displacement across frames
+ok 1 - synthetic marker translation preserves known pixel displacement across frames
+  ---
+  duration_ms: 11.020708
+  type: 'test'
+  ...
+# Subtest: synthetic brightness changes preserve a visible marker centroid without mixing separate background objects
+ok 2 - synthetic brightness changes preserve a visible marker centroid without mixing separate background objects
+  ---
+  duration_ms: 3.0555
+  type: 'test'
+  ...
+# Subtest: lost, overlarge, transparent, fast-moving and edge-clipped markers fail explicitly
+ok 3 - lost, overlarge, transparent, fast-moving and edge-clipped markers fail explicitly
+  ---
+  duration_ms: 2.385292
+  type: 'test'
+  ...
+# Subtest: settled capture rejects insufficient, moving and nonfinite positions
+ok 4 - settled capture rejects insufficient, moving and nonfinite positions
+  ---
+  duration_ms: 0.335333
+  type: 'test'
+  ...
+# Subtest: audio preparation preserves mono samples and explicit equal-weight stereo downmix
+ok 5 - audio preparation preserves mono samples and explicit equal-weight stereo downmix
+  ---
+  duration_ms: 13.631416
+  type: 'test'
+  ...
+# Subtest: audio rate and duration contract is explicit, finite and never pads a recording beyond available samples
+ok 6 - audio rate and duration contract is explicit, finite and never pads a recording beyond available samples
+  ---
+  duration_ms: 11.391292
+  type: 'test'
+  ...
+# Subtest: browser resampling adapter requests the declared mono rate/count and validates returned data
+ok 7 - browser resampling adapter requests the declared mono rate/count and validates returned data
+  ---
+  duration_ms: 0.692125
+  type: 'test'
+  ...
+# Subtest: actual Lab camera entrypoint disposes a permission response received after Stop
+ok 8 - actual Lab camera entrypoint disposes a permission response received after Stop
+  ---
+  duration_ms: 5.194833
+  type: 'test'
+  ...
+# Subtest: actual Lab camera cannot restart tracking when a canceled video.play promise resolves
+ok 9 - actual Lab camera cannot restart tracking when a canceled video.play promise resolves
+  ---
+  duration_ms: 2.101917
+  type: 'test'
+  ...
+# Subtest: actual Lab camera ignores an older denied request after a newer start succeeds
+ok 10 - actual Lab camera ignores an older denied request after a newer start succeeds
+  ---
+  duration_ms: 5.119125
+  type: 'test'
+  ...
+# Subtest: actual Lab tracker rejects out-of-frame crops and requires reselection after marker loss
+ok 11 - actual Lab tracker rejects out-of-frame crops and requires reselection after marker loss
+  ---
+  duration_ms: 2.13325
+  type: 'test'
+  ...
+# Subtest: actual Lab tracker and settled capture retain known synthetic positions in exported-row coordinates
+ok 12 - actual Lab tracker and settled capture retain known synthetic positions in exported-row coordinates
+  ---
+  duration_ms: 117.668375
+  type: 'test'
+  ...
+# Subtest: actual Lab microphone cannot attach an old stream to a newer resumed audio context
+ok 13 - actual Lab microphone cannot attach an old stream to a newer resumed audio context
+  ---
+  duration_ms: 2.035708
+  type: 'test'
+  ...
+# Subtest: actual Lab microphone honors Stop while an earlier AudioContext close is pending
+ok 14 - actual Lab microphone honors Stop while an earlier AudioContext close is pending
+  ---
+  duration_ms: 0.84
+  type: 'test'
+  ...
+# Subtest: actual Lab audio import is canceled by a domain round trip while decoding
+ok 15 - actual Lab audio import is canceled by a domain round trip while decoding
+  ---
+  duration_ms: 1.161541
+  type: 'test'
+  ...
+# Subtest: actual Lab file import hands the shared mono preparation to analysis without changing same-rate samples
+ok 16 - actual Lab file import hands the shared mono preparation to analysis without changing same-rate samples
+  ---
+  duration_ms: 15.887
+  type: 'test'
+  ...
+# Subtest: actual Lab capture preparation trims delayed audio callbacks to the selected capture duration
+ok 17 - actual Lab capture preparation trims delayed audio callbacks to the selected capture duration
+  ---
+  duration_ms: 18.135459
+  type: 'test'
+  ...
+# Subtest: actual Lab Stop cancels a captured signal still waiting for browser resampling
+ok 18 - actual Lab Stop cancels a captured signal still waiting for browser resampling
+  ---
+  duration_ms: 3.858792
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 499.105416

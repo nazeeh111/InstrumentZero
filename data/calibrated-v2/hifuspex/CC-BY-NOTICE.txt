@@ -1,0 +1,16 @@
+Source subset: Cieslak, Michal; Kling, Christoph; Wolff, Andrea (2022).
+Dataset of the high-frequency and ultrasound personal exposimeter (HiFUSPEx)
+validation scans performed in three simulated industrial sound fields.
+Physikalisch-Technische Bundesanstalt (PTB).
+https://doi.org/10.7795/720.20211214
+
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+The original PDF, calibration tables, WAV recordings, analysis outputs and
+sound-level matrices are unchanged. InstrumentZero selected these entries and
+adds documentation, provenance and independently recomputed comparison
+statistics. Selection does not imply endorsement by PTB or the authors.
+Original archive paths, CRC32 values, local SHA-256 values and retrieval method
+are recorded in provenance.json. The complete source ZIP was not downloaded.

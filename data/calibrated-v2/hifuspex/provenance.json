@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "retrieved_on_user_timezone": "2026-10-26",
+  "paths_relative_to": "data/calibrated-v2",
+  "source_dataset": {
+    "title": "Dataset of the high-frequency and ultrasound personal exposimeter (HiFUSPEx) validation scans performed in three simulated industrial sound fields",
+    "doi": "10.7795/720.20211214",
+    "url": "https://oar.ptb.de/resources/show/10.7795/720.20211214",
+    "creators": [
+      "Michal Cieslak",
+      "Christoph Kling",
+      "Andrea Wolff"
+    ],
+    "publisher": "Physikalisch-Technische Bundesanstalt (PTB)",
+    "publication_year": 2022,
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "acquisition_kind": "externally_recorded_physical_microphone_measurements_of_loudspeaker_generated_laboratory_sound_field",
+    "is_live_instrumentzero_capture": false,
+    "is_numerically_simulated_sensor_data": false
+  },
+  "source_archive": {
+    "download_url": "https://oar.ptb.de/files/download/681c538753218de84f08e895",
+    "filename": "Dataset.zip",
+    "bytes": 599142922,
+    "sha256_published_by_ptb": "4c7b7ad64ade89030b710d614f267dbceb85884b73a169280af2d32228f5afdf",
+    "archive_sha256_locally_verified": false,
+    "retrieval_method": "HTTP206 byte ranges, public ZIP central directory then selected local headers and compressed entries; source CRC32 and entry lengths verified",
+    "zip_directory_bytes": 12766404,
+    "full_archive_downloaded": false
+  },
+  "primary_paper": {
+    "title": "Development of a Personal Ultrasound Exposimeter for Occupational Health Monitoring",
+    "doi": "10.3390/ijerph182413289",
+    "url": "https://doi.org/10.3390/ijerph182413289",
+    "publication_date": "2021-12-16",
+    "journal": "International Journal of Environmental Research and Public Health",
+    "volume": 18,
+    "article": 13289,
+    "locally_retained_full_text": false,
+    "decisive_locations": {
+      "calibration": "Section 4.5",
+      "registration_and_sequential_scanning": "Sections 4.6 and 4.7",
+      "comparison_reference": "Table 1, Welding Machine (20 kHz) without PG, Standing/Left",
+      "scope_of_uncertainty": "Section 7"
+    }
+  },
+  "calibration": {
+    "quantity": "acoustic pressure sensitivity",
+    "sensitivity_unit": "dB re 1 V/Pa",
+    "source_reported_traceability": "PTB national standard by substitution using two primary calibrated reference microphones; electrical response calibrated at same frequencies",
+    "source_reported_range_hz": [
+      8000,
+      100000
+    ],
+    "source_frequency_step_hz": 1000,
+    "at20000hz": {
+      "hifuspex_sensitivity_db_re1V_per_Pa": -47.99307244,
+      "uspm_sensitivity_db_re1V_per_Pa": -45.19387001,
+      "hifuspex_expanded_uncertainty_db": 0.6,
+      "uspm_expanded_uncertainty_db": 0.6,
+      "coverage_factor": 2,
+      "correlation_between_devices": "not provided"
+    },
+    "files": [
+      "hifuspex/HiFUSPEx_CalibrationData.txt",
+      "hifuspex/USPM_CalibrationData.txt"
+    ],
+    "sample_clock_calibration_certificate_retained": false,
+    "quantitative_frequency_reference_uncertainty_hz": null,
+    "warning": "Pressure-sensitivity uncertainty is not frequency uncertainty or total per-point SPL uncertainty. The HiFUSPEx table has conflicting duplicate frequencies from 89,000 to 100,000 Hz; the 20,000 Hz row is unique."
+  },
+  "comparison": {
+    "quantity": "source-reported calibrated average sound-pressure level per scan position",
+    "unit": "dB re 20 micropascals",
+    "scene": "WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar",
+    "matrix_paths": {
+      "hifuspex": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/CalculatedFigureSPL/2021-05-11-LEFT-EAR10mmResolutionStanding_HiFUSPEx_X17.csv",
+      "uspm": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/CalculatedFigureSPL/2021-05-11-LEFT-EAR10mmResolutionStanding_USPM_X17.csv"
+    },
+    "shape": [
+      33,
+      33
+    ],
+    "paired_positions": 1089,
+    "difference_definition": "HiFUSPEx level minus USPM reference level at matching source matrix index",
+    "source_matrix_layout": "Dataset_description.pdf page 3: columns correspond to Z, rows to Y; per-cell physical-coordinate reconstruction was not independently verified.",
+    "source_spatial_extent_cm": {
+      "y": [
+        -16,
+        16
+      ],
+      "z": [
+        -14,
+        18
+      ],
+      "resolution": 1,
+      "plane_distance_from_ear_cm": 10
+    },
+    "time_registration": "same day, HiFUSPEx morning and USPM afternoon; not simultaneous",
+    "microphone_length_registration": "The HiFUSPEx microphone is 0.9 cm longer; source scanner patterns were adjusted by 9 mm along Y, per paper Section 4.7.",
+    "local_recomputed_mean_difference_db": 0.7050944807107379,
+    "local_recomputed_twice_spatial_sample_sd_db": 5.949589269857169,
+    "published_rounded_mean_difference_db": 0.71,
+    "published_rounded_expanded_quantity_db": 5.95,
+    "published_metric_reproduction": "Twice the sample standard deviation of paired spatial differences reproduces Table 1; this is not uncertainty of the mean.",
+    "twice_standard_error_of_mean_db_for_contrast_only": 0.18029058393506572,
+    "formal_overall_per_point_accuracy_pass": false,
+    "raw_to_map_processing_reproduced": false,
+    "map_filter_weighting_note": "Matrices have no title row naming the weighting. The source describes average SPL maps and its Figure 4 example labels L_ZF. Do not equate map values with newly computed unweighted RMS or Z_EQ without verifying source processing."
+  },
+  "recordings": [
+    {
+      "device": "HiFUSPEx",
+      "path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/SelectedRawData/CP_20210511_122320_543_-605000_-31000_-385000.wav",
+      "wave_format": {
+        "format_code": 3,
+        "channels": 1,
+        "sample_rate_hz": 250000,
+        "bits": 32,
+        "block_alignment": 4,
+        "data_bytes": 3080192,
+        "sample_count": 770048,
+        "duration_s": 3.080192
+      },
+      "source_position_id": 543,
+      "quantity_of_raw_sample": "uncalibrated digital ADC output; do not interpret as pascals",
+      "raw_to_pa_verified": false,
+      "frequency_calibration_verified": false,
+      "registration": "Source-selected CP point; 9 mm scanner Y difference accounts for microphone length per paper Section 4.7."
+    },
+    {
+      "device": "USPM",
+      "path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/SelectedRawData/CP_20210511_173646_543_-605000_-40000_-385000_ch_0.wav",
+      "wave_format": {
+        "format_code": 3,
+        "channels": 1,
+        "sample_rate_hz": 192000,
+        "bits": 32,
+        "block_alignment": 4,
+        "data_bytes": 1536004,
+        "sample_count": 384001,
+        "duration_s": 2.0000052083333335
+      },
+      "source_position_id": 543,
+      "quantity_of_raw_sample": "uncalibrated digital ADC output; do not interpret as pascals",
+      "raw_to_pa_verified": false,
+      "frequency_calibration_verified": false,
+      "registration": "Source-selected CP point; 9 mm scanner Y difference accounts for microphone length per paper Section 4.7."
+    }
+  ],
+  "retained_source_files": [
+    {
+      "local_path": "hifuspex/Dataset_description.pdf",
+      "original_archive_path": "Dataset_description.pdf",
+      "bytes": 532477,
+      "sha256": "e22cf8b57ec78852072943463189a41beb9f3a915a0fa0f11ca9f760f6b67fed",
+      "zip_crc32": "c79bcb98",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 172659051,
+      "compressed_bytes": 498239,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/HiFUSPEx_CalibrationData.txt",
+      "original_archive_path": "HiFUSPEx_CalibrationData.txt",
+      "bytes": 2792,
+      "sha256": "ab4d7b605ef1c25b930b13795d58c72506ad31661790949f58eaef75a02b4284",
+      "zip_crc32": "e0a54e9e",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 173157343,
+      "compressed_bytes": 1023,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/USPM_CalibrationData.txt",
+      "original_archive_path": "USPM_CalibrationData.txt",
+      "bytes": 2518,
+      "sha256": "482be7e30ea94727fb73d53c2d3d347681d78352c2e0d1d29b957b4968263e0d",
+      "zip_crc32": "5730d454",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 173158424,
+      "compressed_bytes": 944,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/CalculatedFigureSPL/2021-05-11-LEFT-EAR10mmResolutionStanding_HiFUSPEx_X17.csv",
+      "original_archive_path": "WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/CalculatedFigureSPL/2021-05-11-LEFT-EAR10mmResolutionStanding_HiFUSPEx_X17.csv",
+      "bytes": 27258,
+      "sha256": "1709a8d74144a1258d47ffa91d51da7d834fbcaaf069d3997049a5151cb0efc1",
+      "zip_crc32": "00ad09c8",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 405729259,
+      "compressed_bytes": 6405,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/SelectedRawData/CP_20210511_122320_543_-605000_-31000_-385000.csv",
+      "original_archive_path": "WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/SelectedRawData/CP_20210511_122320_543_-605000_-31000_-385000.csv",
+      "bytes": 1631,
+      "sha256": "b20a88bf7db59db3aaeaf028769368aeb4739ff93f43e5c21e513b57e4f2a36f",
+      "zip_crc32": "3a727b89",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 407217046,
+      "compressed_bytes": 615,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/SelectedRawData/CP_20210511_122320_543_-605000_-31000_-385000.wav",
+      "original_archive_path": "WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/HiFUSPEx/SelectedRawData/CP_20210511_122320_543_-605000_-31000_-385000.wav",
+      "bytes": 3080250,
+      "sha256": "11ca881a327e1f66c8820de88612f0ec64c04fb39bb72df947e7631bd885b3bc",
+      "zip_crc32": "f18efbb3",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 407217825,
+      "compressed_bytes": 1610275,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/CalculatedFigureSPL/2021-05-11-LEFT-EAR10mmResolutionStanding_USPM_X17.csv",
+      "original_archive_path": "WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/CalculatedFigureSPL/2021-05-11-LEFT-EAR10mmResolutionStanding_USPM_X17.csv",
+      "bytes": 27258,
+      "sha256": "ca50e6465fac35e85423c71001aeed609050b38516373ae790661892c2108810",
+      "zip_crc32": "32a05f71",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 423324996,
+      "compressed_bytes": 11502,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/SelectedRawData/CP_20210511_173646_543_-605000_-40000_-385000_ch_0.wav",
+      "original_archive_path": "WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/SelectedRawData/CP_20210511_173646_543_-605000_-40000_-385000_ch_0.wav",
+      "bytes": 1536048,
+      "sha256": "71f63e7165460bce186bba79282a016e4a092b0ce63c7475f759b42257ba39e6",
+      "zip_crc32": "a17f9657",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 424012421,
+      "compressed_bytes": 925652,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    },
+    {
+      "local_path": "hifuspex/WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/SelectedRawData/CP_offline_analysis_20210511_173646_543_-605000_-40000_-385000_ch_0.wav_2021-05-12_08.42.38.txt",
+      "original_archive_path": "WeldingMachine/WithoutProtectionGrid/20kHz/Standing/LeftEar/USPM/SelectedRawData/CP_offline_analysis_20210511_173646_543_-605000_-40000_-385000_ch_0.wav_2021-05-12_08.42.38.txt",
+      "bytes": 36636,
+      "sha256": "55a266d846a584ddfc7109be904cbc81e301db7fd551a44d8c34b61734a73086",
+      "zip_crc32": "bd0fb602",
+      "zip_crc32_verified": true,
+      "archive_local_header_offset": 424938238,
+      "compressed_bytes": 8615,
+      "zip_compression_method": 8,
+      "transformations": "none; original extracted bytes retained"
+    }
+  ],
+  "limits": [
+    "Original calibration certificates/signatures and full calibration covariance are not retained.",
+    "Source USPM offline analysis warns original recording metadata was not found and fallback settings were used; referenced electrical-response files are not retained.",
+    "No complete independently verified raw float-WAV normalization/electrical compensation into pascals is claimed.",
+    "The paired calibrated maps validate a source-recorded cross-instrument comparison, not new live hardware behavior or general absolute accuracy.",
+    "Sequential scan differences include spatial sensitivity, drift, registration and noise; repeated calibration checks do not eliminate those effects.",
+    "The prototype had only partial type/performance testing according to the paper; no occupational exposure certification is implied."
+  ]
+}

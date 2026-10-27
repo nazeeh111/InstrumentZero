@@ -1,0 +1,221 @@
+{
+  "evidence_kind": "recorded replay; no new physical acquisition",
+  "source_doi": "10.17632/syjkdyzmxj.1",
+  "source_experiments": 1,
+  "new_physical_experiments": 0,
+  "reused_source_loading_records": 5,
+  "held_out_source_unloading_records": 4,
+  "independent_trials": false,
+  "random_ordering_denominator": 2,
+  "random_ordering_interpretation": "Both possible next recorded settings, each weight one half; reused same data, not independent physical trials",
+  "source_sha256": "e0c0e36900d5483da2913b87e671d1ad435105217a81d66fb020df3f604122e4",
+  "replay_source_sha256": "677d667631d15b9b6f0bd859296c4e9a123a5d0e367cf9833fae8eb7b741a91a",
+  "script_sha256": "ec09826ea314cd39c03feb18550401554cdb3c60e6813bbff281ca0bdddfdd75",
+  "results": [
+    {
+      "policy": "information_gain",
+      "random_seed": 0,
+      "measurement_budget": 4,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04005204265933657,
+      "stiffness_n_per_m": 20234.522349594674,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17393.180746494836,
+        23192.83916427366
+      ],
+      "incremental_model_f_check_p": 0.23490634969475355
+    },
+    {
+      "policy": "fixed_uniform",
+      "random_seed": 0,
+      "measurement_budget": 4,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.05161372074980072,
+      "stiffness_n_per_m": 20741.337090933925,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        16856.48815571111,
+        24768.66098226734
+      ],
+      "incremental_model_f_check_p": 0.34477476009828634
+    },
+    {
+      "policy": "endpoint",
+      "random_seed": 0,
+      "measurement_budget": 4,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04005204265933657,
+      "stiffness_n_per_m": 20234.522349594674,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17393.180746494836,
+        23192.83916427366
+      ],
+      "incremental_model_f_check_p": 0.23490634969475355
+    },
+    {
+      "policy": "random",
+      "random_seed": 0,
+      "measurement_budget": 4,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04005204265933657,
+      "stiffness_n_per_m": 20234.522349594674,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17393.180746494836,
+        23192.83916427366
+      ],
+      "incremental_model_f_check_p": 0.23490634969475355
+    },
+    {
+      "policy": "random",
+      "random_seed": 1,
+      "measurement_budget": 4,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.05161372074980072,
+      "stiffness_n_per_m": 20741.337090933925,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        16856.48815571111,
+        24768.66098226734
+      ],
+      "incremental_model_f_check_p": 0.34477476009828634
+    },
+    {
+      "policy": "information_gain",
+      "random_seed": 0,
+      "measurement_budget": 5,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        5,
+        4
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04138663392652877,
+      "stiffness_n_per_m": 20280.630835376025,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17620.078116541787,
+        23052.495527901112
+      ],
+      "incremental_model_f_check_p": 0.3527855549060588
+    },
+    {
+      "policy": "fixed_uniform",
+      "random_seed": 0,
+      "measurement_budget": 5,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04138663392652877,
+      "stiffness_n_per_m": 20280.630835376025,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17620.078116541787,
+        23052.495527901112
+      ],
+      "incremental_model_f_check_p": 0.3527855549060588
+    },
+    {
+      "policy": "endpoint",
+      "random_seed": 0,
+      "measurement_budget": 5,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        5,
+        4
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04138663392652877,
+      "stiffness_n_per_m": 20280.630835376025,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17620.078116541787,
+        23052.495527901112
+      ],
+      "incremental_model_f_check_p": 0.3527855549060588
+    },
+    {
+      "policy": "random",
+      "random_seed": 0,
+      "measurement_budget": 5,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        5,
+        4
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04138663392652877,
+      "stiffness_n_per_m": 20280.630835376025,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17620.078116541787,
+        23052.495527901112
+      ],
+      "incremental_model_f_check_p": 0.3527855549060588
+    },
+    {
+      "policy": "random",
+      "random_seed": 1,
+      "measurement_budget": 5,
+      "observed_point_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "initial_rmse_reference_force_n": 0.07185605227653658,
+      "final_rmse_reference_force_n": 0.04138663392652877,
+      "stiffness_n_per_m": 20280.630835376025,
+      "status": "conditional_recorded_estimate",
+      "interval_95_n_per_m": [
+        17620.078116541787,
+        23052.495527901112
+      ],
+      "incremental_model_f_check_p": 0.3527855549060588
+    }
+  ]
+}

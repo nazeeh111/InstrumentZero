@@ -1,0 +1,146 @@
+{
+  "evidence_kind": "controlled_synthetic_acoustic_software_acceptance",
+  "live_hardware_run": false,
+  "config": {
+    "trials_per_regime": 100,
+    "seed": 20261026,
+    "sample_rate_hz": 8000,
+    "duration_seconds": 2,
+    "declared_clock_relative_sd": 0.001,
+    "drift_clock_sd_multiplier": 4
+  },
+  "source_sha256": {
+    "scripts/validate_acoustic.py": "9581062e183cb3e3f3985c7dec1b2d8c426e4227026703e7bd3579cc177c5dcb",
+    "src/instrumentzero/acoustic.py": "6e9a4bb01e51feb4179f36573ea4696579a41acaa42fd43eb3d606774f6dba9d",
+    "src/instrumentzero/spec.py": "170cfbec471b50765eead94a21b890cfe0a289b6c8e41c526dd073e0a3c5675f"
+  },
+  "environment": {
+    "python": "3.13.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "summaries": [
+    {
+      "regime": "nominal_clock",
+      "trials": 100,
+      "accepted_as_reliable": 100,
+      "reliable_fraction": 1.0,
+      "expected_reject": false,
+      "model_rejection_fraction": 0.0,
+      "rejection_wilson_95": [
+        3.469446951953614e-18,
+        0.03699349820698568
+      ],
+      "scalar_reference_trials": 100,
+      "envelope_coverage": 0.95,
+      "coverage_wilson_95": [
+        0.8882495307680808,
+        0.9784563208456319
+      ],
+      "frequency_rmse_hz": 0.9152129943064968,
+      "mean_half_width_hz": 1.703437873811697,
+      "mean_analysis_seconds": 0.2636264650314115
+    },
+    {
+      "regime": "unmodeled_clock_drift",
+      "trials": 100,
+      "accepted_as_reliable": 100,
+      "reliable_fraction": 1.0,
+      "expected_reject": false,
+      "model_rejection_fraction": 0.0,
+      "rejection_wilson_95": [
+        3.469446951953614e-18,
+        0.03699349820698568
+      ],
+      "scalar_reference_trials": 100,
+      "envelope_coverage": 0.43,
+      "coverage_wilson_95": [
+        0.33733298524110106,
+        0.5278461045078768
+      ],
+      "frequency_rmse_hz": 3.4316600466358094,
+      "mean_half_width_hz": 1.8275913972981863,
+      "mean_analysis_seconds": 0.5333656062767841
+    },
+    {
+      "regime": "nearby_tones",
+      "trials": 100,
+      "accepted_as_reliable": 0,
+      "reliable_fraction": 0.0,
+      "expected_reject": true,
+      "model_rejection_fraction": 1.0,
+      "rejection_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "scalar_reference_trials": 0,
+      "envelope_coverage": null,
+      "coverage_wilson_95": null,
+      "frequency_rmse_hz": null,
+      "mean_half_width_hz": null,
+      "mean_analysis_seconds": 0.45726738290162755
+    },
+    {
+      "regime": "chirp",
+      "trials": 100,
+      "accepted_as_reliable": 0,
+      "reliable_fraction": 0.0,
+      "expected_reject": true,
+      "model_rejection_fraction": 1.0,
+      "rejection_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "scalar_reference_trials": 0,
+      "envelope_coverage": null,
+      "coverage_wilson_95": null,
+      "frequency_rmse_hz": null,
+      "mean_half_width_hz": null,
+      "mean_analysis_seconds": 0.18120340787805617
+    },
+    {
+      "regime": "clipped",
+      "trials": 100,
+      "accepted_as_reliable": 0,
+      "reliable_fraction": 0.0,
+      "expected_reject": true,
+      "model_rejection_fraction": 1.0,
+      "rejection_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "scalar_reference_trials": 0,
+      "envelope_coverage": null,
+      "coverage_wilson_95": null,
+      "frequency_rmse_hz": null,
+      "mean_half_width_hz": null,
+      "mean_analysis_seconds": 0.0897072187566664
+    },
+    {
+      "regime": "noise_only",
+      "trials": 100,
+      "accepted_as_reliable": 0,
+      "reliable_fraction": 0.0,
+      "expected_reject": true,
+      "model_rejection_fraction": 1.0,
+      "rejection_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "scalar_reference_trials": 0,
+      "envelope_coverage": null,
+      "coverage_wilson_95": null,
+      "frequency_rmse_hz": null,
+      "mean_half_width_hz": null,
+      "mean_analysis_seconds": 0.05660728172049858
+    }
+  ],
+  "limitations": [
+    "Every signal is numerically generated, not a physical microphone recording.",
+    "Wilson intervals describe repeated-trial proportions, not measurement-parameter confidence intervals.",
+    "Empirical coverage applies only to the declared distributions and finite trials.",
+    "A wrong sample clock is not identifiable from a stationary tone alone; the drift negative result is expected.",
+    "A chirp or two-tone signal has no single scalar resonance truth in this test; only model rejection is evaluated.",
+    "These tests do not establish actual permissions, operating-system/device behavior or total physical accuracy."
+  ]
+}

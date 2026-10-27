@@ -1,6 +1,8 @@
 import http.client
+import io
 import json
 import threading
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -64,3 +66,31 @@ def test_invalid_json_shapes_are_explained(lab_server):
     assert "object" in json.loads(body)["error"]
     code, _, _ = request(lab_server, "/../../pyproject.toml")
     assert code == 404
+
+
+def test_recorded_replay_routes_and_portable_source(lab_server):
+    code, body, _ = request(lab_server, '/api/replay?budget=4&policy=information_gain')
+    assert code == 200
+    replay = json.loads(body)
+    assert replay['result']['observed_point_ids'] == [1, 2, 3, 5]
+    assert not replay['live_hardware_run']
+    assert replay['reference_check']['computed_after_all_selection']
+    code, body, mime = request(lab_server, '/api/replay/export?budget=4&policy=endpoint')
+    assert code == 200 and mime == 'application/zip'
+    with zipfile.ZipFile(io.BytesIO(body)) as archive:
+        assert 'LICENSE' in archive.namelist()
+        assert json.loads(archive.read('replay.json'))['policy'] == 'endpoint'
+    code, _, _ = request(lab_server, '/api/replay?budget=999')
+    assert code == 422
+
+
+def test_calibrated_reference_and_production_acquisition_assets(lab_server):
+    code, body, _ = request(lab_server, '/api/validation/ptb')
+    assert code == 200
+    result = json.loads(body)
+    assert result['comparison']['positions'] == 1089
+    assert result['quantity']['interval_95'] is None
+    assert not result['waveforms']['USPM']['clock_calibration_verified']
+    code, body, mime = request(lab_server, '/acquisition.js')
+    assert code == 200 and 'javascript' in mime
+    assert b'InstrumentZeroAcquisition' in body
