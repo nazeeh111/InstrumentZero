@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "instrumentzero"
+version = "0.1.0"
+description = "A local scientific experiment compiler for calibrated measurements and adaptive design"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "Nazeeh Abdul-Hadi"}]
+dependencies = ["numpy>=2.1,<3", "scipy>=1.14,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1", "build>=1.2,<2", "matplotlib>=3.9,<4"]
+instruments = ["pyvisa>=1.14,<2"]
+
+[project.scripts]
+instrumentzero = "instrumentzero.cli:main"
+
+[project.urls]
+Repository = "https://github.com/nazeeh111/InstrumentZero"
+Issues = "https://github.com/nazeeh111/InstrumentZero/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/instrumentzero"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"LICENSE" = "instrumentzero/LICENSE"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

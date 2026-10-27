@@ -1,0 +1,37 @@
+{
+  "domain": "acoustic",
+  "question": "What is the tuning fork's dominant resonance?",
+  "equipment": [
+    "recorded measurement-microphone WAV"
+  ],
+  "budget_seconds": 30,
+  "target_relative_uncertainty": 0.001,
+  "min_frequency_hz": 200,
+  "max_frequency_hz": 1500,
+  "calibration": {
+    "sample_clock_relative_sd": 0.0001
+  },
+  "source_kind": "recorded",
+  "source_name": "jmuehlhans: Tuning Fork 440 Hz, Resonance Box (CC0)",
+  "reference": {
+    "value": 440,
+    "unit": "Hz",
+    "kind": "creator-stated nominal frequency; not traceably calibrated"
+  },
+  "calibration_basis": "The 100 ppm sample-clock uncertainty is a declared example assumption, not a calibration certificate from the recording creator.",
+  "source_limitations": [
+    "The 100 ppm clock uncertainty is an example assumption, not a calibration certificate. The nominal 440 Hz label does not establish physical truth."
+  ],
+  "source_attribution": [
+    {
+      "title": "Tuning Fork 440 Hz, Resonance Box",
+      "creators": [
+        "jmuehlhans"
+      ],
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tuning-fork-440Hz.ogg",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "modifications": "Commons OGG derivative decoded to mono PCM WAV; no resampling, normalization or frequency correction. Original Freesound recording ID220747."
+    }
+  ]
+}

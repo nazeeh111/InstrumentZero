@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-10-26",
+  "all_sources_are_recorded_not_live": true,
+  "datasets": [
+    {
+      "id": "tuning-fork-440Hz",
+      "kind": "authentic_recorded_audio",
+      "creator": "jmuehlhans",
+      "original_recording_publication": "2014-02-26",
+      "commons_upload": "2019-03-26",
+      "title": "Tuning Fork 440 Hz, Resonance Box",
+      "source_url": "https://freesound.org/people/jmuehlhans/sounds/220747/",
+      "redistribution_page": "https://commons.wikimedia.org/wiki/File:Tuning-fork-440Hz.ogg",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Tuning-fork-440Hz.ogg",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "raw_file": "tuning-fork-440Hz.ogg",
+      "derived_file": "tuning-fork-440Hz.wav",
+      "commons_reported_sha1": "3130de1dada08416f9261327a2c0fb83a88907d1",
+      "acquisition_description": "Creator reports a mono tuning fork/resonance box recording with Arnold Esper K4 measurement microphone in an anechoic chamber. Commons supplies a shorter OGG derivative of the original 80.360 s recording.",
+      "nominal_reference_hz": 440,
+      "reference_kind": "creator_stated_nominal_frequency",
+      "traceable_frequency_calibration": false,
+      "limitations": [
+        "Nominal fork label is not an independent calibrated physical frequency reference.",
+        "The ADC clock uncertainty and recording-room temperature are not supplied.",
+        "The retained audio is a lossy OGG derivative, decoded to PCM without resampling.",
+        "Windowed frequency estimates vary across the decay; do not force exact stationarity or interpret estimator-only uncertainty as total measurement uncertainty."
+      ],
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "sample_width_bytes": 2,
+      "sample_count": 1309959,
+      "duration_s": 27.2908125,
+      "pcm_sha256": "fa104af7ff30f19022e2327f252fe90d3a55121a32036e41faf81204162ce82f"
+    },
+    {
+      "id": "pontius",
+      "kind": "authentic_observed_calibration_data",
+      "creator": "Paul Pontius, NIST",
+      "title": "NIST/ITL Statistical Reference Datasets: Pontius load-cell calibration",
+      "source_url": "https://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml",
+      "download_url": "https://www.itl.nist.gov/div898/strd/lls/data/LINKS/DATA/Pontius.dat",
+      "collection_details_url": "https://www.itl.nist.gov/div898/handbook/pmd/section6/pmd611.htm",
+      "certificate_url": "https://www.itl.nist.gov/div898/strd/lls/data/LINKS/v-Pontius.shtml",
+      "license": "NIST data terms; US government work; acknowledgment required; see NIST-NOTICE.txt",
+      "license_url": "https://www.nist.gov/open/license",
+      "raw_file": "Pontius.dat",
+      "derived_file": "pontius.csv",
+      "observations": 40,
+      "model": "deflection = B0 + B1 * load + B2 * load**2",
+      "certified_coefficients": [
+        0.000673565789473684,
+        7.32059160401003e-07,
+        -3.16081871345029e-15
+      ],
+      "certified_coefficient_standard_errors": [
+        0.000107938612033077,
+        1.57817399981659e-10,
+        4.86652849992036e-17
+      ],
+      "certified_residual_standard_deviation": 0.000205177424076185,
+      "certified_r_squared": 0.999999900178537,
+      "load_unit": "unspecified_original_source_unit",
+      "deflection_unit": "unspecified_original_source_unit",
+      "reference_kind": "independently_published_numerical_regression_certificate",
+      "independent_physical_reference": false,
+      "transformation": "Whitespace-delimited y,x rows parsed without numeric rescaling. Added 1-based observation index and run index; exact source decimal strings retained.",
+      "limitations": [
+        "Original SI conversion factors are unavailable; never report N/m, metres or newtons for these values.",
+        "The certified fit checks numerical implementation, not independent physical stiffness accuracy.",
+        "Two increasing-load runs confound drift with load.",
+        "A quadratic response is required; a visually near-perfect linear R-squared does not establish sufficient calibration accuracy."
+      ]
+    },
+    {
+      "id": "nickel-sensor-stiffness",
+      "kind": "authentic_recorded_calibrated_force_displacement",
+      "title": "Data for: Development of a novel nickel-based metal force microsensor using bottom-up approach",
+      "creators": [
+        "Wojciech J. Dera",
+        "Hanna Konopacka",
+        "Dariusz M. Jarz\u0105bek"
+      ],
+      "publication_date": "2026-09-29",
+      "version": 1,
+      "doi": "10.17632/syjkdyzmxj.1",
+      "source_url": "https://data.mendeley.com/datasets/syjkdyzmxj/1",
+      "related_article_doi": "10.1016/j.precisioneng.2025.05.003",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "raw_file": "nickel-sensor/force_displacement.csv",
+      "derived_file": "nickel-sensor/stiffness_si.csv",
+      "source_instrument_notes": "nickel-sensor/README-source.txt",
+      "retained_source_subset_manifest": "nickel-sensor/source-files.json",
+      "observations": 15,
+      "loading_points": 8,
+      "unloading_points": 7,
+      "force_unit": "N",
+      "displacement_original_unit": "mm",
+      "derived_displacement_unit": "m",
+      "source_reported_reference_instrument": "Calibrated Megatron Elektronik KM1403 force transducer, 100 N range, 2.0357 mV/V",
+      "source_reported_displacement_instrument": "Thorlabs Z825B motorised actuator",
+      "reference_kind": "independent_force_transducer_in_source_experiment; separate_loading_unloading_branches",
+      "transformation": "stiffness_si.csv preserves force strings and converts source displacement_mm to displacement_m by exact decimal division by 1000; point/branch retained. All downloaded source files are unchanged.",
+      "limitations": [
+        "Source authors report calibrated force-reference instrumentation, but do not supply the calibration certificate or full reference/displacement uncertainty budget.",
+        "Loading and unloading are from the same specimen and source experiment, not independent laboratories or a new physical experiment run by InstrumentZero.",
+        "Regression standard errors are conditional on the statistical model and do not include missing instrument systematic uncertainty.",
+        "No independent physical stiffness certificate is provided; comparing the fitted slope against the paper using the same curve is numerical reproduction only.",
+        "Raw capacitance timestamps are unavailable; the source calibration applied explicit time-axis alignment, interpolation, trimming, and averaging. Unadjusted raw channels must not be treated as synchronized.",
+        "Primary article Sections 4.2-4.3 (PDF pages 8-9) report capacitance anomalies and out-of-plane rib deflection above about 3 N; source replay above that level is not permission to recommend new physical loading there.",
+        "The article explicitly identifies mechanical slack/backlash and calls for independent displacement sensing. Encoder readings cannot be assumed to equal true specimen deflection without uncertainty."
+      ],
+      "article_file": "nickel-sensor/article-source.pdf",
+      "article_public_copy_url": "https://www.ippt.pan.pl/repository/open/o10366.pdf",
+      "article_equation_reference": "Eq. 8, PDF page 7 / journal p. 257",
+      "article_reported_stiffness_N_per_m": 19126,
+      "article_reported_stiffness_standard_deviation_N_per_m": 200.1,
+      "article_reported_offset_N": 0.0994,
+      "article_reported_r_squared": 0.9986,
+      "article_reported_instability_onset_approx_N": 3,
+      "source_replay_max_force_N": 3.488,
+      "published_uncertainty_kind": "conditional regression slope standard deviation; not full measurement uncertainty",
+      "published_per_observation_displacement_standard_uncertainty_m": null
+    }
+  ],
+  "files": {
+    "tuning-fork-440Hz.ogg": {
+      "bytes": 183514,
+      "sha256": "0149cd7c6c0301de8b7b9329c5a472bd5576c1a5f2057b3630e9b174470e0f97"
+    },
+    "tuning-fork-440Hz.wav": {
+      "bytes": 2619996,
+      "sha256": "06652bc98d9f4940c99f4596771bf2e78c0e2d7ebdb07d48db0e4a3abdda7b65"
+    },
+    "Pontius.dat": {
+      "bytes": 2748,
+      "sha256": "de60baa5dc66fd804f9316f895bc5aa2b8f791c09d1ecc1ec39f8b199b8c15c7"
+    },
+    "pontius.csv": {
+      "bytes": 900,
+      "sha256": "fee4aeff786742c347122054f55df4b766951f9bce7f955c3791291ceb70cee9"
+    },
+    "nickel-sensor/force_displacement.csv": {
+      "bytes": 551,
+      "sha256": "e0c0e36900d5483da2913b87e671d1ad435105217a81d66fb020df3f604122e4"
+    },
+    "nickel-sensor/README-source.txt": {
+      "bytes": 10770,
+      "sha256": "61da9270a5b082d37311916488602d184d14bdd5e53f4ac42f5080499848a2d6"
+    },
+    "nickel-sensor/step9_linear_fit_Fig7d.csv": {
+      "bytes": 12066,
+      "sha256": "b6bcf707b8aa83855555c997fb8b57b5bd631da406aea95866889ecd8394b814"
+    },
+    "nickel-sensor/stiffness_si.csv": {
+      "bytes": 455,
+      "sha256": "75234e99b4670ca9b4ac43ad58b4099914c235c33d49e557d67711c8b6fea70b"
+    },
+    "nickel-sensor/force_reference_raw.csv": {
+      "bytes": 20867,
+      "sha256": "a78213fbc705cc50600e70221591edca1a4fc5d6e49f38a79d7f392664779a2a"
+    },
+    "nickel-sensor/capacitance_AD7746_raw_codes.txt": {
+      "bytes": 7130,
+      "sha256": "4d797cba5deb1bebefb755f886beda9f4931c51e3cbb70ce4e0b7e3a8d383e60"
+    },
+    "nickel-sensor/source-files.json": {
+      "bytes": 2262,
+      "sha256": "3cdab0b776b91ba76ed4677144d5ec5ec373ef3a0bccfbbe81c4904774a043a1"
+    },
+    "nickel-sensor/article-source.pdf": {
+      "bytes": 9581534,
+      "sha256": "d47efe3faa317266d9400199aadfa872bfd2c155db86f34d26dc9a2d744c3c49"
+    },
+    "nickel-sensor/CC-BY-NOTICE.txt": {
+      "bytes": 1229,
+      "sha256": "c030c4e6fc7f0b37bf5b1a80f91815d0ffba28d16270b5e807ed0b136add29ca"
+    }
+  }
+}

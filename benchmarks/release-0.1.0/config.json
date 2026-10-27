@@ -1,0 +1,66 @@
+{
+  "trials_per_policy_per_regime": 150,
+  "budget_seconds": 24.0,
+  "regimes": [
+    "nominal",
+    "heteroscedastic",
+    "calibration_drift",
+    "nonlinear"
+  ],
+  "policies": [
+    "fixed_uniform",
+    "random",
+    "endpoint_video",
+    "endpoint_gauge",
+    "exact_target_per_cost",
+    "exact_eig_per_cost",
+    "learned_surrogate",
+    "ablate_no_cost",
+    "ablate_no_calibration"
+  ],
+  "test_seed_start": 100000,
+  "prior_mean": [
+    0.0,
+    0.001,
+    0.0,
+    0.0
+  ],
+  "prior_covariance": [
+    [
+      1e-06,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      4.9e-07,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      9e-10,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      6.4e-11
+    ]
+  ],
+  "shared_calibration_compliance_sd_m_per_n": [
+    3e-05,
+    8e-06
+  ],
+  "maximum_force_n": 5,
+  "noise_video_m": 8e-05,
+  "noise_gauge_m": 2e-05,
+  "cost_video_seconds": 1,
+  "cost_gauge_seconds": 4,
+  "drift_sd_multiplier": 4,
+  "nonlinear_quadratic_m_per_n2": 4e-05,
+  "setup_and_switching_cost": 0
+}

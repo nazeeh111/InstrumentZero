@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+outputs/
+.DS_Store
+*.log
+TASK_STATE.md
+assets/lab-stiffness.png
+assets/lab-model.png

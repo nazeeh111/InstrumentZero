@@ -1,0 +1,16 @@
+point,branch,force_N,displacement_m
+1,loading,0.042,0
+2,loading,0.516,0.00002121
+3,loading,0.986,0.00004405
+4,loading,1.49,0.00006966
+5,loading,1.982,0.0000953
+6,loading,2.51,0.00012432
+7,loading,2.99,0.00015108
+8,loading,3.488,0.00017916
+9,unloading,3.011,0.00015164
+10,unloading,2.524,0.00012904
+11,unloading,2.043,0.00010462
+12,unloading,1.528,0.00007524
+13,unloading,1.006,0.00004668
+14,unloading,0.519,0.00002028
+15,unloading,0.042,0

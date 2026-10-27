@@ -1,0 +1,1570 @@
+{
+  "evidence_kind": "controlled_synthetic_benchmark",
+  "physical_validation": false,
+  "config": {
+    "trials_per_policy_per_regime": 150,
+    "budget_seconds": 24.0,
+    "regimes": [
+      "nominal",
+      "heteroscedastic",
+      "calibration_drift",
+      "nonlinear"
+    ],
+    "policies": [
+      "fixed_uniform",
+      "random",
+      "endpoint_video",
+      "endpoint_gauge",
+      "exact_target_per_cost",
+      "exact_eig_per_cost",
+      "learned_surrogate",
+      "ablate_no_cost",
+      "ablate_no_calibration"
+    ],
+    "test_seed_start": 100000,
+    "prior_mean": [
+      0.0,
+      0.001,
+      0.0,
+      0.0
+    ],
+    "prior_covariance": [
+      [
+        1e-06,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.9e-07,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        9e-10,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        6.4e-11
+      ]
+    ],
+    "shared_calibration_compliance_sd_m_per_n": [
+      3e-05,
+      8e-06
+    ],
+    "maximum_force_n": 5,
+    "noise_video_m": 8e-05,
+    "noise_gauge_m": 2e-05,
+    "cost_video_seconds": 1,
+    "cost_gauge_seconds": 4,
+    "drift_sd_multiplier": 4,
+    "nonlinear_quadratic_m_per_n2": 4e-05,
+    "setup_and_switching_cost": 0
+  },
+  "environment": {
+    "python": "3.13.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "training": {
+    "states": 1500,
+    "examples": 18000,
+    "training_seed": 7123,
+    "validation_seed": 88123,
+    "validation_states": 200,
+    "log_score_rmse": 0.09718903117601392,
+    "validation_action_agreement": 0.9,
+    "training_and_validation_seconds": 1.224292750004679,
+    "architecture": "7 observable features; 64 fixed tanh random features; ridge output",
+    "trainable_parameters": 72,
+    "teacher": "exact fractional compliance-variance reduction per cost"
+  },
+  "results": [
+    {
+      "regime": "nominal",
+      "policy": "fixed_uniform",
+      "trials": 150,
+      "relative_rmse": 0.03088919108984042,
+      "mean_absolute_relative_error": 0.023848060854781975,
+      "coverage_95": 0.98,
+      "coverage_wilson_95": [
+        0.9428533167296139,
+        0.9931752486770326
+      ],
+      "mean_interval_width_relative": 0.11903634900188143,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 3.102543796308801,
+      "mean_selection_ms_per_trial": 0.012130487399796646,
+      "paired_mae_difference_vs_uniform": 0.0,
+      "paired_mae_difference_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.01729630381638729,
+          "bootstrap_95": [
+            0.014135558472806236,
+            0.02064718797574054
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.017400710047266787,
+          "bootstrap_95": [
+            0.014487028452028275,
+            0.02065348858372152
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "random",
+      "trials": 150,
+      "relative_rmse": 0.011036126589472037,
+      "mean_absolute_relative_error": 0.008259578045326737,
+      "coverage_95": 0.9533333333333334,
+      "coverage_wilson_95": [
+        0.9068135276008725,
+        0.9772134508387381
+      ],
+      "mean_interval_width_relative": 0.03901266953989717,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 10.8,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.4,
+      "mean_target_information_nats": 4.2250777812879585,
+      "mean_selection_ms_per_trial": 0.17690954264253378,
+      "paired_mae_difference_vs_uniform": -0.015588482809455234,
+      "paired_mae_difference_bootstrap_95": [
+        -0.018862518528508492,
+        -0.012506918473996268
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0017078210069320528,
+          "bootstrap_95": [
+            0.0006005279975011311,
+            0.0028440242504437496
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0018122272378115522,
+          "bootstrap_95": [
+            0.0007936070595407332,
+            0.0028623771078968574
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "endpoint_video",
+      "trials": 150,
+      "relative_rmse": 0.030202826432376477,
+      "mean_absolute_relative_error": 0.023900199882642695,
+      "coverage_95": 0.9733333333333334,
+      "coverage_wilson_95": [
+        0.9334461094878556,
+        0.989582059177032
+      ],
+      "mean_interval_width_relative": 0.11590926638946793,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 3.1276909666825197,
+      "mean_selection_ms_per_trial": 0.015394431538879871,
+      "paired_mae_difference_vs_uniform": 5.213902786072357e-05,
+      "paired_mae_difference_bootstrap_95": [
+        -0.0013013064798577593,
+        0.0013516486281006785
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.01734844284424801,
+          "bootstrap_95": [
+            0.014434260152279223,
+            0.020336248459954
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.01745284907512751,
+          "bootstrap_95": [
+            0.014608280241745373,
+            0.020472058031982106
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "endpoint_gauge",
+      "trials": 150,
+      "relative_rmse": 0.00941569021196731,
+      "mean_absolute_relative_error": 0.006551757038394685,
+      "coverage_95": 0.96,
+      "coverage_wilson_95": [
+        0.915486535783444,
+        0.9815408393979256
+      ],
+      "mean_interval_width_relative": 0.032401865527032926,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 6.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 6.0,
+      "mean_target_information_nats": 4.3946443986888974,
+      "mean_selection_ms_per_trial": 0.0027384849575658636,
+      "paired_mae_difference_vs_uniform": -0.01729630381638729,
+      "paired_mae_difference_bootstrap_95": [
+        -0.02060877209779792,
+        -0.014077338647502323
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.00010440623087949941,
+          "bootstrap_95": [
+            -0.0003867851172435464,
+            0.0006269849463453398
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "exact_target_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.008880782310853643,
+      "mean_absolute_relative_error": 0.006447350807515185,
+      "coverage_95": 0.9666666666666667,
+      "coverage_wilson_95": [
+        0.9243482038212211,
+        0.9856795681019074
+      ],
+      "mean_interval_width_relative": 0.03228446352253707,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.399023169705459,
+      "mean_selection_ms_per_trial": 0.5867868739490707,
+      "paired_mae_difference_vs_uniform": -0.017400710047266787,
+      "paired_mae_difference_bootstrap_95": [
+        -0.02070727255686234,
+        -0.014210759149483406
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.00010440623087949941,
+          "bootstrap_95": [
+            -0.0005926389481565108,
+            0.00040669015904013173
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "exact_eig_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.008803963348649996,
+      "mean_absolute_relative_error": 0.006478947924215558,
+      "coverage_95": 0.9666666666666667,
+      "coverage_wilson_95": [
+        0.9243482038212211,
+        0.9856795681019074
+      ],
+      "mean_interval_width_relative": 0.03240809424971023,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.394978128329773,
+      "mean_selection_ms_per_trial": 0.6321134317355851,
+      "paired_mae_difference_vs_uniform": -0.017369112930566415,
+      "paired_mae_difference_bootstrap_95": [
+        -0.020641283794916043,
+        -0.014238197209639916
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -7.280911417912685e-05,
+          "bootstrap_95": [
+            -0.0005543850920936957,
+            0.00043655117471928985
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 3.159711670037259e-05,
+          "bootstrap_95": [
+            -0.00014152304534862647,
+            0.000194456187833551
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "learned_surrogate",
+      "trials": 150,
+      "relative_rmse": 0.0087815571659817,
+      "mean_absolute_relative_error": 0.006348226191376886,
+      "coverage_95": 0.9733333333333334,
+      "coverage_wilson_95": [
+        0.9334461094878556,
+        0.989582059177032
+      ],
+      "mean_interval_width_relative": 0.03228741749887826,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.3989680675382425,
+      "mean_selection_ms_per_trial": 0.8401266050835451,
+      "paired_mae_difference_vs_uniform": -0.01749983466340509,
+      "paired_mae_difference_bootstrap_95": [
+        -0.02077838019175699,
+        -0.014323083228528766
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.00020353084701779943,
+          "bootstrap_95": [
+            -0.0006928637556070945,
+            0.00029922951980242124
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -9.912461613829996e-05,
+          "bootstrap_95": [
+            -0.0001924319589778656,
+            -3.809803278492545e-07
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "ablate_no_cost",
+      "trials": 150,
+      "relative_rmse": 0.008671046145422504,
+      "mean_absolute_relative_error": 0.006375502923722325,
+      "coverage_95": 0.96,
+      "coverage_wilson_95": [
+        0.915486535783444,
+        0.9815408393979256
+      ],
+      "mean_interval_width_relative": 0.03190534044746534,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 9.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 5.0,
+      "mean_target_information_nats": 4.410597496838206,
+      "mean_selection_ms_per_trial": 0.40166608213136595,
+      "paired_mae_difference_vs_uniform": -0.017472557931059646,
+      "paired_mae_difference_bootstrap_95": [
+        -0.020789191973089247,
+        -0.014329824222671025
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.00017625411467236021,
+          "bootstrap_95": [
+            -0.0005840843033891818,
+            0.000220159949403801
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -7.184788379286075e-05,
+          "bootstrap_95": [
+            -0.00033611977308573997,
+            0.00020322777326847524
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nominal",
+      "policy": "ablate_no_calibration",
+      "trials": 150,
+      "relative_rmse": 0.008751135967873499,
+      "mean_absolute_relative_error": 0.006538692207240227,
+      "coverage_95": 0.6066666666666667,
+      "coverage_wilson_95": [
+        0.5267662048449178,
+        0.681240143023226
+      ],
+      "mean_interval_width_relative": 0.01414765580679294,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 5.22373644124236,
+      "mean_selection_ms_per_trial": 0.6291958906998237,
+      "paired_mae_difference_vs_uniform": -0.017309368647541745,
+      "paired_mae_difference_bootstrap_95": [
+        -0.020554378638057178,
+        -0.014196907901489472
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -1.3064831154457404e-05,
+          "bootstrap_95": [
+            -0.0005953031023654764,
+            0.000606533426299185
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 9.13413997250421e-05,
+          "bootstrap_95": [
+            -0.00012639574171136232,
+            0.0003106802349064023
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "fixed_uniform",
+      "trials": 150,
+      "relative_rmse": 0.033584423557455105,
+      "mean_absolute_relative_error": 0.023893492122418404,
+      "coverage_95": 0.9466666666666667,
+      "coverage_wilson_95": [
+        0.8982961216180454,
+        0.9727304600798061
+      ],
+      "mean_interval_width_relative": 0.12243815748530266,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 2.988247850847603,
+      "mean_selection_ms_per_trial": 0.007280020508915186,
+      "paired_mae_difference_vs_uniform": 0.0,
+      "paired_mae_difference_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.01749106159953201,
+          "bootstrap_95": [
+            0.014078153232391812,
+            0.021281036979006126
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.017936809736369925,
+          "bootstrap_95": [
+            0.014096914073088032,
+            0.02213305333649118
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "random",
+      "trials": 150,
+      "relative_rmse": 0.010930151159336834,
+      "mean_absolute_relative_error": 0.008179686752172424,
+      "coverage_95": 0.92,
+      "coverage_wilson_95": [
+        0.8653786362494686,
+        0.953646358481347
+      ],
+      "mean_interval_width_relative": 0.0380136507150041,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 10.5,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.5,
+      "mean_target_information_nats": 4.1693314769853345,
+      "mean_selection_ms_per_trial": 0.10394672164693475,
+      "paired_mae_difference_vs_uniform": -0.01571380537024598,
+      "paired_mae_difference_bootstrap_95": [
+        -0.019708937220474072,
+        -0.011733920524916452
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0017772562292860238,
+          "bootstrap_95": [
+            0.0007827240300244497,
+            0.0027954961510832485
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.002223004366123943,
+          "bootstrap_95": [
+            0.001245574968798809,
+            0.0032525458235188446
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "endpoint_video",
+      "trials": 150,
+      "relative_rmse": 0.03489604048506388,
+      "mean_absolute_relative_error": 0.025524285477220764,
+      "coverage_95": 0.96,
+      "coverage_wilson_95": [
+        0.915486535783444,
+        0.9815408393979256
+      ],
+      "mean_interval_width_relative": 0.12093894537825499,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 2.996662075026243,
+      "mean_selection_ms_per_trial": 0.013012306299060583,
+      "paired_mae_difference_vs_uniform": 0.0016307933548023589,
+      "paired_mae_difference_bootstrap_95": [
+        -0.0007814557795151115,
+        0.0041327690082615005
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.019121854954334366,
+          "bootstrap_95": [
+            0.015507146273093688,
+            0.023002953153685463
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.019567603091172284,
+          "bootstrap_95": [
+            0.015856721053796905,
+            0.023596736337348018
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "endpoint_gauge",
+      "trials": 150,
+      "relative_rmse": 0.00864141597848808,
+      "mean_absolute_relative_error": 0.0064024305228864,
+      "coverage_95": 0.94,
+      "coverage_wilson_95": [
+        0.8899102291652979,
+        0.9681159557907947
+      ],
+      "mean_interval_width_relative": 0.029968293656031833,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 6.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 6.0,
+      "mean_target_information_nats": 4.3946443986888974,
+      "mean_selection_ms_per_trial": 0.0041837431490421295,
+      "paired_mae_difference_vs_uniform": -0.01749106159953201,
+      "paired_mae_difference_bootstrap_95": [
+        -0.021268752061766746,
+        -0.013611429696452798
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0004457481368379186,
+          "bootstrap_95": [
+            2.0266507128216355e-05,
+            0.0008973698321881555
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "exact_target_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.007955954259100236,
+      "mean_absolute_relative_error": 0.00595668238604848,
+      "coverage_95": 0.9533333333333334,
+      "coverage_wilson_95": [
+        0.9068135276008725,
+        0.9772134508387381
+      ],
+      "mean_interval_width_relative": 0.030264277969286203,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.3838212343225305,
+      "mean_selection_ms_per_trial": 0.7052615168504417,
+      "paired_mae_difference_vs_uniform": -0.017936809736369925,
+      "paired_mae_difference_bootstrap_95": [
+        -0.021850129559213664,
+        -0.013935667660224065
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0004457481368379186,
+          "bootstrap_95": [
+            -0.0008806306832930648,
+            -4.3681144752573376e-05
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "exact_eig_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.007956130166955311,
+      "mean_absolute_relative_error": 0.0060760909641665055,
+      "coverage_95": 0.9533333333333334,
+      "coverage_wilson_95": [
+        0.9068135276008725,
+        0.9772134508387381
+      ],
+      "mean_interval_width_relative": 0.03033250484865396,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.381781904236467,
+      "mean_selection_ms_per_trial": 0.8320561051368713,
+      "paired_mae_difference_vs_uniform": -0.017817401158251898,
+      "paired_mae_difference_bootstrap_95": [
+        -0.021683868499827747,
+        -0.01381355714471355
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0003263395587198922,
+          "bootstrap_95": [
+            -0.0007174262821809016,
+            5.873857309554992e-05
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.00011940857811802633,
+          "bootstrap_95": [
+            -0.00010925970533691362,
+            0.0003578799309093155
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "learned_surrogate",
+      "trials": 150,
+      "relative_rmse": 0.00795290267090735,
+      "mean_absolute_relative_error": 0.0061569640987806816,
+      "coverage_95": 0.9666666666666667,
+      "coverage_wilson_95": [
+        0.9243482038212211,
+        0.9856795681019074
+      ],
+      "mean_interval_width_relative": 0.03085634279235108,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.364472421193305,
+      "mean_selection_ms_per_trial": 1.3241204704778888,
+      "paired_mae_difference_vs_uniform": -0.01773652802363772,
+      "paired_mae_difference_bootstrap_95": [
+        -0.021614283840765577,
+        -0.013826964512119724
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0002454664241057164,
+          "bootstrap_95": [
+            -0.0006833470023899994,
+            0.00017617817072351972
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.00020028171273220213,
+          "bootstrap_95": [
+            -0.0001874981238117555,
+            0.0006040584383645705
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "ablate_no_cost",
+      "trials": 150,
+      "relative_rmse": 0.008641415978488148,
+      "mean_absolute_relative_error": 0.006402430522886431,
+      "coverage_95": 0.94,
+      "coverage_wilson_95": [
+        0.8899102291652979,
+        0.9681159557907947
+      ],
+      "mean_interval_width_relative": 0.029968293656031902,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 6.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 6.0,
+      "mean_target_information_nats": 4.394644398688893,
+      "mean_selection_ms_per_trial": 0.41899530061831075,
+      "paired_mae_difference_vs_uniform": -0.017491061599531975,
+      "paired_mae_difference_bootstrap_95": [
+        -0.02126875206176671,
+        -0.013611429696452775
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 3.148014889129552e-17,
+          "bootstrap_95": [
+            -2.2864623854377345e-17,
+            8.302223982167989e-17
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0004457481368379498,
+          "bootstrap_95": [
+            2.0266507128244785e-05,
+            0.0008973698321881612
+          ]
+        }
+      }
+    },
+    {
+      "regime": "heteroscedastic",
+      "policy": "ablate_no_calibration",
+      "trials": 150,
+      "relative_rmse": 0.008223559863601196,
+      "mean_absolute_relative_error": 0.006179391913522236,
+      "coverage_95": 0.6266666666666667,
+      "coverage_wilson_95": [
+        0.5470058519845729,
+        0.7000016861088478
+      ],
+      "mean_interval_width_relative": 0.013367307558174788,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 5.201253086083846,
+      "mean_selection_ms_per_trial": 0.6877265404909849,
+      "paired_mae_difference_vs_uniform": -0.01771410020889617,
+      "paired_mae_difference_bootstrap_95": [
+        -0.021580516750138643,
+        -0.013756294907388979
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0002230386093641617,
+          "bootstrap_95": [
+            -0.0005822425192166068,
+            0.00014001438198877686
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0002227095274737568,
+          "bootstrap_95": [
+            9.210002180988354e-06,
+            0.00044587260002145466
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "fixed_uniform",
+      "trials": 150,
+      "relative_rmse": 0.13715758539509523,
+      "mean_absolute_relative_error": 0.09641359707652614,
+      "coverage_95": 0.35333333333333333,
+      "coverage_wilson_95": [
+        0.2813726509048464,
+        0.4326186207764561
+      ],
+      "mean_interval_width_relative": 0.12062783951842093,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 3.102543796308801,
+      "mean_selection_ms_per_trial": 0.007791084547837575,
+      "paired_mae_difference_vs_uniform": 0.0,
+      "paired_mae_difference_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.07282178015988214,
+          "bootstrap_95": [
+            0.058572946218575866,
+            0.08955009930204062
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.07260565895871293,
+          "bootstrap_95": [
+            0.05795643341531286,
+            0.08791076815268489
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "random",
+      "trials": 150,
+      "relative_rmse": 0.031490643291420706,
+      "mean_absolute_relative_error": 0.024579148821648297,
+      "coverage_95": 0.41333333333333333,
+      "coverage_wilson_95": [
+        0.3376534099233595,
+        0.49334143243377376
+      ],
+      "mean_interval_width_relative": 0.03737965893193354,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 10.62,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.46,
+      "mean_target_information_nats": 4.2166090765453825,
+      "mean_selection_ms_per_trial": 0.1141621801070869,
+      "paired_mae_difference_vs_uniform": -0.07183444825487782,
+      "paired_mae_difference_bootstrap_95": [
+        -0.08710726019734331,
+        -0.058515293738760736
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0009873319050043051,
+          "bootstrap_95": [
+            -0.000688333108331482,
+            0.00258735064036651
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0007712107038350822,
+          "bootstrap_95": [
+            -0.00035341038192230034,
+            0.0019273014585029292
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "endpoint_video",
+      "trials": 150,
+      "relative_rmse": 0.13620466660074987,
+      "mean_absolute_relative_error": 0.09522025200599939,
+      "coverage_95": 0.3333333333333333,
+      "coverage_wilson_95": [
+        0.262887648323876,
+        0.41210243313214945
+      ],
+      "mean_interval_width_relative": 0.11748078605709836,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 3.1276909666825197,
+      "mean_selection_ms_per_trial": 0.009780215720335642,
+      "paired_mae_difference_vs_uniform": -0.00119334507052675,
+      "paired_mae_difference_bootstrap_95": [
+        -0.00277214249508761,
+        0.0003671342834690519
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0716284350893554,
+          "bootstrap_95": [
+            0.05758564553256714,
+            0.08846217368780857
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.07141231388818617,
+          "bootstrap_95": [
+            0.05672941105299256,
+            0.08693751271662983
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "endpoint_gauge",
+      "trials": 150,
+      "relative_rmse": 0.029863911098209756,
+      "mean_absolute_relative_error": 0.023591816916643988,
+      "coverage_95": 0.3466666666666667,
+      "coverage_wilson_95": [
+        0.2751950896082086,
+        0.4257957853313349
+      ],
+      "mean_interval_width_relative": 0.030767621253486296,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 6.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 6.0,
+      "mean_target_information_nats": 4.3946443986888974,
+      "mean_selection_ms_per_trial": 0.005001939522723357,
+      "paired_mae_difference_vs_uniform": -0.07282178015988214,
+      "paired_mae_difference_bootstrap_95": [
+        -0.08844320406503751,
+        -0.059013321062757876
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -0.000216121201169223,
+          "bootstrap_95": [
+            -0.0015704614088757403,
+            0.0011882507549177595
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "exact_target_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.029714018440593376,
+      "mean_absolute_relative_error": 0.02380793811781321,
+      "coverage_95": 0.34,
+      "coverage_wilson_95": [
+        0.2690333503042941,
+        0.4189571278934905
+      ],
+      "mean_interval_width_relative": 0.03063630828476664,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.399023169705459,
+      "mean_selection_ms_per_trial": 0.5883039774683615,
+      "paired_mae_difference_vs_uniform": -0.07260565895871293,
+      "paired_mae_difference_bootstrap_95": [
+        -0.08775440385373817,
+        -0.05901703387111926
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.000216121201169223,
+          "bootstrap_95": [
+            -0.0011219742477091787,
+            0.00154532219011129
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "exact_eig_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.029840891273789753,
+      "mean_absolute_relative_error": 0.023859482956952113,
+      "coverage_95": 0.3466666666666667,
+      "coverage_wilson_95": [
+        0.2751950896082086,
+        0.4257957853313349
+      ],
+      "mean_interval_width_relative": 0.03077175262602296,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.394978128329773,
+      "mean_selection_ms_per_trial": 0.5017563266058762,
+      "paired_mae_difference_vs_uniform": -0.07255411411957402,
+      "paired_mae_difference_bootstrap_95": [
+        -0.08775409586225003,
+        -0.05908393221853123
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0002676660403081254,
+          "bootstrap_95": [
+            -0.0011153386162831716,
+            0.0016260929870041342
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 5.154483913890236e-05,
+          "bootstrap_95": [
+            -0.00011210777336689604,
+            0.00021446779108748082
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "learned_surrogate",
+      "trials": 150,
+      "relative_rmse": 0.029649849723902763,
+      "mean_absolute_relative_error": 0.023744625322136448,
+      "coverage_95": 0.3333333333333333,
+      "coverage_wilson_95": [
+        0.262887648323876,
+        0.41210243313214945
+      ],
+      "mean_interval_width_relative": 0.03063207457833144,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.3989680675382425,
+      "mean_selection_ms_per_trial": 0.963307477068156,
+      "paired_mae_difference_vs_uniform": -0.07266897175438969,
+      "paired_mae_difference_bootstrap_95": [
+        -0.08785972767215508,
+        -0.05905319568124493
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.00015280840549245644,
+          "bootstrap_95": [
+            -0.0011638437336723084,
+            0.0014594635890236172
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -6.331279567676649e-05,
+          "bootstrap_95": [
+            -0.00016214850576832092,
+            4.463968684913126e-05
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "ablate_no_cost",
+      "trials": 150,
+      "relative_rmse": 0.029780999026424903,
+      "mean_absolute_relative_error": 0.0239194409239194,
+      "coverage_95": 0.32666666666666666,
+      "coverage_wilson_95": [
+        0.2567582134119433,
+        0.40523147130232323
+      ],
+      "mean_interval_width_relative": 0.03029514290632637,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 9.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 5.0,
+      "mean_target_information_nats": 4.410597496838206,
+      "mean_selection_ms_per_trial": 0.45840512185047066,
+      "paired_mae_difference_vs_uniform": -0.07249415615260675,
+      "paired_mae_difference_bootstrap_95": [
+        -0.08770886737110217,
+        -0.05905329277061995
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0003276240072754074,
+          "bootstrap_95": [
+            -0.0009961657756717241,
+            0.0016364835964377815
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.00011150280610618444,
+          "bootstrap_95": [
+            -0.00011775794871325762,
+            0.000344012699994757
+          ]
+        }
+      }
+    },
+    {
+      "regime": "calibration_drift",
+      "policy": "ablate_no_calibration",
+      "trials": 150,
+      "relative_rmse": 0.030957728351118406,
+      "mean_absolute_relative_error": 0.024496878976828496,
+      "coverage_95": 0.11333333333333333,
+      "coverage_wilson_95": [
+        0.0719742391403741,
+        0.17400274983760514
+      ],
+      "mean_interval_width_relative": 0.01343349743738687,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 5.22373644124236,
+      "mean_selection_ms_per_trial": 0.5497138334127764,
+      "paired_mae_difference_vs_uniform": -0.07191671809969764,
+      "paired_mae_difference_bootstrap_95": [
+        -0.08721045154828792,
+        -0.05848080964773269
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.000905062060184507,
+          "bootstrap_95": [
+            -0.0012252216522548915,
+            0.0029548584031398022
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.000688940859015284,
+          "bootstrap_95": [
+            -0.00014018271051675015,
+            0.0014965060066219763
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "fixed_uniform",
+      "trials": 150,
+      "relative_rmse": 0.23569684377931027,
+      "mean_absolute_relative_error": 0.20288150596550245,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.14663520486805162,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 3.102543796308801,
+      "mean_selection_ms_per_trial": 0.00681419080744187,
+      "paired_mae_difference_vs_uniform": 0.0,
+      "paired_mae_difference_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0025823386333750408,
+          "bootstrap_95": [
+            -0.009943808552996926,
+            0.005113137849926467
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -0.0018560384222393663,
+          "bootstrap_95": [
+            -0.009001974030972236,
+            0.00539040675674779
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "random",
+      "trials": 150,
+      "relative_rmse": 0.24755535983825766,
+      "mean_absolute_relative_error": 0.19991702055570734,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.050162526777081044,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 10.56,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.48,
+      "mean_target_information_nats": 4.193738576430398,
+      "mean_selection_ms_per_trial": 0.08224762976169586,
+      "paired_mae_difference_vs_uniform": -0.0029644854097951204,
+      "paired_mae_difference_bootstrap_95": [
+        -0.015361796569301592,
+        0.0105067776941836
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.00554682404317016,
+          "bootstrap_95": [
+            -0.015352776618972554,
+            0.00465279624571685
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -0.004820523832034483,
+          "bootstrap_95": [
+            -0.014554100684746423,
+            0.005954108197482761
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "endpoint_video",
+      "trials": 150,
+      "relative_rmse": 0.238357321268814,
+      "mean_absolute_relative_error": 0.20430755313876267,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.1435453481648227,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 24.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 0.0,
+      "mean_target_information_nats": 3.1276909666825197,
+      "mean_selection_ms_per_trial": 0.013919045062114794,
+      "paired_mae_difference_vs_uniform": 0.0014260471732602134,
+      "paired_mae_difference_bootstrap_95": [
+        -0.0004767742911906039,
+        0.0032483275857785755
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0011562914601148282,
+          "bootstrap_95": [
+            -0.008746433652670112,
+            0.007002203820489344
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -0.00042999124897915355,
+          "bootstrap_95": [
+            -0.007650235968048816,
+            0.0068240293178342595
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "endpoint_gauge",
+      "trials": 150,
+      "relative_rmse": 0.23962911888729174,
+      "mean_absolute_relative_error": 0.20546384459887748,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.04036090975949903,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 6.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 6.0,
+      "mean_target_information_nats": 4.3946443986888974,
+      "mean_selection_ms_per_trial": 0.005142591738452514,
+      "paired_mae_difference_vs_uniform": 0.0025823386333750408,
+      "paired_mae_difference_bootstrap_95": [
+        -0.005304708330161097,
+        0.010324288035450777
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0007263002111356747,
+          "bootstrap_95": [
+            -7.729584212760445e-06,
+            0.00153887072285933
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "exact_target_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.2381670827622314,
+      "mean_absolute_relative_error": 0.2047375443877418,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.040069620578733756,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.399023169705459,
+      "mean_selection_ms_per_trial": 0.7927147337856392,
+      "paired_mae_difference_vs_uniform": 0.0018560384222393663,
+      "paired_mae_difference_bootstrap_95": [
+        -0.005425738112983666,
+        0.009147147355555251
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0007263002111356747,
+          "bootstrap_95": [
+            -0.001580019703810368,
+            4.8010500478513066e-05
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.0,
+          "bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "exact_eig_per_cost",
+      "trials": 150,
+      "relative_rmse": 0.23807450140638517,
+      "mean_absolute_relative_error": 0.20479420902068407,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.04021726033315969,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.394978128329773,
+      "mean_selection_ms_per_trial": 0.6904623393590251,
+      "paired_mae_difference_vs_uniform": 0.0019127030551816444,
+      "paired_mae_difference_bootstrap_95": [
+        -0.005378116694521027,
+        0.009211750154389912
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.000669635578193397,
+          "bootstrap_95": [
+            -0.0015448539726982298,
+            0.00012433050318954724
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 5.666463294227755e-05,
+          "bootstrap_95": [
+            -0.00019037114792666533,
+            0.000303328159793429
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "learned_surrogate",
+      "trials": 150,
+      "relative_rmse": 0.23836364549632835,
+      "mean_absolute_relative_error": 0.20484036271535366,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.04008707458627744,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 4.3989680675382425,
+      "mean_selection_ms_per_trial": 1.3719542906619608,
+      "paired_mae_difference_vs_uniform": 0.0019588567498512234,
+      "paired_mae_difference_bootstrap_95": [
+        -0.005359676174845218,
+        0.009360760305726166
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0006234818835238183,
+          "bootstrap_95": [
+            -0.001441347333276285,
+            0.0001406654715226529
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.00010281832761185643,
+          "bootstrap_95": [
+            -3.437815806526078e-05,
+            0.00024359061589323915
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "ablate_no_cost",
+      "trials": 150,
+      "relative_rmse": 0.2385264091413191,
+      "mean_absolute_relative_error": 0.2050062822271224,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.03963829765991329,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 9.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 5.0,
+      "mean_target_information_nats": 4.410597496838206,
+      "mean_selection_ms_per_trial": 0.7957684349579116,
+      "paired_mae_difference_vs_uniform": 0.0021247762616199315,
+      "paired_mae_difference_bootstrap_95": [
+        -0.005198245970926479,
+        0.009429231277785123
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0004575623717551096,
+          "bootstrap_95": [
+            -0.0011554273683308997,
+            0.00025077894969792827
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": 0.00026873783938056507,
+          "bootstrap_95": [
+            -6.189155426913559e-05,
+            0.0006031897089211494
+          ]
+        }
+      }
+    },
+    {
+      "regime": "nonlinear",
+      "policy": "ablate_no_calibration",
+      "trials": 150,
+      "relative_rmse": 0.23773832017129246,
+      "mean_absolute_relative_error": 0.2046277817294115,
+      "coverage_95": 0.0,
+      "coverage_wilson_95": [
+        1.734723475976807e-18,
+        0.0249702443680766
+      ],
+      "mean_interval_width_relative": 0.017536293394333765,
+      "failed_estimates": 0,
+      "unbounded_intervals": 0,
+      "mean_measurements": 12.0,
+      "mean_cost_seconds": 24.0,
+      "mean_gauge_measurements": 4.0,
+      "mean_target_information_nats": 5.22373644124236,
+      "mean_selection_ms_per_trial": 1.2796112794118624,
+      "paired_mae_difference_vs_uniform": 0.0017462757639090806,
+      "paired_mae_difference_bootstrap_95": [
+        -0.0051877193179097015,
+        0.008652155338122807
+      ],
+      "strong_baseline_comparisons": {
+        "endpoint_gauge": {
+          "paired_mae_difference": -0.0008360628694659603,
+          "bootstrap_95": [
+            -0.001928064202100801,
+            0.0002106051348110566
+          ]
+        },
+        "exact_target_per_cost": {
+          "paired_mae_difference": -0.00010976265833028557,
+          "bootstrap_95": [
+            -0.0004907141610320347,
+            0.00026056537278652646
+          ]
+        }
+      }
+    }
+  ],
+  "total_wall_seconds": 10.646287959069014,
+  "source_sha256": "6da980c8b6f4981c8dd9a2959de09e4879b737c24d83e930ed97df3fddc80f13",
+  "design_source_sha256": "7daca39d1ec4b8dfb75c8190f7b5723342ebe1a675e0cacea50dd072f4abc702"
+}

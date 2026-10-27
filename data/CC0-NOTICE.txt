@@ -1,0 +1,19 @@
+Tuning Fork 440 Hz, Resonance Box
+Creator: jmuehlhans
+Original publication: February 26, 2014
+https://freesound.org/people/jmuehlhans/sounds/220747/
+
+Retained derivative: Tuning-fork-440Hz.ogg
+Commons uploader: SVGguru, March 26, 2019
+https://commons.wikimedia.org/wiki/File:Tuning-fork-440Hz.ogg
+https://upload.wikimedia.org/wikipedia/commons/7/70/Tuning-fork-440Hz.ogg
+
+The original creator and the Commons file page identify this recording as
+CC0 1.0 Universal, a public-domain dedication. See the full legal instrument:
+https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+InstrumentZero retains the OGG file unchanged and decodes it to a mono,
+48 kHz, signed 16-bit PCM WAV for its audio workflow. The WAV is a decoded
+derivative of lossy audio, not an original uncompressed microphone capture.
+No resampling or frequency correction was applied. The recording is from
+an external source; no live microphone session is claimed.

@@ -1,0 +1,27 @@
+Data for: Development of a novel nickel-based metal force microsensor using
+bottom-up approach
+
+Authors: Wojciech J. Dera, Hanna Konopacka, Dariusz M. Jarząbek
+Publisher: Mendeley Data, version 1, September 29, 2026
+DOI: 10.17632/syjkdyzmxj.1
+https://data.mendeley.com/datasets/syjkdyzmxj/1
+
+Related article: W.J. Dera, H. Konopacka, D.M. Jarząbek, Precision Engineering
+95 (2025) 251-261. https://doi.org/10.1016/j.precisioneng.2025.05.003
+
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Retained source subset, downloaded October 26, 2026:
+README-source.txt (source filename README.txt)
+force_displacement.csv
+step9_linear_fit_Fig7d.csv
+force_reference_raw.csv
+capacitance_AD7746_raw_codes.txt
+
+These source files are unchanged. Source download URLs and repository-published
+SHA-256 checksums are retained in source-files.json and ../provenance.json.
+The derived stiffness_si.csv converts displacement from millimetres to metres
+by division by 1000, preserving source force values and loading/unloading labels.
+InstrumentZero's analysis and packaging do not imply endorsement by the authors.

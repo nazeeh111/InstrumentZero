@@ -1,0 +1,11 @@
+file '../lab-home-v0.1.jpg'
+duration 4
+file '../lab-protocol-v0.1.jpg'
+duration 4
+file '../lab-model-v0.1.jpg'
+duration 4
+file '../lab-acoustic-v0.1.jpg'
+duration 4
+file '../lab-recorded-v0.1.jpg'
+duration 4
+file '../lab-recorded-v0.1.jpg'

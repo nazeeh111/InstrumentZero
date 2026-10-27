@@ -1,0 +1,50 @@
+[
+  {
+    "file": "force_displacement.csv",
+    "source_file_id": "ab0b571b-4acc-4652-8e54-79e5c61d3130",
+    "download_url": "https://data.mendeley.com/public-files/datasets/syjkdyzmxj/files/ab0b571b-4acc-4652-8e54-79e5c61d3130/file_downloaded",
+    "bytes": 551,
+    "sha256": "e0c0e36900d5483da2913b87e671d1ad435105217a81d66fb020df3f604122e4",
+    "sha256_published_by_repository": true
+  },
+  {
+    "file": "step9_linear_fit_Fig7d.csv",
+    "source_file_id": "857e82a4-51fa-46d8-846c-fe562f850b92",
+    "download_url": "https://data.mendeley.com/public-files/datasets/syjkdyzmxj/files/857e82a4-51fa-46d8-846c-fe562f850b92/file_downloaded",
+    "bytes": 12066,
+    "sha256": "b6bcf707b8aa83855555c997fb8b57b5bd631da406aea95866889ecd8394b814",
+    "sha256_published_by_repository": true
+  },
+  {
+    "file": "force_reference_raw.csv",
+    "source_file_id": "4c30e1a5-f7ed-45d4-8fad-948a08d37b6b",
+    "download_url": "https://data.mendeley.com/public-files/datasets/syjkdyzmxj/files/4c30e1a5-f7ed-45d4-8fad-948a08d37b6b/file_downloaded",
+    "bytes": 20867,
+    "sha256": "a78213fbc705cc50600e70221591edca1a4fc5d6e49f38a79d7f392664779a2a",
+    "sha256_published_by_repository": true
+  },
+  {
+    "file": "capacitance_AD7746_raw_codes.txt",
+    "source_file_id": "3434c73d-57f8-4037-a251-3fb42fc9fe5a",
+    "download_url": "https://data.mendeley.com/public-files/datasets/syjkdyzmxj/files/3434c73d-57f8-4037-a251-3fb42fc9fe5a/file_downloaded",
+    "bytes": 7130,
+    "sha256": "4d797cba5deb1bebefb755f886beda9f4931c51e3cbb70ce4e0b7e3a8d383e60",
+    "sha256_published_by_repository": true
+  },
+  {
+    "file": "README-source.txt",
+    "source_filename": "README.txt",
+    "download_url": "https://data.mendeley.com/public-files/datasets/syjkdyzmxj/files/2c2bbc02-3737-4fae-9eef-85215497f207/file_downloaded",
+    "bytes": 10770,
+    "sha256": "61da9270a5b082d37311916488602d184d14bdd5e53f4ac42f5080499848a2d6",
+    "sha256_published_by_repository": true
+  },
+  {
+    "file": "article-source.pdf",
+    "source_filename": "o10366.pdf",
+    "download_url": "https://www.ippt.pan.pl/repository/open/o10366.pdf",
+    "bytes": 9581534,
+    "sha256": "d47efe3faa317266d9400199aadfa872bfd2c155db86f34d26dc9a2d744c3c49",
+    "sha256_published_by_repository": false
+  }
+]

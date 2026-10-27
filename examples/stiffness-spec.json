@@ -1,0 +1,25 @@
+{
+  "domain": "stiffness",
+  "question": "How stiff is this spring?",
+  "equipment": [
+    "calibrated webcam",
+    "known loads",
+    "CSV"
+  ],
+  "target_relative_uncertainty": 0.05,
+  "budget_seconds": 120,
+  "max_force_n": 2,
+  "calibration": {
+    "meters_per_pixel": 0.0001,
+    "pixel_noise_sd": 0.7,
+    "scale_relative_sd": 0.01,
+    "force_relative_sd": 0.005
+  },
+  "source_kind": "synthetic",
+  "source_name": "Seeded synthetic linear spring, k = 80 N/m",
+  "reference": {
+    "value": 80,
+    "unit": "N/m",
+    "kind": "synthetic ground truth"
+  }
+}

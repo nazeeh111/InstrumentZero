@@ -1,0 +1,27 @@
+name: Scientific checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e '.[dev]'
+      - run: python -m ruff check src tests scripts data/reproduce.py
+      - run: python -m pytest -q
+      - run: python data/reproduce.py
+      - run: python scripts/validate_real.py --output /tmp/validation
+      - run: python -m build
+      - run: python -m pip install --force-reinstall dist/*.whl
+      - run: cd /tmp && instrumentzero demo stiffness
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-python-${{ matrix.python }}
+          path: dist/*
