@@ -7,8 +7,8 @@
     82739
   ],
   "confirmation_seeds": [
-    9123071,
-    9123072
+    9123091,
+    9123092
   ],
   "scenarios": [
     "mount_a",
@@ -32,25 +32,29 @@
   },
   "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
   "frozen_sha256": {
-    "src/instrumentzero/edge/planner.py": "ac154123ab063a3facf8a1395ee0b024102030909f2aa9eacac0381034768563",
-    "src/instrumentzero/edge/estimator.py": "8d753b5e7475cdd83bf82629b5fb5ddf1187a6caab5a3c56377b3acfd87196b7",
-    "src/instrumentzero/edge/spec.py": "9285778baba72c5bc9c1ed626f9865e3b6bae5535c46a663a9935e0a2505603d",
-    "examples/edge/cost-profile.json": "56b9c902f5a7041d7dd44d0a0adb4f336b7ca6aa450971cd5e9d5f4ca7732bcc",
-    "examples/edge/host-favored-cost-profile.json": "6c80824d1dcf19d244c0df09b30b18253becc7b6f62de4e9f3a47747d24146a3",
-    "examples/edge/simulation-spec.json": "77f77627c6a534d669e376483b11b06c9729ffa04bf9f802ea7cd866a39b03d1",
-    "examples/edge/host-favored-spec.json": "8a4fb1c233f7ab8b6962f8c9fc235313c3ee02a6d72de8f50800607528699a93",
-    "src/instrumentzero/edge/simulation.py": "80f16a04c261d29138127f5d477f84c69417c04067b3ff2632246cfaa5769d1b",
-    "src/instrumentzero/edge/protocol.py": "cff0221214020c8a37b29c310e794091a337e00be6fc9a307afd4d17140eba00",
-    "src/instrumentzero/edge/__init__.py": "60d8275b9dccc74005149dd837ead69a7bc4bfd96a0d35d181d5fb6e11edfe0f",
-    "src/instrumentzero/edge/native.py": "b298010adf1fb0ffa23777ea0c29bfd98a44eab575417d528ab953821c9922cd",
-    "src/instrumentzero/edge/runtime.py": "55a82c4dd0d4df9aedf9d71b431d27b5f0b0906481bcc0d8a71de3ac1df808ce",
-    "src/instrumentzero/edge/cli.py": "84399c0eb9e291b45b654590887f332ef148f7d49341cdf91ddc71d3403a598a",
-    "src/instrumentzero/edge/artifacts.py": "dbd2ee040e4cadc3118477fa3a61c673b50875cc500d1bb12e161f86513d89da",
-    "src/instrumentzero/edge/acquisition.py": "2cb02057c5403a09662b6979b49de326352f4cc2dabfb99fe469b73976f48e9b",
-    "src/instrumentzero/edge/core/iz_core.h": "cdeb0d03920be665cb598e96dd159633b9911b6664e7ba437c32213efd569e43",
-    "src/instrumentzero/edge/core/iz_core.c": "144515eb0b1c12b8dc2b0e2e2ddf7302038f2767a6ad390e044729c405c985df",
+    "examples/edge/cost-profile.json": "df8fef7967796f2c3e92248ba2e9074ce210faa57afc3844341cd31a483b675f",
+    "examples/edge/host-favored-cost-profile.json": "122e564cf61a5ede783c894a5efe09b605c8b1cf137bbb438183b5021759d605",
+    "examples/edge/host-favored-spec.json": "05cb17b7140fd57a44a75fa5dc82e8b309b272a56ecc2a73ee5cceb1bdb8be91",
+    "examples/edge/simulation-spec.json": "b32c853528e7dddd4a5c16a876801b6effb04106aeaa4cbcc4d64ea823c22cf7",
     "requirements-runtime.lock": "c26c8a4a3ed8c2ce9f9e14d21236e43d962de8c16c0effc811e32b68eed0e347",
-    "scripts/validate_edge.py": "2b080e0aff781dae5ea4bdb4d5e503fe3fd15cc2ca0699c0a8efde974c7eb09e"
+    "scripts/validate_edge.py": "2b080e0aff781dae5ea4bdb4d5e503fe3fd15cc2ca0699c0a8efde974c7eb09e",
+    "src/instrumentzero/edge/__init__.py": "60d8275b9dccc74005149dd837ead69a7bc4bfd96a0d35d181d5fb6e11edfe0f",
+    "src/instrumentzero/edge/acquisition.py": "c56c0335e58767fdd0d37740c01f063de9eac3f7b1469a56305f2d05d5d4e664",
+    "src/instrumentzero/edge/artifacts.py": "93680558f70cb3aafb4f1a5ff2f15f2b2838a86346dd4ddd503455f3521223da",
+    "src/instrumentzero/edge/cli.py": "06dbf76ab90526a21db3a6b32abbd783508f059ec8c413388b4888ed531a70d0",
+    "src/instrumentzero/edge/core/iz_core.c": "144515eb0b1c12b8dc2b0e2e2ddf7302038f2767a6ad390e044729c405c985df",
+    "src/instrumentzero/edge/core/iz_core.h": "cdeb0d03920be665cb598e96dd159633b9911b6664e7ba437c32213efd569e43",
+    "src/instrumentzero/edge/estimator.py": "8d753b5e7475cdd83bf82629b5fb5ddf1187a6caab5a3c56377b3acfd87196b7",
+    "src/instrumentzero/edge/native.py": "b298010adf1fb0ffa23777ea0c29bfd98a44eab575417d528ab953821c9922cd",
+    "src/instrumentzero/edge/planner.py": "6e24eff53cb79c85f5be7597fd86c4b1a6cc33fa24d09999c4f3e05ec49b39e9",
+    "src/instrumentzero/edge/protocol.py": "3b2fff6a65d14e94304af1577219d3f07019068bdcca96b199544a789193f895",
+    "src/instrumentzero/edge/runtime.py": "55a82c4dd0d4df9aedf9d71b431d27b5f0b0906481bcc0d8a71de3ac1df808ce",
+    "src/instrumentzero/edge/simulation.py": "a178e5664888979dcac26fd72ab905476a8f08f3b845249b6406e914f9eaf881",
+    "src/instrumentzero/edge/spec.py": "5023579d92b72d4e580f284d35a59b9ca0d521e9f5666e7a2a5c237850f70254"
   },
-  "freeze_revision_note": "Allocation/stack/prefix fixes reviewed before first confirmation execution. Earlier frozen plan retained in commit cccda00."
+  "freeze_revision_note": "Independent review corrected total RAM reserve, supplied-transform validation, serial cleanup and selected bindings. First 18-case run retained as superseded. No numerical thresholds tuned; new disjoint seeds frozen before execution.",
+  "superseded_confirmation_seeds": [
+    9123071,
+    9123072
+  ]
 }
