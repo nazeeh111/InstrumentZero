@@ -11,3 +11,9 @@ InstrumentZero's code is MIT; that license does not replace data licenses.
 NumPy/SciPy use BSD-style licenses and are installed as dependencies. Optional development tools include Matplotlib (PSF-based) and pytest/Ruff/build (MIT). Preserve installed packages' notices if bundling an environment. FFmpeg decoded the OGG; no FFmpeg executable is redistributed.
 
 Bluesky, Bluesky Adaptive, PyVISA, PyMeasure, BoTorch, Phyphox, PaperVizAgent and brag informed the research or implementation route. Their source and experiment definitions are not vendored. The Phyphox client independently validates a public schema. Primary links and boundaries: [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md).
+
+## Edge firmware preview
+
+The provisional linked nRF52840 firmware uses Zephyr v4.2.0 (Apache-2.0), ARM CMSIS (Apache-2.0), Nordic nrfx drivers (BSD-3-Clause), and the official Zephyr SDK 0.17.2 runtime libraries. Relevant Picolibc/Newlib notices and GCC Runtime Library Exception/GPL notices are retained under `firmware/zephyr/notices/`. No compiler executable or SDK archive is redistributed. Exact upstream commits are in the build manifest and pinned Zephyr west manifest. Neither Nordic, Analog Devices, ARM nor Zephyr endorses this project; a successful build does not establish physical sensor operation.
+
+New Edge confirmation signals are generated locally from the included explicit equations and seeds. No external dataset, pretrained weights, voice clone or separately billed generation API is used for those signals or their numerical validation.

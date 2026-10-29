@@ -1,3 +1,7 @@
+# Edge v0.3.0-rc.1
+
+Software preview: bounded typed measurement graph; shared streaming C99 core; versioned raw/calibrated/filtered protocol; epoch/disconnect/buffer contracts; conservative ringdown/damping rejection; measured-host-proxy placement planner; consented PCM/IZP1 imports; provisional Zephyr ADXL345 adapter; offline source-complete exports; local Edge workspace. Simulation is explicit. Acquisition and fresh independent physical validation remain open gates. Previous recording workflows/releases are retained.
+
 # Changelog
 
 ## 0.2.0 — 2026-10-26

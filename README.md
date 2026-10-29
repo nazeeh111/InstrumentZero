@@ -10,6 +10,30 @@ InstrumentZero is a local scientific experiment compiler: supported questions be
 
 > **v0.2: validation without physical equipment.** Public calibrated recordings, executable adaptive replay, 600 acoustic stress cases and 18 production acquisition checks extend the Lab. Recorded measurements, replay and simulations remain visibly distinct. [Validation evidence and remaining limits](docs/NO_EQUIPMENT_VALIDATION.md).
 
+## InstrumentZero Edge · v0.3.0-rc.1 software preview
+
+One typed specification controls timestamp validation, calibration, filtering, a host ringdown estimator and recording. A deterministic placement planner compares raw-host, fixed-edge and chosen placements under declared resource and numerical-error budgets. Its costs are measured on the host and remain provisional for an MCU.
+
+```sh
+python -m pip install -r requirements-runtime.lock
+python -m pip install --no-deps .
+instrumentzero edge simulate --scenario mount_a --export mount-a.zip
+instrumentzero edge simulate --scenario mount_b --export mount-b.zip
+instrumentzero edge simulate --scenario silence
+instrumentzero lab --port 58129
+# Open http://127.0.0.1:58129/edge
+```
+
+A free C99 compiler is required. The C core has no heap or I/O, matches float64 references across chunk boundaries and is shared with the provisional Zephyr ADXL345 adapter. Raw and transformed streams use versioned, CRC-checked packets, bounded queues and isolated configuration epochs. Evidence exports include exact samples, timestamps and executable source for independent recomputation.
+
+**No physical setup is available.** Every new cantilever demonstration is synthetic. Physical acquisition, fresh remounts and independently acquired reference comparisons remain unverified. A firmware build is software evidence; this is not a measurement-verified instrument. The original recording Lab remains available.
+
+![Actual installed Edge workspace, simulated Mount A](assets/edge-v0.3/mount-a.png)
+
+[Watch the software preview walkthrough](assets/edge-v0.3/instrumentzero-edge-walkthrough.mp4) · [Editable timeline and captures](assets/edge-v0.3/)
+
+[Quickstart and contracts](docs/edge/README.md) · [Executed evidence and limits](docs/edge/VALIDATION.md) · [Protocol](docs/edge/PROTOCOL.md) · [Provisional firmware](docs/edge/FIRMWARE.md) · [Physical acceptance plan](docs/edge/PHYSICAL.md)
+
 ## From an ordinary question to a measurement
 
 **“How stiff is this spring?”** Supply known forces and calibrated video positions or an SI displacement CSV. Fit the unknown offset and compliance, propagate shared length/force calibration uncertainty, and convert a positive compliance interval into stiffness. Then compare feasible loads by expected variance reduction per second. A recommendation remains a proposal until someone actually makes the measurement.

@@ -9,6 +9,7 @@ from pathlib import Path
 
 from .acoustic import analyze_audio, load_wav
 from .calibrated import calibrated_acoustic_validation, export_calibrated_package
+from .edge.cli import add_parser as add_edge_parser
 from .engine import analyze_stiffness, compile_experiment
 from .examples import acoustic_example, recorded_stiffness_example, stiffness_example
 from .export import export_package
@@ -31,6 +32,7 @@ def _rows(path: str):
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="instrumentzero", description="Compile questions into calibrated measurement workflows.")
     sub = parser.add_subparsers(dest="command", required=True)
+    add_edge_parser(sub)
     plan = sub.add_parser("compile", help="Compile a supported measurement specification")
     plan.add_argument("spec")
     analyze = sub.add_parser("analyze", help="Analyze CSV/JSON force observations or WAV audio")
@@ -56,6 +58,10 @@ def main(argv: list[str] | None = None) -> int:
     ptb.add_argument("--export", metavar="ZIP")
     args = parser.parse_args(argv)
     try:
+        if args.command == "edge":
+            from .edge.cli import run
+            print(json.dumps(run(args), indent=2, allow_nan=False))
+            return 0
         if args.command == "lab":
             from .server import serve
             serve(args.port, args.data_dir)

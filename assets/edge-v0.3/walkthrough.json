@@ -1,0 +1,14 @@
+{
+  "title": "InstrumentZero Edge software preview",
+  "format": "Edited screenshot walkthrough of actual installed UI; synthetic inputs; silent",
+  "frames_per_second": 30,
+  "shots": [
+    {"image":"landing-viewport.png","seconds":3,"caption":"One specification controls a bounded measurement pipeline."},
+    {"image":"mount-a-viewport.png","seconds":4,"caption":"Mount A model: 17.25 Hz. Samples and protocol remain exportable."},
+    {"image":"mount-b.png","seconds":4,"caption":"Change the mounting model: 22.50 Hz. The old epoch is cleared."},
+    {"image":"signal-rejected.png","seconds":4,"caption":"Silence is rejected. No supported measurement is reported."},
+    {"image":"reconnected.png","seconds":4,"caption":"Simulated disconnect: a fresh session replaces the old one."},
+    {"image":"placement-comparison.png","seconds":5,"caption":"Reduction saves 64% here. Required raw validation can favor the host."},
+    {"image":"architecture-preview.png","seconds":4,"caption":"Software checks pass. Physical verification remains open."}
+  ]
+}

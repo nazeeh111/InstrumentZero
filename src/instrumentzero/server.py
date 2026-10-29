@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 import secrets
+import threading
+from collections import OrderedDict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
@@ -21,6 +23,8 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
     web = Path(__file__).parent / "web"
     data_dir = (data_dir or Path("data")).resolve()
     token = secrets.token_urlsafe(32)
+    edge_artifacts = OrderedDict()
+    artifact_lock = threading.Lock()
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, format, *args):
@@ -54,6 +58,16 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
                     return self._send({"status": "ok", "version": __version__, "device_connections": 0})
                 if path == "/api/session":
                     return self._send({"token": token})
+                if path == "/api/edge/spec":
+                    from .edge.spec import default_spec
+                    return self._send(default_spec())
+                if path == "/api/edge/artifact":
+                    key = parse_qs(urlsplit(self.path).query).get("id", [""])[0]
+                    with artifact_lock:
+                        artifact = edge_artifacts.get(key)
+                    if artifact is None:
+                        return self._send({"error": "This export expired. Run the experiment again."}, 404)
+                    return self._send(artifact, content_type="application/zip")
                 if path == "/api/demo/stiffness":
                     return self._send(stiffness_example())
                 if path == "/api/demo/stiffness/recorded":
@@ -86,6 +100,10 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
                                        "acquisition": json.loads(acquisition.read_text()) if acquisition.is_file() else None,
                                        "physical_hardware_acceptance": "Not verified by these software tests"})
                 allowed = {"/": ("index.html", "text/html; charset=utf-8"),
+                           "/edge": ("edge.html", "text/html; charset=utf-8"),
+                           "/edge.js": ("edge.js", "text/javascript; charset=utf-8"),
+                           "/edge.css": ("edge.css", "text/css; charset=utf-8"),
+                           "/edge-architecture.svg": ("edge-architecture.svg", "image/svg+xml"),
                            "/index.html": ("index.html", "text/html; charset=utf-8"),
                            "/app.js": ("app.js", "text/javascript; charset=utf-8"),
                            "/acquisition.js": ("acquisition.js", "text/javascript; charset=utf-8"),
@@ -121,7 +139,24 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
                 if not isinstance(payload, dict):
                     raise MeasurementError("The request must be a JSON object.")
                 path = urlsplit(self.path).path
-                if path == "/api/compile":
+                if path == "/api/edge/run":
+                    from .edge.artifacts import export_run
+                    from .edge.simulation import compare, generate
+                    from .edge.spec import default_spec
+                    if set(payload) - {"spec", "scenario", "seed", "seconds"}:
+                        raise MeasurementError("Unknown Edge request fields.")
+                    spec = payload.get("spec", default_spec())
+                    y, ticks, source = generate(spec, payload.get("scenario", "mount_a"),
+                                                 payload.get("seed", 20261029), payload.get("seconds", 8.))
+                    output = compare(spec, y, ticks, source=source)
+                    artifact = export_run(output, y, ticks)
+                    key = secrets.token_urlsafe(18)
+                    with artifact_lock:
+                        edge_artifacts[key] = artifact
+                        while len(edge_artifacts) > 4:
+                            edge_artifacts.popitem(last=False)
+                    output["artifact_url"] = "/api/edge/artifact?id=" + key
+                elif path == "/api/compile":
                     output = compile_experiment(payload)
                 elif path == "/api/analyze":
                     output = analyze_stiffness(payload.get("spec"), payload.get("rows"))

@@ -1,0 +1,49 @@
+{
+  "schema": "instrumentzero.edge.software-checks/1",
+  "version": "0.3.0rc1",
+  "scope": "software preview only",
+  "python_tests": {
+    "passed": 138,
+    "seconds": 44.83
+  },
+  "node_tests": {
+    "passed": 30
+  },
+  "ruff": "passed",
+  "core": {
+    "schema": "instrumentzero.edge.core-verification/1",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "sanitizers": "AddressSanitizer + UndefinedBehaviorSanitizer harness executed successfully",
+    "cpp_integration": "C++17 consumer linked to the separately compiled C99 core and executed",
+    "cross_compilation": "Cortex-M4 freestanding core object; not a linked board firmware image",
+    "object_sha256": "c10c458be318778cc31b5a711b9bf27081f53e1c6dc3de087dd8ca176aa06e75",
+    "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+    "physical_verification": false
+  },
+  "confirmation": {
+    "path": "confirmation-final-v0.3/results.json",
+    "all_18_passed": true
+  },
+  "firmware": "firmware-build/report.json",
+  "independent_install": {
+    "changed_input": "Mount B",
+    "frequency_hz": 22.50000091826718,
+    "portable_source_recomputed": true
+  },
+  "interface": {
+    "desktop_checked": true,
+    "mobile_width_px": 390,
+    "horizontal_overflow": false,
+    "rejection_and_simulated_recovery_checked": true,
+    "http_export_recomputed": true,
+    "native_browser_file_save": "observer timed out; not verified"
+  },
+  "demo": {
+    "duration_seconds": 28,
+    "video_decode": "passed",
+    "scope": "edited actual UI screenshots; synthetic; silent"
+  },
+  "acquisition_verified": false,
+  "independent_physical_measurement_verified": false,
+  "runtime_firmware_graph_reconfiguration": "not implemented"
+}

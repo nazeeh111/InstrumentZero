@@ -1,0 +1,37 @@
+${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/build-filtered_edge/zephyr/zephyr.elf  :
+section                           size        addr
+rom_start                          256           0
+text                             28640         256
+.ARM.exidx                           8       28896
+initlevel                          104       28904
+device_area                        256       29008
+sw_isr_table                       384       29264
+entropy_driver_api_area              8       29648
+gpio_driver_api_area                36       29656
+i2c_driver_api_area                 24       29692
+sensor_driver_api_area              56       29716
+clock_control_driver_api_area       28       29772
+uart_driver_api_area                12       29800
+tbss                                 4       29812
+rodata                            1068       29824
+.ramfunc                             0   536870912
+datas                              192   536870912
+device_states                       16   536871104
+k_mutex_area                        20   536871120
+k_msgq_area                         40   536871140
+.comment                            32           0
+.debug_aranges                    5424           0
+.debug_info                     328293           0
+.debug_abbrev                    54337           0
+.debug_line                     154832           0
+.debug_frame                     13336           0
+.debug_str                       56041           0
+.debug_loc                      149530           0
+.debug_ranges                    24608           0
+.ARM.attributes                     50           0
+.last_section                        4       31160
+bss                               7454   536871232
+noinit                           10752   536878720
+Total                           835845
+
+
