@@ -7,8 +7,8 @@
     82739
   ],
   "confirmation_seeds": [
-    9123091,
-    9123092
+    9123101,
+    9123102
   ],
   "scenarios": [
     "mount_a",
@@ -50,11 +50,15 @@
     "src/instrumentzero/edge/protocol.py": "3b2fff6a65d14e94304af1577219d3f07019068bdcca96b199544a789193f895",
     "src/instrumentzero/edge/runtime.py": "55a82c4dd0d4df9aedf9d71b431d27b5f0b0906481bcc0d8a71de3ac1df808ce",
     "src/instrumentzero/edge/simulation.py": "a178e5664888979dcac26fd72ab905476a8f08f3b845249b6406e914f9eaf881",
-    "src/instrumentzero/edge/spec.py": "5023579d92b72d4e580f284d35a59b9ca0d521e9f5666e7a2a5c237850f70254"
+    "src/instrumentzero/edge/spec.py": "6eccc7412f3a11c372e7e945dbc195359733bf48c89b1ac5ea7bfc2c405d3056"
   },
-  "freeze_revision_note": "Independent review corrected total RAM reserve, supplied-transform validation, serial cleanup and selected bindings. First 18-case run retained as superseded. No numerical thresholds tuned; new disjoint seeds frozen before execution.",
+  "freeze_revision_note": "Final invalid-input regression closes direct EdgeSpec constructor bypass. Placement rules and numerical thresholds unchanged. Fresh disjoint confirmation frozen before final execution; earlier runs retained.",
   "superseded_confirmation_seeds": [
     9123071,
     9123072
+  ],
+  "previous_confirmation_seeds": [
+    9123091,
+    9123092
   ]
 }
