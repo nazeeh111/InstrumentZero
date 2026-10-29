@@ -39,7 +39,7 @@ retained audio has undergone lossy compression. Frequency estimates also vary
 over its decay, so a narrow estimator-only interval cannot establish total
 measurement accuracy. This example supports real recorded-signal analysis and
 nominal agreement checks, not a new live measurement or certified tuning-fork
-calibration. See [`CC0-NOTICE.txt`](../data/CC0-NOTICE.txt).
+calibration.
 
 ## Load-cell calibration: NIST Pontius
 
