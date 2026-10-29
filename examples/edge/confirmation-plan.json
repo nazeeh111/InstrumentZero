@@ -1,0 +1,43 @@
+{
+  "schema": "instrumentzero.edge.confirmation/1",
+  "scope": "Synthetic software confirmation only; no physical validation",
+  "development_seeds": [
+    20261029,
+    536,
+    82739
+  ],
+  "confirmation_seeds": [
+    9123071,
+    9123072
+  ],
+  "scenarios": [
+    "mount_a",
+    "mount_b",
+    "silence",
+    "chirp",
+    "close_modes",
+    "saturation",
+    "impulse"
+  ],
+  "duration_seconds": 8,
+  "host_favored_cases": [
+    "mount_a",
+    "mount_b"
+  ],
+  "rules": "prefix-v1; all reviewed placements retained; no tuning on confirmation cases",
+  "truth_acceptance": {
+    "max_frequency_abs_error_hz": 0.005,
+    "max_damping_relative_error": 0.02,
+    "unsuitable_signals_must_reject": true
+  },
+  "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+  "frozen_sha256": {
+    "src/instrumentzero/edge/planner.py": "ac154123ab063a3facf8a1395ee0b024102030909f2aa9eacac0381034768563",
+    "src/instrumentzero/edge/estimator.py": "8d753b5e7475cdd83bf82629b5fb5ddf1187a6caab5a3c56377b3acfd87196b7",
+    "src/instrumentzero/edge/spec.py": "ec7ce7f2fb10a67592614d9484e745d33f59765db11b08f3c774c3dd61afbb76",
+    "examples/edge/cost-profile.json": "56b9c902f5a7041d7dd44d0a0adb4f336b7ca6aa450971cd5e9d5f4ca7732bcc",
+    "examples/edge/host-favored-cost-profile.json": "6c80824d1dcf19d244c0df09b30b18253becc7b6f62de4e9f3a47747d24146a3",
+    "examples/edge/simulation-spec.json": "77f77627c6a534d669e376483b11b06c9729ffa04bf9f802ea7cd866a39b03d1",
+    "examples/edge/host-favored-spec.json": "8a4fb1c233f7ab8b6962f8c9fc235313c3ee02a6d72de8f50800607528699a93"
+  }
+}
