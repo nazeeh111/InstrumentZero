@@ -129,4 +129,4 @@ python scripts/benchmark.py --trials 150 --training-states 1500 --output benchma
 
 Use fresh evaluation output directories. See [contribution opportunities](CONTRIBUTING.md), [release notes](CHANGELOG.md), [research foundations](docs/FOUNDATIONS.md), and [security boundaries](SECURITY.md).
 
-Code is **MIT**. Data and the retained paper have separate terms in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). InstrumentZero builds on NumPy/SciPy and established experimental-design research. It does not claim to invent Bayesian design, learned sequential policies or general autonomous science.
+Code is **MIT**. Data and the retained paper have separate terms in [the data documentation](docs/DATA.md). InstrumentZero builds on NumPy/SciPy and established experimental-design research. It does not claim to invent Bayesian design, learned sequential policies or general autonomous science.
