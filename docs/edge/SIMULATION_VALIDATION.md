@@ -12,7 +12,7 @@ The unchanged shared C99 core retains its executed ASan/UBSan harness, C++17 int
 
 ## Frozen confirmation
 
-The source-bound [plan](../../examples/edge/simulation-plan-v0.3.json) defines fresh, explicit model cases, rejection/fault cases, frozen measured-host cost profiles and numerical thresholds before execution. All outcomes, including rejected input, are retained. Current results will be recorded here after the frozen run succeeds; no result is implied by the plan alone.
+The source-bound [plan](../../examples/edge/simulation-plan-v0.3-final.json) defines fresh, explicit model cases, rejection/fault cases, frozen measured-host cost profiles and numerical thresholds before execution. All outcomes, including rejected input, are retained. The initial plan at commit `4e504a9` retained a failed expectation: a fast-decaying signal correctly withheld damping after reaching the noise floor too early, whereas the plan had required damping. That complete failed run remains in `simulation-confirmation-v0.3`. Production rules and thresholds were not loosened. The final plan uses disjoint fresh seeds and explicitly checks correct frequency-only output for this signal. Final results are recorded after execution; the plan alone does not imply a pass.
 
 ## Scope and reproduction
 

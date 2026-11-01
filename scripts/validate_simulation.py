@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--plan', type=Path, default=ROOT/'examples/edge/simulation-plan-v0.3.json')
+    parser.add_argument('--plan', type=Path, default=ROOT/'examples/edge/simulation-plan-v0.3-final.json')
     parser.add_argument('--output', type=Path, required=True, help='New folder; never overwrites prior evidence')
     args = parser.parse_args()
     plan = json.loads(args.plan.read_text())
