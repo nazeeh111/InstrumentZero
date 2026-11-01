@@ -1,0 +1,48 @@
+name: Edge firmware build
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cross-compile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned free build tools
+        run: |
+          python -m pip install -r requirements-runtime.lock
+          python -m pip install -r firmware/zephyr/requirements-build.lock
+          python -m pip install --no-deps -e .
+      - name: Fetch pinned Zephyr and required driver modules
+        run: |
+          git clone --depth 1 --branch v4.2.0 https://github.com/zephyrproject-rtos/zephyr "$RUNNER_TEMP/edge-zephyr/zephyr"
+          cd "$RUNNER_TEMP/edge-zephyr"
+          west init -l zephyr
+          west update cmsis cmsis_6 hal_nordic
+      - name: Verify and unpack official ARM SDK
+        working-directory: ${{ runner.temp }}
+        run: |
+          curl -fL https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.2/sha256.sum -o sdk-sha256.sum
+          curl -fL https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.2/zephyr-sdk-0.17.2_linux-x86_64_minimal.tar.xz -o zephyr-sdk-0.17.2_linux-x86_64_minimal.tar.xz
+          curl -fL https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.2/toolchain_linux-x86_64_arm-zephyr-eabi.tar.xz -o toolchain_linux-x86_64_arm-zephyr-eabi.tar.xz
+          python - <<'PYSDK'
+          from pathlib import Path
+          import hashlib
+          sums = {line.split()[1].lstrip('*'):line.split()[0] for line in Path('sdk-sha256.sum').read_text().splitlines()}
+          for name in ['zephyr-sdk-0.17.2_linux-x86_64_minimal.tar.xz','toolchain_linux-x86_64_arm-zephyr-eabi.tar.xz']:
+              assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == sums[name], name
+          PYSDK
+          tar -xf zephyr-sdk-0.17.2_linux-x86_64_minimal.tar.xz
+          tar -xf toolchain_linux-x86_64_arm-zephyr-eabi.tar.xz -C zephyr-sdk-0.17.2
+      - name: Build all three placements without hardware access
+        run: python scripts/build_edge_firmware.py --workspace "$RUNNER_TEMP/edge-zephyr" --sdk "$RUNNER_TEMP/zephyr-sdk-0.17.2" --tools "$(dirname "$(command -v west)")" --output "$RUNNER_TEMP/edge-firmware"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: edge-firmware-build-evidence
+          path: |
+            ${{ runner.temp }}/edge-firmware/report.json
+            ${{ runner.temp }}/edge-firmware/*.log
+            ${{ runner.temp }}/edge-firmware/*-sections.txt

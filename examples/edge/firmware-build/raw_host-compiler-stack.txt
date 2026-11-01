@@ -1,0 +1,9 @@
+${ZEPHYR_WORKSPACE}/zephyr/include/zephyr/sys/byteorder.h:442:20:sys_put_le32	0	static
+${ZEPHYR_WORKSPACE}/zephyr/include/zephyr/sys/atomic_builtin.h:69:28:atomic_set.isra	0	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:67:12:stop_acquisition	8	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:47:13:acquired	56	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:115:5:main	1712	static
+
+${INSTRUMENTZERO}/src/instrumentzero/edge/core/iz_core.c:4:8:iz_state_bytes	0	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/core/iz_core.c:5:5:iz_init	48	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/core/iz_core.c:25:5:iz_process	64	static

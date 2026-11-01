@@ -1,0 +1,60 @@
+{
+  "schema": "instrumentzero.edge.confirmation/1",
+  "scope": "Synthetic software confirmation only; no physical validation",
+  "development_seeds": [
+    20261029,
+    536,
+    82739
+  ],
+  "confirmation_seeds": [
+    9123091,
+    9123092
+  ],
+  "scenarios": [
+    "mount_a",
+    "mount_b",
+    "silence",
+    "chirp",
+    "close_modes",
+    "saturation",
+    "impulse"
+  ],
+  "duration_seconds": 8,
+  "host_favored_cases": [
+    "mount_a",
+    "mount_b"
+  ],
+  "rules": "prefix-v1; all reviewed placements retained; no tuning on confirmation cases",
+  "truth_acceptance": {
+    "max_frequency_abs_error_hz": 0.005,
+    "max_damping_relative_error": 0.02,
+    "unsuitable_signals_must_reject": true
+  },
+  "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+  "frozen_sha256": {
+    "examples/edge/cost-profile.json": "df8fef7967796f2c3e92248ba2e9074ce210faa57afc3844341cd31a483b675f",
+    "examples/edge/host-favored-cost-profile.json": "122e564cf61a5ede783c894a5efe09b605c8b1cf137bbb438183b5021759d605",
+    "examples/edge/host-favored-spec.json": "05cb17b7140fd57a44a75fa5dc82e8b309b272a56ecc2a73ee5cceb1bdb8be91",
+    "examples/edge/simulation-spec.json": "b32c853528e7dddd4a5c16a876801b6effb04106aeaa4cbcc4d64ea823c22cf7",
+    "requirements-runtime.lock": "c26c8a4a3ed8c2ce9f9e14d21236e43d962de8c16c0effc811e32b68eed0e347",
+    "scripts/validate_edge.py": "2b080e0aff781dae5ea4bdb4d5e503fe3fd15cc2ca0699c0a8efde974c7eb09e",
+    "src/instrumentzero/edge/__init__.py": "60d8275b9dccc74005149dd837ead69a7bc4bfd96a0d35d181d5fb6e11edfe0f",
+    "src/instrumentzero/edge/acquisition.py": "c56c0335e58767fdd0d37740c01f063de9eac3f7b1469a56305f2d05d5d4e664",
+    "src/instrumentzero/edge/artifacts.py": "93680558f70cb3aafb4f1a5ff2f15f2b2838a86346dd4ddd503455f3521223da",
+    "src/instrumentzero/edge/cli.py": "06dbf76ab90526a21db3a6b32abbd783508f059ec8c413388b4888ed531a70d0",
+    "src/instrumentzero/edge/core/iz_core.c": "144515eb0b1c12b8dc2b0e2e2ddf7302038f2767a6ad390e044729c405c985df",
+    "src/instrumentzero/edge/core/iz_core.h": "cdeb0d03920be665cb598e96dd159633b9911b6664e7ba437c32213efd569e43",
+    "src/instrumentzero/edge/estimator.py": "8d753b5e7475cdd83bf82629b5fb5ddf1187a6caab5a3c56377b3acfd87196b7",
+    "src/instrumentzero/edge/native.py": "b298010adf1fb0ffa23777ea0c29bfd98a44eab575417d528ab953821c9922cd",
+    "src/instrumentzero/edge/planner.py": "6e24eff53cb79c85f5be7597fd86c4b1a6cc33fa24d09999c4f3e05ec49b39e9",
+    "src/instrumentzero/edge/protocol.py": "3b2fff6a65d14e94304af1577219d3f07019068bdcca96b199544a789193f895",
+    "src/instrumentzero/edge/runtime.py": "55a82c4dd0d4df9aedf9d71b431d27b5f0b0906481bcc0d8a71de3ac1df808ce",
+    "src/instrumentzero/edge/simulation.py": "a178e5664888979dcac26fd72ab905476a8f08f3b845249b6406e914f9eaf881",
+    "src/instrumentzero/edge/spec.py": "5023579d92b72d4e580f284d35a59b9ca0d521e9f5666e7a2a5c237850f70254"
+  },
+  "freeze_revision_note": "Independent review corrected total RAM reserve, supplied-transform validation, serial cleanup and selected bindings. First 18-case run retained as superseded. No numerical thresholds tuned; new disjoint seeds frozen before execution.",
+  "superseded_confirmation_seeds": [
+    9123071,
+    9123072
+  ]
+}

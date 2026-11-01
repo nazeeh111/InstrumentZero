@@ -1,0 +1,24 @@
+flowchart TB
+  SPEC[Versioned typed specification] --> COMPILE[Validate units, graph, rate and FIR response]
+  COST[Measured host primitive costs; MCU costs unknown] --> PLAN[Deterministic legal prefix planner]
+  COMPILE --> PLAN
+  PLAN --> BIND[Configuration hash, C bindings and epoch]
+  subgraph MCU[Provisional Zephyr adapter: build verified; hardware unverified]
+    IRQ[ADXL345 mature driver / acquisition thread] --> Q[Bounded queue; fail on overrun]
+    Q --> EDGE[Calibration and FIR prefix, when selected]
+    STOP[Start / keepalive / synchronized stop] --> IRQ
+  end
+  BIND --> MCU
+  EDGE --> WIRE[IZP1: length, kind, UUID, epoch, sequence, timestamps, CRC]
+  SIM[Explicitly synthetic source] --> WIRE
+  WAV[Consented signed PCM recording / unknown prior gain and clock] --> WIRE
+  subgraph HOST[Local host application]
+    CHECK[Validate contract; invalidate faults and stale epochs] --> CORE[Shared C suffix + float64 numerical reference]
+    CORE --> FIT[Single-mode ringdown; reject unsuitable signal / unidentifiable damping]
+    FIT --> UI[Task-centered Edge workspace]
+    FIT --> ZIP[Raw samples, original packets, config, firmware declaration, source and recompute]
+    CHECK -. raw evidence .-> ZIP
+  end
+  WIRE --> CHECK
+  BIND --> HOST
+  REF[Fresh independent physical reference: unavailable] -. required before measurement verification .-> FIT

@@ -1,0 +1,1 @@
+This first 18-case synthetic run is retained for history. It predates review corrections to memory accounting, supplied-device stream validation, serial lifecycle and binding export. Do not use it as current acceptance. No physical validation was performed. Current confirmation uses a newly frozen disjoint seed set.

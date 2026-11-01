@@ -1,0 +1,1 @@
+Retained reviewed 18-case run. The final release adds a separately tested invalid-typed-input guard and executes a new disjoint confirmation set under confirmation-final-v0.3. No numerical thresholds or placement rules were tuned on these results.

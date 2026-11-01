@@ -1,11 +1,11 @@
 [build-system]
-requires = ["hatchling>=1.26,<2"]
+requires = ["hatchling==1.32.4"]
 build-backend = "hatchling.build"
 
 [project]
 name = "instrumentzero"
-version = "0.2.0"
-description = "A local scientific experiment compiler for calibrated measurements and adaptive design"
+version = "0.3.0rc1"
+description = "A local measurement compiler with a typed host/edge acquisition and processing preview"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
@@ -28,6 +28,7 @@ packages = ["src/instrumentzero"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "LICENSE" = "instrumentzero/LICENSE"
+"requirements-runtime.lock" = "instrumentzero/edge/requirements-runtime.lock"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

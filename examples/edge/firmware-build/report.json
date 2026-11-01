@@ -1,0 +1,80 @@
+{
+  "schema": "instrumentzero.edge.firmware-build/1",
+  "zephyr_commit": "413b789deb391d3a37d06b463288a5fe765ee57e",
+  "sdk_version": "0.17.2",
+  "board": "nrf52840dk/nrf52840",
+  "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+  "adapter_source_sha256": {
+    "firmware/zephyr/src/main.c": "3e79c3f543cabd23b4b2d6af77cc30a6fd86a8aa6c451e14180111d8fe164f96",
+    "firmware/zephyr/prj.conf": "c171f3011b521da9bc248f4dc9841ed2744f30a82bcf1faa8982d5788a7a28f2",
+    "firmware/zephyr/boards/nrf52840dk_nrf52840.overlay": "42fa6e35300682090799782b20f7ebdf6696d17d7e97dfb37219f39b87b531de",
+    "firmware/zephyr/CMakeLists.txt": "d136ed87f237a4785d7612061b8d2fcdc43298d6db4d94c1f31d3b5ccaf9d587",
+    "src/instrumentzero/edge/core/iz_core.c": "144515eb0b1c12b8dc2b0e2e2ddf7302038f2767a6ad390e044729c405c985df",
+    "src/instrumentzero/edge/core/iz_core.h": "cdeb0d03920be665cb598e96dd159633b9911b6664e7ba437c32213efd569e43"
+  },
+  "placements": [
+    {
+      "mode": "raw_host",
+      "elf_sha256": "b567cc5fca454103c2ec8071f3059027e233d1fbbe0ba580cccf9c91b2b526fd",
+      "hex_sha256": "a0fa4baa9b3be633fa3cf223541c7670d8377ce788310a758bb64f16c7f81685",
+      "elf_bytes": 869524,
+      "section_report": "${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/build-raw_host/zephyr/zephyr.elf  :\nsection                           size        addr\nrom_start                          256           0\ntext                             26544         256\n.ARM.exidx                           8       26800\ninitlevel                          104       26808\ndevice_area                        256       26912\nsw_isr_table                       384       27168\nentropy_driver_api_area              8       27552\ngpio_driver_api_area                36       27560\ni2c_driver_api_area                 24       27596\nsensor_driver_api_area              56       27620\nclock_control_driver_api_area       28       27676\nuart_driver_api_area                12       27704\ntbss                                 4       27716\nrodata                             552       27728\n.ramfunc                             0   536870912\ndatas                              192   536870912\ndevice_states                       16   536871104\nk_mutex_area                        20   536871120\nk_msgq_area                         40   536871140\n.comment                            32           0\n.debug_aranges                    5360           0\n.debug_info                     326491           0\n.debug_abbrev                    53905           0\n.debug_line                     152553           0\n.debug_frame                     13036           0\n.debug_str                       55662           0\n.debug_loc                      148490           0\n.debug_ranges                    24256           0\n.ARM.attributes                     50           0\n.last_section                        4       28548\nbss                               3314   536871232\nnoinit                           10752   536874560\nTotal                           822445\n\n\n",
+      "spec_sha256": "dea5616a20a8d85f5dbd683c8c1593aa274d1ab09c5f4ec27923664ac6039a1c",
+      "command": [
+        "${ZEPHYR_WORKSPACE}/tools/bin/west",
+        "build",
+        "-b",
+        "nrf52840dk/nrf52840",
+        "${INSTRUMENTZERO}/firmware/zephyr",
+        "-d",
+        "${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/build-raw_host",
+        "--",
+        "-DIZ_BINDINGS_DIR=${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/bindings-raw_host",
+        "-DDTC_OVERLAY_FILE=${INSTRUMENTZERO}/firmware/zephyr/boards/nrf52840dk_nrf52840.overlay"
+      ]
+    },
+    {
+      "mode": "calibrated_edge",
+      "elf_sha256": "0cd288ef33e0310368cbced48e1e4905cd84688adf3b550a9f222927553c896a",
+      "hex_sha256": "544c640df14d4fba60628857d4e39c6bb1389b919e3e57424ec534843f612519",
+      "elf_bytes": 879816,
+      "section_report": "${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/build-calibrated_edge/zephyr/zephyr.elf  :\nsection                           size        addr\nrom_start                          256           0\ntext                             28576         256\n.ARM.exidx                           8       28832\ninitlevel                          104       28840\ndevice_area                        256       28944\nsw_isr_table                       384       29200\nentropy_driver_api_area              8       29584\ngpio_driver_api_area                36       29592\ni2c_driver_api_area                 24       29628\nsensor_driver_api_area              56       29652\nclock_control_driver_api_area       28       29708\nuart_driver_api_area                12       29736\ntbss                                 4       29748\nrodata                             560       29760\n.ramfunc                             0   536870912\ndatas                              192   536870912\ndevice_states                       16   536871104\nk_mutex_area                        20   536871120\nk_msgq_area                         40   536871140\n.comment                            32           0\n.debug_aranges                    5424           0\n.debug_info                     328816           0\n.debug_abbrev                    54365           0\n.debug_line                     154812           0\n.debug_frame                     13336           0\n.debug_str                       56047           0\n.debug_loc                      149601           0\n.debug_ranges                    24648           0\n.ARM.attributes                     50           0\n.last_section                        4       30588\nbss                               7454   536871232\nnoinit                           10752   536878720\nTotal                           835921\n\n\n",
+      "spec_sha256": "dea5616a20a8d85f5dbd683c8c1593aa274d1ab09c5f4ec27923664ac6039a1c",
+      "command": [
+        "${ZEPHYR_WORKSPACE}/tools/bin/west",
+        "build",
+        "-b",
+        "nrf52840dk/nrf52840",
+        "${INSTRUMENTZERO}/firmware/zephyr",
+        "-d",
+        "${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/build-calibrated_edge",
+        "--",
+        "-DIZ_BINDINGS_DIR=${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/bindings-calibrated_edge",
+        "-DDTC_OVERLAY_FILE=${INSTRUMENTZERO}/firmware/zephyr/boards/nrf52840dk_nrf52840.overlay"
+      ]
+    },
+    {
+      "mode": "filtered_edge",
+      "elf_sha256": "1a5a200113d5b989a2bb5d2004da5cc2189029d698ae1aae02f446623492725d",
+      "hex_sha256": "7fefddfce67c6129011623b176e0a7bc02a60ce5e5cfe9b019a8136a41cd8cf5",
+      "elf_bytes": 879808,
+      "section_report": "${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/build-filtered_edge/zephyr/zephyr.elf  :\nsection                           size        addr\nrom_start                          256           0\ntext                             28640         256\n.ARM.exidx                           8       28896\ninitlevel                          104       28904\ndevice_area                        256       29008\nsw_isr_table                       384       29264\nentropy_driver_api_area              8       29648\ngpio_driver_api_area                36       29656\ni2c_driver_api_area                 24       29692\nsensor_driver_api_area              56       29716\nclock_control_driver_api_area       28       29772\nuart_driver_api_area                12       29800\ntbss                                 4       29812\nrodata                            1068       29824\n.ramfunc                             0   536870912\ndatas                              192   536870912\ndevice_states                       16   536871104\nk_mutex_area                        20   536871120\nk_msgq_area                         40   536871140\n.comment                            32           0\n.debug_aranges                    5424           0\n.debug_info                     328293           0\n.debug_abbrev                    54337           0\n.debug_line                     154832           0\n.debug_frame                     13336           0\n.debug_str                       56041           0\n.debug_loc                      149530           0\n.debug_ranges                    24608           0\n.ARM.attributes                     50           0\n.last_section                        4       31160\nbss                               7454   536871232\nnoinit                           10752   536878720\nTotal                           835845\n\n\n",
+      "spec_sha256": "dea5616a20a8d85f5dbd683c8c1593aa274d1ab09c5f4ec27923664ac6039a1c",
+      "command": [
+        "${ZEPHYR_WORKSPACE}/tools/bin/west",
+        "build",
+        "-b",
+        "nrf52840dk/nrf52840",
+        "${INSTRUMENTZERO}/firmware/zephyr",
+        "-d",
+        "${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/build-filtered_edge",
+        "--",
+        "-DIZ_BINDINGS_DIR=${ZEPHYR_WORKSPACE}/acceptance-synchronized-v1/bindings-filtered_edge",
+        "-DDTC_OVERLAY_FILE=${INSTRUMENTZERO}/firmware/zephyr/boards/nrf52840dk_nrf52840.overlay"
+      ]
+    }
+  ],
+  "hardware_operation_verified": false,
+  "flashed": false,
+  "memory_scope": "Linker sections include fixed RTOS/driver/static stacks; stack high-water and device utilization remain unmeasured."
+}
