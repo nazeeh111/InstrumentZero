@@ -8,6 +8,8 @@ InstrumentZero Edge is a local measurement compiler that lets one specification 
 
 The software preview compares raw streaming, a fixed edge pipeline and a deterministic placement planner on identical input. In the retained synthetic test, reduction cuts framed transfer from 30,000 to 10,800 bytes. The planner ties the fixed edge pipeline there. When raw validation is required, it keeps processing on the host and avoids an extra stream.
 
+The rc2 update adds runtime device configuration with a matching acknowledgement before start, bounded interrupt-driven receive buffering and cancellation cleanup. This path is tested in software and cross-compiled, with physical execution still open.
+
 The release includes a shared C core, protocol and numerical tests, three actual Zephyr firmware builds, a local interface, raw sample exports and source that recomputes the result. No physical setup was available. Sensor operation and independent physical measurement validation are still open, and MCU speed or power is not claimed.
 
 Source and evidence: https://github.com/nazeeh111/InstrumentZero

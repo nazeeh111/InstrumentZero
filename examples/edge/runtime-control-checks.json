@@ -1,0 +1,8 @@
+{
+  "schema": "instrumentzero.edge.control-checks/1",
+  "checks": "ASan/UBSan configuration/guard harness executed for all placements, CRC mutations, truncation, repeated start, epoch overflow, SPSC ring bursts/wrap/overflow",
+  "cross_compilation": "actual Cortex-M4 freestanding control object",
+  "control_sha256": "39bbcea3171ce701134c15c8a9a05011137793378558fa5a5058ca509ad79710",
+  "object_sha256": "a2a468ef70eb0ef9460200bdc6f3ac7eac15417a143df9b8fa1a262eedc932f5",
+  "hardware_operation_verified": false
+}

@@ -30,11 +30,11 @@ A free C99 compiler is required. The C core has no heap or I/O, matches float64 
 
 The rc2 adapter adds bounded runtime configuration with a matching acknowledgement before start, interrupt-driven receive buffering, cancellation cleanup and retained control receipts. Supported rates, calibration, filtering and placement can change within the compiled buffer envelope. This path is software-tested and build-verified; physical behavior remains unverified. [Runtime configuration](docs/edge/CONTROL.md).
 
-![Actual installed Edge workspace, simulated Mount A](assets/edge-v0.3/mount-a.png)
+![Actual installed rc2 workspace, simulated Mount B](assets/edge-rc2/workspace.png)
 
-[Watch the software preview walkthrough](assets/edge-v0.3/instrumentzero-edge-walkthrough.mp4) · [Editable timeline and captures](assets/edge-v0.3/)
+[Watch the original synthetic UI walkthrough](assets/edge-v0.3/instrumentzero-edge-walkthrough.mp4) · [Editable timeline and captures](assets/edge-v0.3/)
 
-[Quickstart and contracts](docs/edge/README.md) · [Executed evidence and limits](docs/edge/VALIDATION.md) · [Protocol](docs/edge/PROTOCOL.md) · [Provisional firmware](docs/edge/FIRMWARE.md) · [Physical acceptance plan](docs/edge/PHYSICAL.md)
+[Quickstart and contracts](docs/edge/README.md) · [Executed evidence and limits](docs/edge/RUNTIME_VALIDATION.md) · [Protocol](docs/edge/PROTOCOL.md) · [Provisional firmware](docs/edge/FIRMWARE.md) · [Physical acceptance plan](docs/edge/PHYSICAL.md)
 
 ## From an ordinary question to a measurement
 

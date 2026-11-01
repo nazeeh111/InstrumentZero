@@ -1,0 +1,18 @@
+{
+  "confirmation_trials": 18,
+  "positive_trials": 8,
+  "all_passed": true,
+  "maximum_frequency_absolute_error_hz": 1.751873605826404e-05,
+  "maximum_damping_relative_error": 0.00015186936067890233,
+  "standard_framed_bytes": [
+    30000,
+    10800,
+    10800
+  ],
+  "raw_validation_framed_bytes": [
+    30000,
+    40800,
+    30000
+  ],
+  "physical_measurement_verified": false
+}

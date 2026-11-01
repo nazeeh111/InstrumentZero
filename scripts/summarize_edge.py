@@ -1,6 +1,7 @@
 """Render measured software comparisons from retained confirmation receipts."""
 from __future__ import annotations
 
+import argparse
 import json
 import subprocess
 from pathlib import Path
@@ -28,7 +29,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
-    evidence = ROOT/'examples/edge/confirmation-final-v0.3'
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--evidence',type=Path,default=ROOT/'examples/edge/confirmation-rc2')
+    parser.add_argument('--output',type=Path,required=True,help='New empty figure folder')
+    args=parser.parse_args()
+    evidence=args.evidence
+    args.output.mkdir(parents=True,exist_ok=False)
     report = json.loads((evidence/'results.json').read_text())
     assert report['all_passed'] and len(report['trials']) == 18
     positives = [t for t in report['trials'] if t['scenario'] in ('mount_a','mount_b')]
@@ -51,11 +57,11 @@ def main():
         ax.set_axisbelow(True)
         for bar,value in zip(bars,values,strict=True):
             ax.text(bar.get_x()+bar.get_width()/2,value+1.1,f'{value:.1f}',ha='center',fontsize=12)
-    axes[0].set_ylabel('Transferred data / kB (1 kB = 1000 bytes)')
+    axes[0].set_ylabel('Framed data / kB (1 kB = 1000 bytes)')
     fig.suptitle('InstrumentZero Edge · identical synthetic 8-second input',x=.06,ha='left',fontsize=18)
-    fig.text(.06,.02,'Length prefixes, packet headers and timestamps included. Host cost proxies only; no MCU timing or physical measurement claim.',fontsize=9,color='#646e65')
+    fig.text(.06,.02,'Data packets only. Configuration/ACK/control and electrical framing excluded. Synthetic software; no physical measurement claim.',fontsize=9,color='#646e65')
     fig.tight_layout(rect=(.02,.07,1,.9))
-    folder=ROOT/'assets/edge-v0.3'
+    folder=args.output
     fig.savefig(folder/'placement-comparison.png',dpi=170)
     fig.savefig(folder/'placement-comparison.svg')
     summary={'confirmation_trials':18,'positive_trials':len(positives),'all_passed':True,

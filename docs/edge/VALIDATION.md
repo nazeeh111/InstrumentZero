@@ -1,4 +1,6 @@
-# Edge v0.3.0-rc.1: executed evidence and open gates
+# Historical Edge v0.3.0-rc.1 evidence
+
+This document records the original rc1 source and contracts. See [current rc2 runtime evidence](RUNTIME_VALIDATION.md) for the newer implementation. Reproduce these historical checks from the v0.3.0-rc.1 tag.
 
 Status: **software preview**. The software checks below were executed locally; the versioned release also records remote CI and downloaded-artifact verification. **Acquisition and independent physical measurement remain unverified.** No physical sensor was activated or device flashed for this work.
 

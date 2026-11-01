@@ -31,7 +31,7 @@
       const tr=document.createElement('tr');if(c.selected)tr.className='selected';[names[c.mode]+(c.selected?' ✓':''),c.metrics.wire_bytes_including_headers.toLocaleString(),(c.metrics.processing_wall_seconds*1000).toFixed(2),c.frequency_disagreement_hz===null?'—':c.frequency_disagreement_hz.toExponential(2),c.resource_model.legal_under_declared_model?'Within model':c.resource_model.reasons.join('; ')].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td);});el('comparison-rows').append(tr);
     });
     const raw=run.comparisons[0].metrics.wire_bytes_including_headers,saving=100*(1-chosen.metrics.wire_bytes_including_headers/raw);
-    text('measurement-note',`${saving.toFixed(1)}% fewer transferred bytes for the selected placement. Headers and timestamps included. Host run includes initialization and analysis. Physical latency, MCU utilization and power are unmeasured. Δf uses a float64 numerical reference on the same input.`);
+    text('measurement-note',`${saving.toFixed(1)}% fewer framed data bytes for the selected placement. Data headers and timestamps included; configuration/ACK/control traffic and electrical framing excluded. Host run includes initialization and analysis. Physical latency, MCU utilization and power are unmeasured. Δf uses a float64 numerical reference on the same input.`);
     el('export').href=run.artifact_url;if(run.lifecycle_demo){status('Simulated disconnect cleared the old session. Reconnected with a new session; physical unplug behavior remains unverified.');return;}status(fit.status==='rejected'?'Completed. Signal rejected; evidence remains exportable.':'Completed. Result and evidence belong to this configuration.');
   }
   el('experiment-form').addEventListener('submit',async event=>{
