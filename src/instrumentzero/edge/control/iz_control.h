@@ -10,6 +10,7 @@
  * The processing state is reserved separately, in every runtime placement. */
 #define IZ_CONTROL_RESERVE_BYTES 6144u
 #define IZ_CONFIG_MAX_TAPS 255u
+#define IZ_UART_BYTES_PER_SECOND 11520u /* 115200 baud, 8N1 nominal upper bound only. */
 #define IZ_RX_CAPACITY 2048u
 typedef struct {
     _Atomic uint32_t read, written, overflow;

@@ -1,0 +1,13 @@
+{
+  "script_sha256": "1c7564bc64faa34d98502c85bf75a61623ffb5b6926713774df0f62b2db6ded9",
+  "run_from": "InstrumentZero checkout root with PYTHONPATH=src and installed locked dependencies",
+  "command": "PYTHONPATH=src .venv/bin/python /var/folders/ss/tml7487n205dg94kb7__tth80000gn/T/iz-review-rc3-uart-njoqnkxe/independent_uart_check.py",
+  "source_sha256": {
+    "src/instrumentzero/edge/control/iz_control.c": "dd3bf20ce553e671364f0c9b7e02ded8c4c751cdb112f5ffb8d5edc173011ccb",
+    "src/instrumentzero/edge/control/iz_control.h": "62b09b8fc9ed603e24a34558902c41142231838076d2781819097d6769cce946",
+    "src/instrumentzero/edge/control.py": "216caabd0e2b6c08ada4a3ccbd603e7f43060424908cb3bd3d3a3a9b5fb6556b",
+    "src/instrumentzero/edge/planner.py": "2cbe0862e86fc874fe8ca8d65e5624ab06c13366bdb315169a6c0e23cc3a622b",
+    "src/instrumentzero/edge/protocol.py": "f61058daff55fdfb01567dc33bd9d25685cfed1c0a71e4c7625b64d393eeb0ab",
+    "examples/edge/adxl345-spec.json": "9ad1d558c0d70b9e39d5dc372b451294f82e4a437a22e5ade3f3842dd5a4ba00"
+  }
+}

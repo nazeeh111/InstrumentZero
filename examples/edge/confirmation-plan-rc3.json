@@ -1,0 +1,72 @@
+{
+  "schema": "instrumentzero.edge.confirmation/1",
+  "scope": "Synthetic software confirmation only; no physical validation",
+  "development_seeds": [
+    20261029,
+    536,
+    82739
+  ],
+  "confirmation_seeds": [
+    9131131,
+    9131132
+  ],
+  "scenarios": [
+    "mount_a",
+    "mount_b",
+    "silence",
+    "chirp",
+    "close_modes",
+    "saturation",
+    "impulse"
+  ],
+  "duration_seconds": 8,
+  "host_favored_cases": [
+    "mount_a",
+    "mount_b"
+  ],
+  "rules": "prefix-v3; nominal UART ceiling, exact filtered packet cadence/wait, runtime state/control reservation; unchanged numerical thresholds",
+  "truth_acceptance": {
+    "max_frequency_abs_error_hz": 0.005,
+    "max_damping_relative_error": 0.02,
+    "unsuitable_signals_must_reject": true
+  },
+  "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+  "freeze_revision_note": "Independent review fixes transport admission, binary serial normalization, control-write data preservation and native capture outcome provenance. WAV source bounds checked before conversion. Fresh disjoint synthetic confirmation is frozen before execution; no numerical thresholds tuned. The transport-only oracle uses clearly synthetic CPU fixtures, while these confirmation cost profiles remain the original measured host proxies bound to the unchanged numerical core.",
+  "previous_confirmation_seeds": [
+    9131101,
+    9131102
+  ],
+  "frozen_sha256": {
+    "examples/edge/adxl345-spec.json": "9ad1d558c0d70b9e39d5dc372b451294f82e4a437a22e5ade3f3842dd5a4ba00",
+    "examples/edge/cost-profile.json": "df8fef7967796f2c3e92248ba2e9074ce210faa57afc3844341cd31a483b675f",
+    "examples/edge/host-favored-cost-profile.json": "122e564cf61a5ede783c894a5efe09b605c8b1cf137bbb438183b5021759d605",
+    "examples/edge/host-favored-spec.json": "05cb17b7140fd57a44a75fa5dc82e8b309b272a56ecc2a73ee5cceb1bdb8be91",
+    "examples/edge/simulation-spec.json": "b32c853528e7dddd4a5c16a876801b6effb04106aeaa4cbcc4d64ea823c22cf7",
+    "examples/edge/uart-admission-review/check_transport_only.py": "63c3df9358599342f0815aa3efc3bb119374d55131b932deafd576fa793f0505",
+    "examples/edge/uart-admission-review/independent_uart_check.py": "1c7564bc64faa34d98502c85bf75a61623ffb5b6926713774df0f62b2db6ded9",
+    "firmware/zephyr/CMakeLists.txt": "60b9e8ba25054c4acec0b57239be52eac022ee94c0e68e6129ad1d50c28e3ea1",
+    "firmware/zephyr/boards/nrf52840dk_nrf52840.overlay": "42fa6e35300682090799782b20f7ebdf6696d17d7e97dfb37219f39b87b531de",
+    "firmware/zephyr/prj.conf": "2255b4c46c15b8f8ef50937c3ecdf61dd5f2ece287802e82dbcf19e14e34060d",
+    "firmware/zephyr/src/main.c": "363f04ececa6d10c91c3c7e5abe0d32c91ad0188417272cbba7c57405c46203f",
+    "requirements-runtime.lock": "c26c8a4a3ed8c2ce9f9e14d21236e43d962de8c16c0effc811e32b68eed0e347",
+    "scripts/validate_edge.py": "e9887d8852bdaf7518dea6dffb2a7a405ca8df057febcc954caf6db2464134d6",
+    "scripts/verify_edge_control.py": "df715518c7b6d2c09ca003eb9b5f542d493a42cacf9b83d49a3302fbbe2232a0",
+    "src/instrumentzero/__init__.py": "ba431a05ce8ab20168cea64eb4ad9d607f1e8c42a73a5eead60b01e562114cfd",
+    "src/instrumentzero/edge/__init__.py": "60d8275b9dccc74005149dd837ead69a7bc4bfd96a0d35d181d5fb6e11edfe0f",
+    "src/instrumentzero/edge/acquisition.py": "c3e8a4e0c7ff0927b59e5dfede2d8dc93a32bafd9e518e16f6f17aa80018924d",
+    "src/instrumentzero/edge/artifacts.py": "86f83c32d26eb0acf9e920783cbcdae6a60848148e473aa2f0c7e244f46a18f6",
+    "src/instrumentzero/edge/cli.py": "68a047b517f5f72ad3a701493c69647e752727b0a43ad238608d2ed828f6662d",
+    "src/instrumentzero/edge/control/iz_control.c": "dd3bf20ce553e671364f0c9b7e02ded8c4c751cdb112f5ffb8d5edc173011ccb",
+    "src/instrumentzero/edge/control/iz_control.h": "62b09b8fc9ed603e24a34558902c41142231838076d2781819097d6769cce946",
+    "src/instrumentzero/edge/control.py": "81591a45b5fe0746de00ec32e5b380d43d6ab3fcd2f6cb571754f1c5d4f6fa0b",
+    "src/instrumentzero/edge/core/iz_core.c": "144515eb0b1c12b8dc2b0e2e2ddf7302038f2767a6ad390e044729c405c985df",
+    "src/instrumentzero/edge/core/iz_core.h": "cdeb0d03920be665cb598e96dd159633b9911b6664e7ba437c32213efd569e43",
+    "src/instrumentzero/edge/estimator.py": "8d753b5e7475cdd83bf82629b5fb5ddf1187a6caab5a3c56377b3acfd87196b7",
+    "src/instrumentzero/edge/native.py": "b298010adf1fb0ffa23777ea0c29bfd98a44eab575417d528ab953821c9922cd",
+    "src/instrumentzero/edge/planner.py": "2cbe0862e86fc874fe8ca8d65e5624ab06c13366bdb315169a6c0e23cc3a622b",
+    "src/instrumentzero/edge/protocol.py": "f61058daff55fdfb01567dc33bd9d25685cfed1c0a71e4c7625b64d393eeb0ab",
+    "src/instrumentzero/edge/runtime.py": "55a82c4dd0d4df9aedf9d71b431d27b5f0b0906481bcc0d8a71de3ac1df808ce",
+    "src/instrumentzero/edge/simulation.py": "a178e5664888979dcac26fd72ab905476a8f08f3b845249b6406e914f9eaf881",
+    "src/instrumentzero/edge/spec.py": "6eccc7412f3a11c372e7e945dbc195359733bf48c89b1ac5ea7bfc2c405d3056"
+  }
+}

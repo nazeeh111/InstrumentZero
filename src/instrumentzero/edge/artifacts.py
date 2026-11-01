@@ -56,8 +56,13 @@ def export_run(run, samples, timestamps_us, original_protocol=None, original_con
     if original_protocol is not None:
         files["original-device.izp"] = original_protocol
     control_receipt=run['source'].get('runtime_configuration')
+    native_capture=run['source'].get('native_capture_metadata')
+    if run['source'].get('source_kind')=='user_supplied_sensor_recording' and original_protocol is None:
+        raise EdgeError('A device recording export must retain its original protocol evidence.')
     if control_receipt is not None and original_protocol is None:
         raise EdgeError('A controlled device export must retain its original protocol evidence.')
+    if original_control is None and native_capture is not None:
+        original_control=canonical(native_capture)
     if original_control is None and control_receipt is not None:
         original_control=canonical({'runtime_configuration':control_receipt})
     if original_control is not None:
@@ -91,6 +96,7 @@ if (root/"original-device.izp").is_file():
     assert np.array_equal(device_y, np.load(root/"samples.npy", allow_pickle=False))
     assert np.array_equal(device_t, np.load(root/"timestamps_us.npy", allow_pickle=False))
     assert device_source.get("runtime_configuration") == run["source"].get("runtime_configuration")
+    assert device_source.get("native_capture_metadata") == run["source"].get("native_capture_metadata")
 result = compare(json.loads((root/"spec.json").read_text()),
     np.load(root/"samples.npy", allow_pickle=False), np.load(root/"timestamps_us.npy", allow_pickle=False),
     json.loads((root/"costs.json").read_text()), run["source"])

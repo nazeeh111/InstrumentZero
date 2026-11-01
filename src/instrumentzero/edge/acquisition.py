@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 
 from .protocol import MAX_FRAME, Validator, decode
-from .spec import EdgeError, compile_graph, number
+from .spec import EdgeError, canonical, compile_graph, number
 
 
 def read_recording(path, spec, firmware_sha256):
@@ -61,6 +61,7 @@ def read_recording(path, spec, firmware_sha256):
         actual_ticks = np.concatenate(transformed_times[kind])
         device_checks.append(_check_device_stream(compiled, values, ticks, actual, actual_ticks, kind))
     control_receipt = None
+    native_capture_metadata = None
     sidecar = Path(str(path)+'.json')
     if sidecar.is_file():
         if sidecar.stat().st_size>65536:
@@ -71,6 +72,22 @@ def read_recording(path, spec, firmware_sha256):
             raise EdgeError('Invalid capture control sidecar.') from exc
         if not isinstance(metadata,dict):
             raise EdgeError('Capture sidecar must be a JSON object.')
+        schema=metadata.get('schema')
+        if isinstance(schema,str) and schema.startswith('instrumentzero.edge.capture/'):
+            if schema!='instrumentzero.edge.capture/1':
+                raise EdgeError('Unsupported native capture sidecar version.')
+            if metadata.get('outcome')!='captured_not_validated' or metadata.get('error') or metadata.get('error_type'):
+                raise EdgeError('Rejected native capture outcome; preserve failed/cancelled/incomplete trials as rejected evidence.')
+            if (type(metadata.get('received_bytes')) is not int or metadata['received_bytes']!=path.stat().st_size or
+                    metadata.get('spec_sha256')!=compiled['spec_sha256']):
+                raise EdgeError('The native capture size or specification binding does not match this recording.')
+            try:
+                matching=canonical(metadata.get('spec'))==canonical(compiled['spec'])
+            except (ValueError,TypeError) as exc:
+                raise EdgeError('Invalid native capture specification metadata.') from exc
+            if not matching:
+                raise EdgeError('The native capture specification does not match the analyzed graph.')
+            native_capture_metadata=metadata
         if 'runtime_configuration' in metadata:
             from .control import validate_receipt
             control_receipt=validate_receipt(metadata['runtime_configuration'],compiled,validator.session,validator.epoch,{1,*transforms})
@@ -79,7 +96,7 @@ def read_recording(path, spec, firmware_sha256):
         'firmware_sha256': firmware_sha256, 'firmware_identity_basis': 'user-declared image hash; not device-attested',
         'session': validator.session, 'epoch': validator.epoch, 'independent_physical_reference': False,
         'timestamp_location': 'Zephyr driver-thread callback before sample fetch; not physical sample aperture',
-        'hardware_verified': False, 'runtime_configuration': control_receipt, 'device_processing_checks': device_checks,
+        'hardware_verified': False, 'native_capture_metadata':native_capture_metadata, 'runtime_configuration': control_receipt, 'device_processing_checks': device_checks,
         'device_processing_scope': 'Consistency of supplied transformed bytes against retained raw input. No physical operation or attestation inferred.'}
 
 
@@ -134,7 +151,6 @@ class SerialPort:
 
     def __enter__(self):
         import termios
-        import tty
         resolved = Path(self.device).resolve(strict=True)
         if not resolved.is_relative_to('/dev') or not stat.S_ISCHR(resolved.stat().st_mode):
             raise EdgeError('Serial device must resolve to a character device under /dev/.')
@@ -143,8 +159,20 @@ class SerialPort:
             if not stat.S_ISCHR(os.fstat(self.fd).st_mode) or not os.isatty(self.fd):
                 raise EdgeError('The opened character device is not a TTY serial endpoint.')
             self.old_attributes = termios.tcgetattr(self.fd)
-            tty.setraw(self.fd)
-            attrs = termios.tcgetattr(self.fd)
+            attrs=list(self.old_attributes)
+            attrs[6]=list(self.old_attributes[6])
+            # Normalize the binary profile ourselves: Python3.11 setraw leaves
+            # inherited byte translations/echo flags that later versions clear.
+            for option in ('IGNBRK','BRKINT','IGNPAR','PARMRK','INPCK','ISTRIP','INLCR','IGNCR','ICRNL','IXON','IXOFF','IXANY'):
+                attrs[0] &= ~getattr(termios,option,0)
+            attrs[1] &= ~termios.OPOST
+            for option in ('ECHO','ECHOE','ECHOK','ECHONL','ICANON','IEXTEN','ISIG','NOFLSH','TOSTOP'):
+                attrs[3] &= ~getattr(termios,option,0)
+            attrs[6][termios.VMIN]=1
+            attrs[6][termios.VTIME]=0
+            attrs[2] = (attrs[2] & ~(termios.CSIZE | termios.PARENB | termios.CSTOPB)) | termios.CS8 | termios.CLOCAL | termios.CREAD
+            for option in ('CRTSCTS','CCTS_OFLOW','CRTS_IFLOW'):
+                attrs[2] &= ~getattr(termios,option,0)
             attrs[4] = attrs[5] = termios.B115200
             termios.tcsetattr(self.fd, termios.TCSANOW, attrs)
             termios.tcflush(self.fd, termios.TCIFLUSH)

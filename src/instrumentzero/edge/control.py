@@ -11,6 +11,7 @@ import zlib
 import numpy as np
 
 from .planner import measure_costs, plan
+from .protocol import UART_PROTOCOL_CEILING_BYTES_PER_SECOND
 from .spec import EdgeError, compile_graph, integer, number
 
 CONFIG = struct.Struct("<4sBBHIIHHHBB32sffI")
@@ -89,16 +90,17 @@ def write_all(port, data, deadline):
     sent = 0
     while sent < len(data):
         if time.monotonic() >= deadline:
-            raise EdgeError("Serial control write timed out; acquisition stays stopped.")
+            raise EdgeError("Serial control write timed out; device state is unconfirmed.")
         try:
             n = port.write(data[sent:])
         except BlockingIOError:
-            port.read(0.005)
+            # Waiting for a control write must not consume queued trial bytes.
+            time.sleep(0.005)
             continue
         if n is None or not 0 <= n <= len(data) - sent:
             raise EdgeError("Invalid serial control write count.")
         if n == 0:
-            port.read(0.005)
+            time.sleep(0.005)
         sent += n
 
 
@@ -270,6 +272,12 @@ def decode_configuration(request):
         or zlib.crc32(payload[:-4]) != struct.unpack_from("<I", payload, len(payload) - 4)[0]
     ):
         raise EdgeError("Invalid runtime configuration payload.")
+    wire_d = decimation if mode == 2 else 1
+    bps = rate * (8 / wire_d + 88 / max(block, wire_d))
+    if mode and flags:
+        bps += rate * (8 + 88 / block)
+    if bps > UART_PROTOCOL_CEILING_BYTES_PER_SECOND:
+        raise EdgeError("Runtime configuration exceeds the nominal UART protocol ceiling.")
     return {
         "request_id": request_id,
         "rate_hz": rate,

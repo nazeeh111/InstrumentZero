@@ -86,3 +86,76 @@ def test_missing_consent_never_opens_a_device_or_creates_a_trial(tmp_path, monke
     with pytest.raises(EdgeError, match="consent"):
         acquisition.capture(sensor_spec(), "/dev/EXPLICIT-FAKE", 8, output, False)
     assert not output.exists()
+
+
+def test_explicit_uart_profile_is_115200_8n1_without_flow_control_and_is_restored(monkeypatch):
+    import copy
+    import stat
+    import termios
+    from types import SimpleNamespace
+
+    flags = termios.CSTOPB | termios.PARENB | getattr(termios, "CRTSCTS", 0)
+    input_flags = sum(
+        getattr(termios, name, 0)
+        for name in ("INLCR", "IGNCR", "PARMRK", "IXOFF", "IXANY", "ISTRIP", "ICRNL", "IXON")
+    )
+    local_flags = sum(getattr(termios, name, 0) for name in ("ECHONL", "ECHO", "ICANON", "ISIG", "IEXTEN"))
+    original = [input_flags, termios.OPOST, flags, local_flags, termios.B9600, termios.B9600, [b"\0"] * 32]
+    configured = []
+    monkeypatch.setattr(acquisition.os, "open", lambda *args: 424242)
+    monkeypatch.setattr(acquisition.os, "fstat", lambda _: SimpleNamespace(st_mode=stat.S_IFCHR))
+    monkeypatch.setattr(acquisition.os, "isatty", lambda _: True)
+    monkeypatch.setattr(acquisition.os, "close", lambda _: None)
+    monkeypatch.setattr(termios, "tcgetattr", lambda _: copy.deepcopy(original))
+    monkeypatch.setattr(termios, "tcsetattr", lambda fd, when, attrs: configured.append(copy.deepcopy(attrs)))
+    monkeypatch.setattr(termios, "tcflush", lambda *args: None)
+    # Only /dev/null metadata is inspected. os.open is replaced before entry.
+    with acquisition.SerialPort("/dev/null"):
+        pass
+    applied = configured[0]
+    assert applied[0] & input_flags == 0 and applied[1] & termios.OPOST == 0 and applied[3] & local_flags == 0
+    assert applied[6][termios.VMIN] == 1 and applied[6][termios.VTIME] == 0
+    assert applied[4:6] == [termios.B115200] * 2
+    assert applied[2] & termios.CSIZE == termios.CS8
+    assert not applied[2] & (termios.CSTOPB | termios.PARENB | getattr(termios, "CRTSCTS", 0))
+    assert configured[-1] == original
+
+
+def test_failed_native_capture_is_not_promoted_from_an_intact_packet_prefix(tmp_path):
+    import uuid
+
+    import numpy as np
+
+    from instrumentzero.edge.acquisition import read_recording
+    from instrumentzero.edge.runtime import packets
+    from instrumentzero.edge.spec import compile_graph
+
+    spec = sensor_spec()
+    compiled = compile_graph(spec)
+    frames = list(packets(np.zeros((64, 1), np.float32), np.arange(64) * 2500, compiled, str(uuid.uuid4())))
+    import struct
+
+    recording = tmp_path / "prefix.izp"
+    recording.write_bytes(b"".join(struct.pack("<I", len(frame)) + frame for frame in frames))
+    metadata = {
+        "schema": "instrumentzero.edge.capture/1",
+        "spec": spec,
+        "spec_sha256": compiled["spec_sha256"],
+        "received_bytes": recording.stat().st_size,
+        "requested_seconds": 8,
+        "outcome": "failed",
+        "error_type": "OSError",
+    }
+    sidecar = tmp_path / "prefix.izp.json"
+    for outcome in ("failed", "cancelled", "starting", "unknown"):
+        metadata["outcome"] = outcome
+        sidecar.write_text(json.dumps(metadata))
+        with pytest.raises(EdgeError, match="native capture"):
+            read_recording(recording, spec, "ab" * 32)
+    metadata.pop("error_type")
+    metadata["outcome"] = "captured_not_validated"
+    sidecar.write_text(json.dumps(metadata))
+    _, _, source = read_recording(recording, spec, "ab" * 32)
+    assert source["native_capture_metadata"] == metadata
+    sidecar.unlink()  # This test's disposable sidecar; generic recording remains supported.
+    assert read_recording(recording, spec, "ab" * 32)[2]["native_capture_metadata"] is None

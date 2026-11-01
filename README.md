@@ -10,7 +10,7 @@ InstrumentZero is a local scientific experiment compiler: supported questions be
 
 > **v0.2: validation without physical equipment.** Public calibrated recordings, executable adaptive replay, 600 acoustic stress cases and 18 production acquisition checks extend the Lab. Recorded measurements, replay and simulations remain visibly distinct. [Validation evidence and remaining limits](docs/NO_EQUIPMENT_VALIDATION.md).
 
-## InstrumentZero Edge · v0.3.0-rc.2 software preview
+## InstrumentZero Edge · v0.3.0-rc.3 software preview
 
 One typed specification controls timestamp validation, calibration, filtering, a host ringdown estimator and recording. A deterministic placement planner compares raw-host, fixed-edge and chosen placements under declared resource and numerical-error budgets. Its costs are measured on the host and remain provisional for an MCU.
 
@@ -28,7 +28,7 @@ A free C99 compiler is required. The C core has no heap or I/O, matches float64 
 
 **No physical setup is available.** Every new cantilever demonstration is synthetic. Physical acquisition, fresh remounts and independently acquired reference comparisons remain unverified. A firmware build is software evidence; this is not a measurement-verified instrument. The original recording Lab remains available.
 
-The rc2 adapter adds bounded runtime configuration with a matching acknowledgement before start, interrupt-driven receive buffering, cancellation cleanup and retained control receipts. Supported rates, calibration, filtering and placement can change within the compiled buffer envelope. This path is software-tested and build-verified; physical behavior remains unverified. [Runtime configuration](docs/edge/CONTROL.md).
+The runtime adapter adds bounded runtime configuration with a matching acknowledgement before start, interrupt-driven receive buffering, cancellation cleanup and retained control receipts. Supported rates, calibration, filtering and placement can change within the compiled buffer envelope. This path is software-tested and build-verified; physical behavior remains unverified. [Runtime configuration](docs/edge/CONTROL.md). The rc3 update enforces the serial link’s theoretical ceiling and makes binary terminal settings explicit across supported Python versions.
 
 ![Actual installed rc2 workspace, simulated Mount B](assets/edge-rc2/workspace.png)
 

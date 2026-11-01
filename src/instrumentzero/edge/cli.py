@@ -107,11 +107,18 @@ def run(args):
         import numpy as np
         if compiled["spec"]["source"]["adapter"] != "wav":
             raise EdgeError("Recording import requires source.adapter=wav and FS units.")
-        rate, y = wavfile.read(args.wav)
+        if args.wav.stat().st_size>16*1024*1024:
+            raise EdgeError('WAV input exceeds the 16 MiB container bound.')
+        rate, y = wavfile.read(args.wav,mmap=True)
         if rate != compiled["spec"]["source"]["rate_hz"]:
             raise EdgeError("Recording rate differs from specification; implicit resampling is forbidden.")
         if y.dtype not in (np.int16, np.int32):
             raise EdgeError("Supported WAV encodings: signed PCM16 or PCM32. No implicit unsigned/float conversion.")
+        if not 32<=len(y)<=200000:
+            raise EdgeError('WAV input must contain 32–200000 frames.')
+        channels=1 if y.ndim==1 else y.shape[1] if y.ndim==2 else 0
+        if channels!=len(compiled['spec']['source']['channels']):
+            raise EdgeError('WAV channels differ from the declared source; no implicit downmix.')
         y = y.astype(np.float32) / (2**(15 if y.dtype == np.int16 else 31))
         if y.ndim == 1:
             y = y[:, None]

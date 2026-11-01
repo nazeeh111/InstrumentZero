@@ -1,6 +1,6 @@
 """InstrumentZero's local, evidence-first measurement engine."""
 
-__version__ = "0.3.0rc2"
+__version__ = "0.3.0rc3"
 
 from .engine import analyze_stiffness, compile_experiment
 from .spec import MeasurementError, MeasurementSpec

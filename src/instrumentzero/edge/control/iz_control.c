@@ -36,6 +36,13 @@ int iz_config_decode(iz_config *out,const uint8_t *p,size_t n,uint16_t block,uin
         l1+=c.coefficients[i]<0?-c.coefficients[i]:c.coefficients[i];
     }
     if (!__builtin_isfinite(l1) || l1>8) return IZ_CONFIG_INVALID;
+    /* UART data-frame overhead is 4-byte prefix + 80-byte header + 4-byte CRC.
+     * Empty filtered blocks emit no frame. Compare an exact integer rational
+     * rate; all products are bounded by the rate/block/decimation checks above. */
+    uint32_t d=c.mode==2?c.decimation:1, b=c.block_samples;
+    uint32_t numerator=c.rate_hz*(8*b+88*(b<d?b:d));
+    if (c.mode && c.flags) numerator+=c.rate_hz*d*(8*b+88);
+    if (numerator>IZ_UART_BYTES_PER_SECOND*b*d) return IZ_CONFIG_INVALID;
     *out=c;
     return IZ_CONFIG_OK;
 }

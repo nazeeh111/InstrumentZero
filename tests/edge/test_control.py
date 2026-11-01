@@ -404,7 +404,15 @@ def test_cancel_after_ack_before_start_disarms_native_guard_and_closes(
 
     closed = []
     monkeypatch.setattr(acquisition.os, "fsync", fail_after_ack)
-    monkeypatch.setattr(acquisition.os, "close", lambda fd: closed.append(fd))
+    real_close = acquisition.os.close
+
+    def close_owned(fd):
+        if fd == 424242:
+            closed.append(fd)
+        else:
+            real_close(fd)
+
+    monkeypatch.setattr(acquisition.os, "close", close_owned)
     output = tmp_path / "cancelled.izp"
     with pytest.raises(OSError, match="post-ack"):
         acquisition.capture(sensor_spec(), "/dev/EXPLICIT-FAKE", 8, output, True)
@@ -440,3 +448,104 @@ def test_offline_cli_emits_bound_bytes_without_opening_any_device(tmp_path, monk
     assert result["bytes"] == len(output.read_bytes()) and not result["hardware_operation_verified"]
     with pytest.raises(FileExistsError):
         run(Namespace(edge_command="control", spec=spec_path, output=output, placement="raw_host"))
+
+
+def transport_cost_fixture(compiled):
+    # Deliberately synthetic CPU inputs isolate byte admission from scheduler load.
+    # These are test dependencies, never reported as a benchmark.
+    from instrumentzero.edge.native import core_identity, library
+
+    return {
+        "schema": "instrumentzero.edge.costs/1",
+        "basis": "measured_host_proxy",
+        "platform": "transport-test-fixture",
+        "machine": "test-fixture",
+        "core_sha256": core_identity(),
+        "spec_sha256": compiled["spec_sha256"],
+        "state_bytes": library().iz_state_bytes(),
+        "primitive_costs": {
+            name: {"ns_per_input_frame": 1000.0, "observed_max_ns_per_input_frame": 1000.0}
+            for name in ("calibration", "calibration_fir")
+        },
+        "limits": "Synthetic positive costs for transport-only tests; not a measured benchmark.",
+    }
+
+
+def test_nominal_uart_ceiling_rejects_impossible_raw_but_preserves_feasible_tiny_filtered_graph(
+    control_library,
+    monkeypatch,
+):
+    from instrumentzero.edge import control
+    from instrumentzero.edge.planner import plan
+
+    monkeypatch.setattr(control, "measure_costs", transport_cost_fixture)
+
+    spec = sensor_spec()
+    spec["resources"].update(block_samples=1, link_bytes_per_second=1e9, max_latency_ms=10000)
+    compiled = compile_graph(spec)
+    result = plan(compiled, transport_cost_fixture(compiled))
+    raw, _, filtered = result["candidates"]
+    assert raw["estimated_transfer_bytes_per_second"] == 38400 and not raw["legal_under_declared_model"]
+    assert filtered["estimated_transfer_bytes_per_second"] == 9600 and filtered["legal_under_declared_model"]
+    assert result["selected"] == "filtered_edge" and result["effective_link_bytes_per_second"] == 11520
+    from instrumentzero.edge.runtime import execute
+
+    samples = np.sin(np.arange(400) * 2 * np.pi * 17.25 / 400).astype(np.float32)[:, None]
+    stream = execute(compiled, samples, np.arange(400) * 2500, mode="filtered_edge", chunks=[1])
+    assert stream["metrics"]["wire_bytes_including_headers"] == 9600
+    with pytest.raises(EdgeError, match="throughput"):
+        configuration(spec, "raw_host")
+    request, _ = configuration(spec, "filtered_edge")
+    cfg = Config()
+    assert control_library.iz_config_decode(ctypes.byref(cfg), request[3:], len(request) - 3, 1, 4) == 0
+    # CRC-valid raw request bypassing the host is also refused by firmware.
+    bad = bytearray(request)
+    bad[26] = 0
+    bad = repair_crc(bad)
+    assert control_library.iz_config_decode(ctypes.byref(cfg), bad[3:], len(bad) - 3, 1, 4) == 1
+    with pytest.raises(EdgeError, match="UART"):
+        decode_configuration(bad)
+    spec["resources"]["raw_validation"] = True
+    with pytest.raises(EdgeError, match="No placement"):
+        configuration(spec, "filtered_edge")
+    spec["source"]["adapter"] = "simulated"
+    virtual = compile_graph(spec)
+    assert plan(virtual, transport_cost_fixture(virtual))["candidates"][0]["legal_under_declared_model"]
+
+
+def test_small_nondivisible_blocks_use_actual_packet_cadence_and_wait(control_library, monkeypatch):
+    from instrumentzero.edge import control
+    from instrumentzero.edge.planner import plan
+
+    monkeypatch.setattr(control, "measure_costs", transport_cost_fixture)
+
+    spec = sensor_spec()
+    spec["resources"].update(block_samples=3, link_bytes_per_second=11520, max_latency_ms=10000)
+    compiled = compile_graph(spec)
+    candidate = plan(compiled, transport_cost_fixture(compiled))["candidates"][2]
+    assert candidate["estimated_transfer_bytes_per_second"] == 9600
+    # A block3/decimation4 output may wait6input samples, then transmit96bytes.
+    lower = 1000 * (6 / 400 + compiled["filter"]["group_delay_seconds"] + 96 / 11520)
+    assert candidate["modeled_latency_ms"] >= lower
+    request, _ = configuration(spec, "filtered_edge")
+    cfg = Config()
+    assert control_library.iz_config_decode(ctypes.byref(cfg), request[3:], len(request) - 3, 3, 4) == 0
+
+
+def test_control_write_backpressure_never_consumes_received_sample_bytes():
+    class Port:
+        def __init__(self):
+            self.writes = 0
+            self.pending = b"raw-trial-bytes"
+
+        def write(self, data):
+            self.writes += 1
+            return 0 if self.writes == 1 else len(data)
+
+        def read(self, timeout):
+            data, self.pending = self.pending, b""
+            return data
+
+    port = Port()
+    write_all(port, b"S", time.monotonic() + 1)
+    assert port.pending == b"raw-trial-bytes"
