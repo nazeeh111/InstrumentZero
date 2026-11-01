@@ -28,9 +28,9 @@ A free C99 compiler is required. The C core has no heap or I/O, matches float64 
 
 **No physical setup is available.** Every new cantilever demonstration is synthetic. Physical acquisition, fresh remounts and independently acquired reference comparisons remain unverified. A firmware build is software evidence; this is not a measurement-verified instrument. The original recording Lab remains available.
 
-The runtime adapter adds bounded runtime configuration with a matching acknowledgement before start, interrupt-driven receive buffering, cancellation cleanup and retained control receipts. Supported rates, calibration, filtering and placement can change within the compiled buffer envelope. This path is software-tested and build-verified; physical behavior remains unverified. [Runtime configuration](docs/edge/CONTROL.md). The rc3 update enforces the serial link’s theoretical ceiling and makes binary terminal settings explicit across supported Python versions.
+The runtime adapter adds bounded runtime configuration with a matching acknowledgement before start, interrupt-driven receive buffering, cancellation cleanup and retained control receipts. Supported rates, calibration, filtering and placement can change within the compiled buffer envelope. This path is software-tested and build-verified; physical behavior remains unverified. [Runtime configuration](docs/edge/CONTROL.md). The rc3 update enforces the serial link’s theoretical ceiling, makes binary terminal settings explicit, preserves input during control-write retries and refuses known failed native captures.
 
-![Actual installed rc2 workspace, simulated Mount B](assets/edge-rc2/workspace.png)
+![Actual installed rc3 workspace, simulated Mount B](assets/edge-rc3/workspace.png)
 
 [Watch the original synthetic UI walkthrough](assets/edge-v0.3/instrumentzero-edge-walkthrough.mp4) · [Editable timeline and captures](assets/edge-v0.3/)
 

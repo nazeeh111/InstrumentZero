@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--evidence',type=Path,default=ROOT/'examples/edge/confirmation-rc2')
+    parser.add_argument('--evidence',type=Path,default=ROOT/'examples/edge/confirmation-rc3')
     parser.add_argument('--output',type=Path,required=True,help='New empty figure folder')
     args=parser.parse_args()
     evidence=args.evidence

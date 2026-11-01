@@ -8,7 +8,7 @@ InstrumentZero Edge is a local measurement compiler that lets one specification 
 
 The software preview compares raw streaming, a fixed edge pipeline and a deterministic placement planner on identical input. In the retained synthetic test, reduction cuts framed transfer from 30,000 to 10,800 bytes. The planner ties the fixed edge pipeline there. When raw validation is required, it keeps processing on the host and avoids an extra stream.
 
-The rc2 update adds runtime device configuration with a matching acknowledgement before start, bounded interrupt-driven receive buffering and cancellation cleanup. This path is tested in software and cross-compiled, with physical execution still open.
+The runtime configuration update adds runtime device configuration with a matching acknowledgement before start, bounded interrupt-driven receive buffering and cancellation cleanup. This path is tested in software and cross-compiled, with physical execution still open.
 
 The release includes a shared C core, protocol and numerical tests, three actual Zephyr firmware builds, a local interface, raw sample exports and source that recomputes the result. No physical setup was available. Sensor operation and independent physical measurement validation are still open, and MCU speed or power is not claimed.
 
@@ -23,3 +23,5 @@ A useful next evaluation would be fresh cantilever remounts with a separately re
 ## Relevant audiences and boundaries
 
 This may fit an existing discussion about scientific data acquisition, reproducible DSP or small embedded instruments when its limitations answer a real question. Share the exact relevant example and evidence if invited. Do not claim adoption, traceable physical calibration, power savings, hard real-time behavior or hardware support established only by a build. No bulk outreach or unsolicited promotional replies are part of this release.
+
+The rc3 software preview additionally corrects nominal UART admission, binary terminal setup and capture provenance handling. Its fresh 18-case simulation confirmation and all three complete firmware builds passed. Physical acquisition and independently checked measurement remain open.

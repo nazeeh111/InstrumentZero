@@ -1,0 +1,27 @@
+{
+  "schema": "instrumentzero.edge.rc3-software-checks/1",
+  "scope": "software preview; physical gates open",
+  "source_freeze_commit": "aedc656",
+  "python_tests_passed": 176,
+  "node_tests_passed": 30,
+  "confirmation_trials_passed": 18,
+  "transport_oracle_cases_passed": 4224,
+  "transport_oracle_cpu_costs": "explicit synthetic dependency fixture; not a benchmark",
+  "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+  "control_sha256": "e361632dc12baa4d94b235a2f5180343c88e311830c33c96c628062b9a12554d",
+  "control_sanitizer_and_cortex_m4": "passed",
+  "firmware_report": "firmware-uart-build/report.json",
+  "firmware_linked_flash_bytes": 33132,
+  "firmware_linked_ram_bytes": 25920,
+  "main_stack_bytes": 6144,
+  "interface": {
+    "installed_wheel_version": "0.3.0rc3",
+    "runtime_files_byte_matched": 38,
+    "mount_b_hz": 22.5,
+    "desktop_inspected": true,
+    "new_mobile_override": "unavailable; requested390 but browser retained1280; historical rc2 responsive check retained"
+  },
+  "physical_acquisition_verified": false,
+  "independent_measurement_verified": false,
+  "limits": "Native parser/core and serial test doubles are software evidence. Power, physical timing, MCU utilization, high-water memory and independent physical comparisons remain unmeasured."
+}
