@@ -100,6 +100,15 @@ if (root/"original-device.izp").is_file():
 result = compare(json.loads((root/"spec.json").read_text()),
     np.load(root/"samples.npy", allow_pickle=False), np.load(root/"timestamps_us.npy", allow_pickle=False),
     json.loads((root/"costs.json").read_text()), run["source"])
+if 'simulation_truth' in run:
+    old_truth, new_truth = run['simulation_truth'], result['simulation_truth']
+    assert old_truth.keys() == new_truth.keys(), 'Synthetic truth fields changed'
+    for key, value in old_truth.items():
+        actual = new_truth[key]
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            assert np.isclose(value, actual, rtol=1e-6, atol=1e-8), (key, value, actual)
+        else:
+            assert value == actual, (key, value, actual)
 for old, new in zip(run["comparisons"], result["comparisons"], strict=True):
     for key in ("frequency_hz", "damping_ratio", "explained_energy_fraction"):
         a, b = old["result"].get(key), new["result"].get(key)
@@ -108,9 +117,10 @@ for old, new in zip(run["comparisons"], result["comparisons"], strict=True):
         else:
             assert np.isclose(a, b, rtol=1e-6, atol=1e-8), (key, a, b)
 print(json.dumps({"recomputed": True, "source": run["source"], "selected": result["placement"]["selected"],
+    "simulation_truth": result.get('simulation_truth'),
     "results": [c["result"] for c in result["comparisons"]]}, indent=2, allow_nan=False))
 '''
-    files["README.txt"] = b"InstrumentZero Edge software preview.\nRaw samples retained; summaries cannot reconstruct discarded samples.\nRun: python -m pip install -r requirements.txt\nThen: python recompute.py\nA free C99 compiler (Clang/GCC) is required. No private files or network are used by recompute.py.\nTiming metrics vary by computer; recorded host costs freeze the provisional placement rules.\nSynthetic data is not independently measured physical evidence.\n"
+    files["README.txt"] = b"InstrumentZero Edge: reproducible simulation and placement studio.\nRaw samples retained; summaries cannot reconstruct discarded samples.\nRun: python -m pip install -r requirements.txt\nThen: python recompute.py\nA free C99 compiler (Clang/GCC) is required. No private files or network are used by recompute.py.\nTiming metrics vary by computer; recorded host costs freeze placement.\nSynthetic truth checks are numerical results, not physical measurements. Hardware is outside the simulation project's completion scope.\n"
     manifest = {"schema": "instrumentzero.edge.artifact/1", "spec_sha256": run["compiled"]["spec_sha256"],
                 "core_sha256": core_identity(), "firmware_sha256": None,
                 "source": run["source"], "physical_acquisition_verified": False,

@@ -1,3 +1,5 @@
+> Historical release evidence under the earlier physical-instrument scope. The current project is simulation-only; see [current simulation acceptance](SIMULATION_VALIDATION.md). Physical gates mentioned below do not block the simulation project.
+
 # Historical Edge v0.3.0-rc.1 evidence
 
 This document records the original rc1 source and contracts. See [current rc2 runtime evidence](RUNTIME_VALIDATION.md) for the newer implementation. Reproduce these historical checks from the v0.3.0-rc.1 tag.

@@ -143,11 +143,11 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
                     from .edge.artifacts import export_run
                     from .edge.simulation import compare, generate
                     from .edge.spec import default_spec
-                    if set(payload) - {"spec", "scenario", "seed", "seconds"}:
+                    if set(payload) - {"spec", "scenario", "seed", "seconds", "model"}:
                         raise MeasurementError("Unknown Edge request fields.")
                     spec = payload.get("spec", default_spec())
                     y, ticks, source = generate(spec, payload.get("scenario", "mount_a"),
-                                                 payload.get("seed", 20261029), payload.get("seconds", 8.))
+                                                 payload.get("seed", 20261029), payload.get("seconds", 8.), payload.get('model'))
                     output = compare(spec, y, ticks, source=source)
                     artifact = export_run(output, y, ticks)
                     key = secrets.token_urlsafe(18)

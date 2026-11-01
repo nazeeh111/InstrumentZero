@@ -1,3 +1,5 @@
+> Optional extension: physical operation is outside the simulation-only project scope. This document preserves an unexecuted commissioning plan or software/build evidence; it is not a simulation completion gate.
+
 # Runtime configuration: implementation contract
 
 This work adds software-tested configuration of the provisional ADXL345 adapter without rebuilding it for every supported specification. Physical behavior remains unverified. Existing v0.3.0-rc.1 artifacts retain their original compiled-configuration contract.

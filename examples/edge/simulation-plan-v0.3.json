@@ -1,0 +1,203 @@
+{
+  "schema": "instrumentzero.simulation.plan/1",
+  "scope": "simulation_only",
+  "acceptance": {
+    "frequency_absolute_error_hz": 0.005,
+    "damping_relative_error": 0.02
+  },
+  "cases": [
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "custom-1",
+      "scenario": "custom_ringdown",
+      "seed": 9132201,
+      "expected": "fit",
+      "model": {
+        "frequency_hz": 9.75,
+        "decay_per_second": 0.45,
+        "noise_rms": 0.0006,
+        "amplitude": 1
+      }
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "custom-2",
+      "scenario": "custom_ringdown",
+      "seed": 9132202,
+      "expected": "fit",
+      "model": {
+        "frequency_hz": 18.6,
+        "decay_per_second": 0.8,
+        "noise_rms": 0.001,
+        "amplitude": 0.8
+      }
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "custom-3",
+      "scenario": "custom_ringdown",
+      "seed": 9132203,
+      "expected": "fit",
+      "model": {
+        "frequency_hz": 24.25,
+        "decay_per_second": 1.1,
+        "noise_rms": 0.0004,
+        "amplitude": 1
+      }
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "preset-a",
+      "scenario": "mount_a",
+      "seed": 9132204,
+      "expected": "fit"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "preset-b",
+      "scenario": "mount_b",
+      "seed": 9132205,
+      "expected": "fit"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "no-decay",
+      "scenario": "custom_ringdown",
+      "seed": 9132206,
+      "expected": "frequency_only",
+      "model": {
+        "frequency_hz": 16,
+        "decay_per_second": 0,
+        "noise_rms": 0.0003,
+        "amplitude": 1
+      }
+    },
+    {
+      "spec": "examples/edge/host-favored-spec.json",
+      "costs": "examples/edge/host-favored-cost-profile.json",
+      "seconds": 8,
+      "id": "raw-validation-favors-host",
+      "scenario": "custom_ringdown",
+      "seed": 9132207,
+      "expected": "fit",
+      "model": {
+        "frequency_hz": 18.6,
+        "decay_per_second": 0.8
+      },
+      "selected": "raw_host"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "silence",
+      "scenario": "silence",
+      "seed": 9132208,
+      "expected": "reject"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "chirp",
+      "scenario": "chirp",
+      "seed": 9132209,
+      "expected": "reject"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "close_modes",
+      "scenario": "close_modes",
+      "seed": 9132210,
+      "expected": "reject"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "impulse",
+      "scenario": "impulse",
+      "seed": 9132211,
+      "expected": "reject"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "saturation",
+      "scenario": "saturation",
+      "seed": 9132212,
+      "expected": "clip"
+    },
+    {
+      "spec": "examples/edge/simulation-spec.json",
+      "costs": "examples/edge/cost-profile.json",
+      "seconds": 8,
+      "id": "disconnect_recover",
+      "scenario": "disconnect_recover",
+      "seed": 9132213,
+      "expected": "recovery"
+    }
+  ],
+  "cost_scope": "Previously measured host proxy profiles bound to unchanged C core/spec; not synthetic performance fixtures or MCU measurements.",
+  "freeze_note": "Commit before executing these fresh cases. No numerical thresholds tuned on confirmation. Reject/clip/recovery outcomes retained.",
+  "frozen_sha256": {
+    "examples/edge/cost-profile.json": "df8fef7967796f2c3e92248ba2e9074ce210faa57afc3844341cd31a483b675f",
+    "examples/edge/host-favored-cost-profile.json": "122e564cf61a5ede783c894a5efe09b605c8b1cf137bbb438183b5021759d605",
+    "examples/edge/host-favored-spec.json": "05cb17b7140fd57a44a75fa5dc82e8b309b272a56ecc2a73ee5cceb1bdb8be91",
+    "examples/edge/simulation-spec.json": "b32c853528e7dddd4a5c16a876801b6effb04106aeaa4cbcc4d64ea823c22cf7",
+    "scripts/validate_simulation.py": "84d893d2f5f01d30c7a4d76a16b5af0c089aee6d9dd0309b810de2c7b7cef4f3",
+    "src/instrumentzero/__init__.py": "838cf518b47e7b5700ee71b25ae7e59e95c354873d193484c24a7743234324de",
+    "src/instrumentzero/acoustic.py": "6e9a4bb01e51feb4179f36573ea4696579a41acaa42fd43eb3d606774f6dba9d",
+    "src/instrumentzero/adapters.py": "bc3af96795c7ec483d0e6b13d73a223cdf2145c13c7b3310725beafc54fb0460",
+    "src/instrumentzero/calibrated.py": "eb9f00043cbc21ff373e18e1d51469d5ff1ae6118b3bf7a01fd8021613e3e4ed",
+    "src/instrumentzero/cli.py": "d30d5b405838e1488c4a2bf658f2dd67954e7088263f306792d2a0379ce2731f",
+    "src/instrumentzero/design.py": "7daca39d1ec4b8dfb75c8190f7b5723342ebe1a675e0cacea50dd072f4abc702",
+    "src/instrumentzero/edge/__init__.py": "b55e5d848fb5d2a0993b86de1c96636e969d7ebf6f0500bcac4f112e20c9424f",
+    "src/instrumentzero/edge/acquisition.py": "c3e8a4e0c7ff0927b59e5dfede2d8dc93a32bafd9e518e16f6f17aa80018924d",
+    "src/instrumentzero/edge/artifacts.py": "ba7d344025eb7b457a3c0aa8fa2d18609a583720da26646ad195c6f0244cf3a2",
+    "src/instrumentzero/edge/cli.py": "311ff21ed4a1d7682fac22bcb200b67c9b0ea1a88897e4b4e93c2eefbd238bfc",
+    "src/instrumentzero/edge/control/iz_control.c": "dd3bf20ce553e671364f0c9b7e02ded8c4c751cdb112f5ffb8d5edc173011ccb",
+    "src/instrumentzero/edge/control/iz_control.h": "62b09b8fc9ed603e24a34558902c41142231838076d2781819097d6769cce946",
+    "src/instrumentzero/edge/control.py": "81591a45b5fe0746de00ec32e5b380d43d6ab3fcd2f6cb571754f1c5d4f6fa0b",
+    "src/instrumentzero/edge/core/iz_core.c": "144515eb0b1c12b8dc2b0e2e2ddf7302038f2767a6ad390e044729c405c985df",
+    "src/instrumentzero/edge/core/iz_core.h": "cdeb0d03920be665cb598e96dd159633b9911b6664e7ba437c32213efd569e43",
+    "src/instrumentzero/edge/estimator.py": "8d753b5e7475cdd83bf82629b5fb5ddf1187a6caab5a3c56377b3acfd87196b7",
+    "src/instrumentzero/edge/native.py": "b298010adf1fb0ffa23777ea0c29bfd98a44eab575417d528ab953821c9922cd",
+    "src/instrumentzero/edge/planner.py": "2cbe0862e86fc874fe8ca8d65e5624ab06c13366bdb315169a6c0e23cc3a622b",
+    "src/instrumentzero/edge/protocol.py": "f61058daff55fdfb01567dc33bd9d25685cfed1c0a71e4c7625b64d393eeb0ab",
+    "src/instrumentzero/edge/runtime.py": "55a82c4dd0d4df9aedf9d71b431d27b5f0b0906481bcc0d8a71de3ac1df808ce",
+    "src/instrumentzero/edge/simulation.py": "0a1656b1b5c24f16f745480be8b5d6df928aad6720421fa00475b022e012119e",
+    "src/instrumentzero/edge/spec.py": "6eccc7412f3a11c372e7e945dbc195359733bf48c89b1ac5ea7bfc2c405d3056",
+    "src/instrumentzero/engine.py": "054a2d66a52d491ca82bdcad61cea7d74ddb3d43ebfe8c0562ee6aa4786bdc9d",
+    "src/instrumentzero/examples.py": "b73dd8025af8fca8d5199a198fb793310227d917b76dde1634bfc77bf7e519c2",
+    "src/instrumentzero/export.py": "bf4300af25561d3cac4f5e7d0eceb0d04347cbad66713f82b6dbd713cfeee4f9",
+    "src/instrumentzero/replay.py": "677d667631d15b9b6f0bd859296c4e9a123a5d0e367cf9833fae8eb7b741a91a",
+    "src/instrumentzero/server.py": "53df8b94e95dcfff964ad1793737ca87cf7eee07508b8f0e3264b6194adba900",
+    "src/instrumentzero/spec.py": "170cfbec471b50765eead94a21b890cfe0a289b6c8e41c526dd073e0a3c5675f",
+    "src/instrumentzero/web/acquisition.js": "fd4d6ff6ba99a008b121b7151f6da1abf14dcec6ce8e12a5b8bfdc1d06d93278",
+    "src/instrumentzero/web/app.js": "df0cf8cf49098345e7251f574a9e49aa82214b1e982c00d2b9e8906df3ac67df",
+    "src/instrumentzero/web/edge-architecture.svg": "44cc0ef410f9623d8c9afbc4fd4165e4123cd8da9425d44276aacb901fdd9be9",
+    "src/instrumentzero/web/edge.css": "07b72e19c66f6282dcfff078770c5b36a893bc1966f84677dce53af7f59dea4a",
+    "src/instrumentzero/web/edge.html": "610583f49ff864ef65b6919f6c191494e50952863bc7fcc4b281ff66f628585a",
+    "src/instrumentzero/web/edge.js": "be6ee9a39756102870e9134cbe23614d01b5bedf373fee0d838c6c11b9af4b54",
+    "src/instrumentzero/web/index.html": "542edbd302f63a0c9627be4734d53814055a2e3f00e1757166884aa7a223d6ce",
+    "src/instrumentzero/web/mark.svg": "8e51518d073bf11bde13b8145d42a3ad237b4dfc32600902a2b9718354c52614",
+    "src/instrumentzero/web/style.css": "9753d33708d025b83c2a6ee637c9b26b37e7ab2930d789b9b82b42df5cf64d72",
+    "src/instrumentzero/web/validation.js": "cf8d805c3d3285fdc369e52dbe32052979d5fd66eb31b8a0c3fe9b200d62c8ec"
+  }
+}

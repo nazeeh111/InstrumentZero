@@ -1,3 +1,5 @@
+> Historical release evidence under the earlier physical-instrument scope. The current project is simulation-only; see [current simulation acceptance](SIMULATION_VALIDATION.md). Physical gates mentioned below do not block the simulation project.
+
 # Edge v0.3.0-rc.3: runtime configuration evidence
 
 This is a software preview. Runtime device configuration is implemented and tested in software, and the complete adapter cross-compiles. No sensor has been operated or flashed. Physical acquisition, real reconfiguration/unplug behavior and independent measurement remain unverified.

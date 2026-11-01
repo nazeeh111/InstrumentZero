@@ -1,0 +1,23 @@
+{
+  "scope": "independent bounded simulation model/API/CLI/export/epoch review; read-only source",
+  "finding_corrected": "Custom amplitude/noise UI units and numeric bounds were fixed to follow applied source specification. Correction source-read and browser regression verified.",
+  "remaining_confirmed_defects": [],
+  "checks": {
+    "focused_python_model_measurement_import": "26 passed in17.24s",
+    "loopback_api": "1 passed in3.79s",
+    "browser_epoch_and_custom_units": "9 passed",
+    "normalized_FS_source_custom_model": "truth within budgets",
+    "portable_source_cross_python": "3.14-built export recomputed using separate Python3.13 environment"
+  },
+  "source_sha256": {
+    "src/instrumentzero/edge/simulation.py": "0a1656b1b5c24f16f745480be8b5d6df928aad6720421fa00475b022e012119e",
+    "src/instrumentzero/edge/artifacts.py": "ba7d344025eb7b457a3c0aa8fa2d18609a583720da26646ad195c6f0244cf3a2",
+    "src/instrumentzero/edge/cli.py": "311ff21ed4a1d7682fac22bcb200b67c9b0ea1a88897e4b4e93c2eefbd238bfc",
+    "src/instrumentzero/server.py": "53df8b94e95dcfff964ad1793737ca87cf7eee07508b8f0e3264b6194adba900",
+    "src/instrumentzero/web/edge.js": "be6ee9a39756102870e9134cbe23614d01b5bedf373fee0d838c6c11b9af4b54",
+    "src/instrumentzero/web/edge.html": "610583f49ff864ef65b6919f6c191494e50952863bc7fcc4b281ff66f628585a"
+  },
+  "devices_opened": false,
+  "external_requests": false,
+  "source_mutated": false
+}

@@ -1,3 +1,5 @@
+> Optional extension: physical operation is outside the simulation-only project scope. This document preserves an unexecuted commissioning plan or software/build evidence; it is not a simulation completion gate.
+
 # Runtime configuration update (rc3)
 
 The current adapter requires IZC1 configuration and a matching IZA1 acknowledgement before each `G`. It supports rates of 100, 200 or 400 Hz, calibration, FIR/reduction, placement and raw-validation changes within the compiled block/queue envelope. All placement builds now contain the same runtime-capable numerical and control paths. The example total RAM planning budget is 40,960 bytes with a 6,144-byte control/RX reserve and processing state reserved in every mode. C11 atomics support the interrupt-driven RX ring; the numerical core remains C99-compatible. See [CONTROL.md](CONTROL.md). No physical operation or flashing has been performed.

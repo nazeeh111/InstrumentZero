@@ -13,7 +13,7 @@ from .spec import EdgeError, compile_graph, default_spec
 
 
 def add_parser(sub):
-    parser = sub.add_parser("edge", help="Compile, simulate and recompute the Edge software preview")
+    parser = sub.add_parser("edge", help="Compile, simulate and recompute the Edge simulation studio")
     commands = parser.add_subparsers(dest="edge_command", required=True)
     example = commands.add_parser("spec", help="Write the supported default specification to stdout")
     example.set_defaults(edge_command="spec")
@@ -35,6 +35,10 @@ def add_parser(sub):
     demo.add_argument("--seconds", type=float, default=8.)
     demo.add_argument("--costs", type=Path)
     demo.add_argument("--export", type=Path)
+    demo.add_argument('--frequency', type=float, help='Custom ringdown frequency in Hz (requires custom_ringdown)')
+    demo.add_argument('--decay', type=float, help='Custom exponential decay per second')
+    demo.add_argument('--noise', type=float, help='Custom Gaussian noise standard deviation in source units')
+    demo.add_argument('--amplitude', type=float, help='Custom initial sinusoid amplitude in source units')
     recording = commands.add_parser("recording", help="Analyze a consented local PCM WAV through the same contracts")
     recording.add_argument("spec", type=Path)
     recording.add_argument("wav", type=Path)
@@ -128,7 +132,9 @@ def run(args):
                   "independent_physical_reference": False, "clock": "nominal file rate; no device timestamps"}
         result = compare(spec, y, ticks, source=source)
     else:
-        y, ticks, source = generate(spec, args.scenario, args.seed, args.seconds)
+        model = {name:value for name,value in [('frequency_hz',args.frequency),('decay_per_second',args.decay),
+                                              ('noise_rms',args.noise),('amplitude',args.amplitude)] if value is not None}
+        y, ticks, source = generate(spec, args.scenario, args.seed, args.seconds, model or None)
         costs = read_json(args.costs)
         if args.costs is not None and not isinstance(costs, dict):
             raise EdgeError("A frozen cost profile must be a JSON object.")

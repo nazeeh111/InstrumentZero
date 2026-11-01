@@ -1,3 +1,5 @@
+> Optional extension: physical operation is outside the simulation-only project scope. This document preserves an unexecuted commissioning plan or software/build evidence; it is not a simulation completion gate.
+
 # Physical confirmation plan: not executed
 
 No physical setup is available. The following is an editable acceptance procedure, not an experiment report or a certified fixture design. It does not authorize purchasing, wiring, energizing or flashing equipment.

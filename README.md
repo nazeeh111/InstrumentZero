@@ -10,31 +10,29 @@ InstrumentZero is a local scientific experiment compiler: supported questions be
 
 > **v0.2: validation without physical equipment.** Public calibrated recordings, executable adaptive replay, 600 acoustic stress cases and 18 production acquisition checks extend the Lab. Recorded measurements, replay and simulations remain visibly distinct. [Validation evidence and remaining limits](docs/NO_EQUIPMENT_VALIDATION.md).
 
-## InstrumentZero Edge · v0.3.0-rc.3 software preview
+## InstrumentZero Edge · v0.3.0 simulation studio
 
-One typed specification controls timestamp validation, calibration, filtering, a host ringdown estimator and recording. A deterministic placement planner compares raw-host, fixed-edge and chosen placements under declared resource and numerical-error budgets. Its costs are measured on the host and remain provisional for an MCU.
+A complete local simulation workflow: create a seeded signal, estimate resonance and damping when identifiable, compare three processing placements, and export every sample with executable source. No hardware or paid API is required.
 
 ```sh
 python -m pip install -r requirements-runtime.lock
 python -m pip install --no-deps .
-instrumentzero edge simulate --scenario mount_a --export mount-a.zip
-instrumentzero edge simulate --scenario mount_b --export mount-b.zip
-instrumentzero edge simulate --scenario silence
-instrumentzero lab --port 58129
-# Open http://127.0.0.1:58129/edge
+instrumentzero edge simulate --scenario custom_ringdown --frequency 18.6 \
+  --decay .8 --noise .0006 --amplitude 1 --seed 6001 --export custom.zip
+instrumentzero edge simulate --scenario silence --export rejected.zip
+instrumentzero lab --port 58134
+# Open http://127.0.0.1:58134/edge
 ```
 
-A free C99 compiler is required. The C core has no heap or I/O, matches float64 references across chunk boundaries and is shared with the provisional Zephyr ADXL345 adapter. Raw and transformed streams use versioned, CRC-checked packets, bounded queues and isolated configuration epochs. Evidence exports include exact samples, timestamps and executable source for independent recomputation.
+A free C99 compiler is required. The interface exposes frequency, decay, noise, amplitude and seed, plus reduction, raw validation and resource budgets. It separates error against the analytic model from C-versus-float64 processing agreement. Rejected signals remain inspectable; every edit invalidates stale results and exports.
 
-**No physical setup is available.** Every new cantilever demonstration is synthetic. Physical acquisition, fresh remounts and independently acquired reference comparisons remain unverified. A firmware build is software evidence; this is not a measurement-verified instrument. The original recording Lab remains available.
+Raw-host, calibrated-edge and filtered-edge paths run the same C core through actual packet encoding/decoding in software. The planner uses measured host costs and declared models. It can tie fixed edge or prefer the host. These are simulation and numerical results, not physical measurements or MCU performance claims. The analytic generator is not a material or finite-element beam solver.
 
-The runtime adapter adds bounded runtime configuration with a matching acknowledgement before start, interrupt-driven receive buffering, cancellation cleanup and retained control receipts. Supported rates, calibration, filtering and placement can change within the compiled buffer envelope. This path is software-tested and build-verified; physical behavior remains unverified. [Runtime configuration](docs/edge/CONTROL.md). The rc3 update enforces the serial link’s theoretical ceiling, makes binary terminal settings explicit, preserves input during control-write retries and refuses known failed native captures.
+![Installed simulation studio, custom signal and truth check](assets/edge-simulation/workspace.png)
 
-![Actual installed rc3 workspace, simulated Mount B](assets/edge-rc3/workspace.png)
+[Current walkthrough](assets/edge-simulation/instrumentzero-simulation-walkthrough.mp4) · [Editable timeline and captures](assets/edge-simulation/) · [Quickstart](docs/edge/README.md) · [Model equations and scope](docs/edge/SIMULATION.md) · [Executed acceptance evidence](docs/edge/SIMULATION_VALIDATION.md) · [API](docs/edge/API.md)
 
-[Watch the original synthetic UI walkthrough](assets/edge-v0.3/instrumentzero-edge-walkthrough.mp4) · [Editable timeline and captures](assets/edge-v0.3/)
-
-[Quickstart and contracts](docs/edge/README.md) · [Executed evidence and limits](docs/edge/RUNTIME_VALIDATION.md) · [Protocol](docs/edge/PROTOCOL.md) · [Provisional firmware](docs/edge/FIRMWARE.md) · [Physical acceptance plan](docs/edge/PHYSICAL.md)
+The original recording Lab and provisional hardware source remain as optional extensions and history. Physical validation is outside the simulation project's completion scope.
 
 ## From an ordinary question to a measurement
 
