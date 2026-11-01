@@ -102,10 +102,14 @@ def test_explicit_uart_profile_is_115200_8n1_without_flow_control_and_is_restore
     local_flags = sum(getattr(termios, name, 0) for name in ("ECHONL", "ECHO", "ICANON", "ISIG", "IEXTEN"))
     original = [input_flags, termios.OPOST, flags, local_flags, termios.B9600, termios.B9600, [b"\0"] * 32]
     configured = []
-    monkeypatch.setattr(acquisition.os, "open", lambda *args: 424242)
-    monkeypatch.setattr(acquisition.os, "fstat", lambda _: SimpleNamespace(st_mode=stat.S_IFCHR))
-    monkeypatch.setattr(acquisition.os, "isatty", lambda _: True)
-    monkeypatch.setattr(acquisition.os, "close", lambda _: None)
+    # Keep fake descriptors local to this adapter. Patching the shared os module
+    # also changes pytest's own capture-file metadata on Linux.
+    serial_os = SimpleNamespace(**vars(acquisition.os))
+    serial_os.open = lambda *args: 424242
+    serial_os.fstat = lambda _: SimpleNamespace(st_mode=stat.S_IFCHR)
+    serial_os.isatty = lambda _: True
+    serial_os.close = lambda _: None
+    monkeypatch.setattr(acquisition, "os", serial_os)
     monkeypatch.setattr(termios, "tcgetattr", lambda _: copy.deepcopy(original))
     monkeypatch.setattr(termios, "tcsetattr", lambda fd, when, attrs: configured.append(copy.deepcopy(attrs)))
     monkeypatch.setattr(termios, "tcflush", lambda *args: None)
