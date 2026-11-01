@@ -37,3 +37,7 @@ For consented local recording imports, use `edge recording` or `edge protocol`. 
 ## C++ caller
 
 [cpp-integration.cpp](../../examples/edge/cpp-integration.cpp) wraps the C header in `extern "C"` and links against the separately compiled C99 implementation. `scripts/verify_edge_core.py` builds and executes this C++17 example along with the sanitizer and ARM checks. The numerical implementation stays in C99.
+
+## Runtime device configuration (rc2)
+
+`instrumentzero.edge.control.configuration(spec, placement)` emits offline IZC1 bytes after graph/filter/resource validation. `DeviceController` requires a matching IZA1 acknowledgement before start and supports repeated configuration of one explicitly owned port. The firmware accepts supported rates, calibration, FIR, reduction and placements within its compiled block/queue envelope. [Control layout and lifecycle](CONTROL.md) document the bounds, cancellation, overflow and epoch rules. Physical execution remains unverified.

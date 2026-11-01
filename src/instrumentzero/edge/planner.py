@@ -7,7 +7,7 @@ import time
 import numpy as np
 
 from .native import Processor, core_identity, library
-from .protocol import CRC, HEADER
+from .protocol import CONTROL_RESERVE_BYTES, CRC, HEADER
 from .spec import EdgeError, _keys, identity, number
 
 
@@ -60,7 +60,12 @@ def plan(compiled, profile):
         bps = rate / edge_d * (4 + 4*ch) + rate / block * (4 + HEADER.size + CRC.size)
         if r["raw_validation"] and mode != "raw_host":
             bps += rate * (4 + 4*ch) + rate / block * (4 + HEADER.size + CRC.size)
-        ram = base_ram + (profile["state_bytes"] if mode != "raw_host" else 0)
+        # The runtime-configurable board image always allocates its processor,
+        # two configurations and bounded control RX state, even in raw mode.
+        device_control = a['adapter'] == 'zephyr_adxl345'
+        ram = base_ram + (profile["state_bytes"] if mode != "raw_host" or device_control else 0)
+        if device_control:
+            ram += CONTROL_RESERVE_BYTES
         cost_key = "calibration_fir" if mode == "filtered_edge" else "calibration"
         cost = 0 if mode == "raw_host" else profile["primitive_costs"][cost_key]["observed_max_ns_per_input_frame"]
         utilization = cost * rate * 1e-9
@@ -87,7 +92,7 @@ def plan(compiled, profile):
         raise EdgeError("No placement meets declared resource bounds: " + str({c["mode"]: c["reasons"] for c in candidates}))
     winner = min(legal, key=lambda c: (c["score"], c["mode"]))
     return {"selected": winner["mode"], "candidates": candidates, "cost_profile_sha256": identity(profile),
-            "rules_version": "prefix-v1", "raw_validation": r["raw_validation"],
+            "rules_version": "prefix-v2", "raw_validation": r["raw_validation"],
             "edge_estimator": "Unavailable: ringdown optimization stays on host.",
             "status": "provisional placement using measured host costs; MCU costs unavailable",
             "error_contract": "FIR response checked at compilation; per-input frequency/damping disagreement checked at execution. No universal error guarantee.",

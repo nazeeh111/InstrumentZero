@@ -21,6 +21,10 @@ def add_parser(sub):
     compiler.add_argument("spec", type=Path)
     compiler.add_argument("--output", type=Path)
     compiler.add_argument("--placement", choices=["raw_host", "calibrated_edge", "filtered_edge"], default="raw_host")
+    control = commands.add_parser('control', help='Compile an offline runtime configuration request; never opens a device')
+    control.add_argument('spec', type=Path)
+    control.add_argument('--placement', choices=['raw_host','calibrated_edge','filtered_edge'], default='raw_host')
+    control.add_argument('--output', type=Path, required=True)
     planner = commands.add_parser("plan", help="Measure local primitive costs and choose a provisional placement")
     planner.add_argument("spec", type=Path)
     planner.add_argument("--costs", type=Path, help="Use a frozen matching measured-host cost profile")
@@ -45,6 +49,7 @@ def add_parser(sub):
     capture = commands.add_parser("capture", help="Explicitly open one provisional sensor serial port; never flashes")
     capture.add_argument("spec", type=Path)
     capture.add_argument("--device", required=True)
+    capture.add_argument("--placement", choices=["raw_host", "calibrated_edge", "filtered_edge"], default="raw_host")
     capture.add_argument("--seconds", type=float, default=8.)
     capture.add_argument("--output", type=Path, required=True)
     capture.add_argument("--consent", action="store_true", required=True)
@@ -59,9 +64,21 @@ def run(args):
         return default_spec()
     spec = read_json(args.spec) if args.spec is not None else default_spec()
     compiled = compile_graph(spec)
+    if args.edge_command == 'control':
+        import hashlib
+
+        from .control import configuration, decode_configuration
+        request,_=configuration(spec,args.placement)
+        with args.output.open('xb') as output:
+            output.write(request)
+        request_id=decode_configuration(request)['request_id']
+        return {'request':str(args.output),'bytes':len(request),'sha256':hashlib.sha256(request).hexdigest(),
+                'spec_sha256':compiled['spec_sha256'],'request_id':request_id,'placement':args.placement,
+                'status':'offline bytes only; a matching device acknowledgement is required before explicit start',
+                'hardware_operation_verified':False}
     if args.edge_command == "capture":
         from .acquisition import capture
-        return capture(spec, args.device, args.seconds, args.output, args.consent)
+        return capture(spec, args.device, args.seconds, args.output, args.consent, args.placement)
     if args.edge_command == "compile":
         profile = measure_costs(compiled)
         placement = plan(compiled, profile)
@@ -111,5 +128,6 @@ def run(args):
         result = compare(spec, y, ticks, costs, source)
     if args.export:
         with args.export.open("xb") as stream:
-            stream.write(export_run(result, y, ticks, original_protocol=args.data.read_bytes() if args.edge_command == "protocol" else None))
+            stream.write(export_run(result, y, ticks, original_protocol=args.data.read_bytes() if args.edge_command == "protocol" else None,
+                                    original_control=Path(str(args.data)+'.json').read_bytes() if args.edge_command == 'protocol' and Path(str(args.data)+'.json').is_file() else None))
     return result

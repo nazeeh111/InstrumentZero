@@ -11,7 +11,7 @@ import numpy as np
 
 from .native import core_identity
 from .runtime import packets
-from .spec import canonical
+from .spec import EdgeError, canonical
 
 
 def generated_header(compiled, placement="raw_host"):
@@ -35,7 +35,7 @@ def generated_header(compiled, placement="raw_host"):
             "#endif\n")
 
 
-def export_run(run, samples, timestamps_us, original_protocol=None):
+def export_run(run, samples, timestamps_us, original_protocol=None, original_control=None):
     package = Path(__file__).parents[1]
     files = {}
     files["spec.json"] = canonical(run["compiled"]["spec"])
@@ -55,6 +55,15 @@ def export_run(run, samples, timestamps_us, original_protocol=None):
     files["raw.izp"] = stream.getvalue()
     if original_protocol is not None:
         files["original-device.izp"] = original_protocol
+    control_receipt=run['source'].get('runtime_configuration')
+    if control_receipt is not None and original_protocol is None:
+        raise EdgeError('A controlled device export must retain its original protocol evidence.')
+    if original_control is None and control_receipt is not None:
+        original_control=canonical({'runtime_configuration':control_receipt})
+    if original_control is not None:
+        if original_protocol is None:
+            raise EdgeError('Control sidecar requires its original device protocol.')
+        files["original-device.izp.json"] = original_control
     for path in package.rglob("*"):
         if path.is_file() and path.suffix in (".py", ".c", ".h", ".html", ".css", ".js", ".svg") and "__pycache__" not in path.parts:
             files["source/instrumentzero/" + path.relative_to(package).as_posix()] = path.read_bytes()
@@ -81,6 +90,7 @@ if (root/"original-device.izp").is_file():
     device_y, device_t, device_source = read_recording(root/"original-device.izp", run["compiled"]["spec"], run["source"]["firmware_sha256"])
     assert np.array_equal(device_y, np.load(root/"samples.npy", allow_pickle=False))
     assert np.array_equal(device_t, np.load(root/"timestamps_us.npy", allow_pickle=False))
+    assert device_source.get("runtime_configuration") == run["source"].get("runtime_configuration")
 result = compare(json.loads((root/"spec.json").read_text()),
     np.load(root/"samples.npy", allow_pickle=False), np.load(root/"timestamps_us.npy", allow_pickle=False),
     json.loads((root/"costs.json").read_text()), run["source"])

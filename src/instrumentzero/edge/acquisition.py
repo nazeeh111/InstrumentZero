@@ -60,12 +60,26 @@ def read_recording(path, spec, firmware_sha256):
         actual = np.concatenate(transformed_values[kind])
         actual_ticks = np.concatenate(transformed_times[kind])
         device_checks.append(_check_device_stream(compiled, values, ticks, actual, actual_ticks, kind))
+    control_receipt = None
+    sidecar = Path(str(path)+'.json')
+    if sidecar.is_file():
+        if sidecar.stat().st_size>65536:
+            raise EdgeError('Capture control sidecar exceeds its 64 KiB bound.')
+        try:
+            metadata=json.loads(sidecar.read_text())
+        except (ValueError,UnicodeError) as exc:
+            raise EdgeError('Invalid capture control sidecar.') from exc
+        if not isinstance(metadata,dict):
+            raise EdgeError('Capture sidecar must be a JSON object.')
+        if 'runtime_configuration' in metadata:
+            from .control import validate_receipt
+            control_receipt=validate_receipt(metadata['runtime_configuration'],compiled,validator.session,validator.epoch,{1,*transforms})
     return values, ticks, {
         'source_kind': 'user_supplied_sensor_recording', 'file_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
         'firmware_sha256': firmware_sha256, 'firmware_identity_basis': 'user-declared image hash; not device-attested',
         'session': validator.session, 'epoch': validator.epoch, 'independent_physical_reference': False,
         'timestamp_location': 'Zephyr driver-thread callback before sample fetch; not physical sample aperture',
-        'hardware_verified': False, 'device_processing_checks': device_checks,
+        'hardware_verified': False, 'runtime_configuration': control_receipt, 'device_processing_checks': device_checks,
         'device_processing_scope': 'Consistency of supplied transformed bytes against retained raw input. No physical operation or attestation inferred.'}
 
 
@@ -115,6 +129,7 @@ class SerialPort:
         self.fd = None
         self.old_attributes = None
         self.started = False
+        self.control_pending = False
         self.bytes_sent = 0
 
     def __enter__(self):
@@ -142,6 +157,10 @@ class SerialPort:
     def write(self, data):
         written = os.write(self.fd, data)
         self.bytes_sent += written
+        if data.startswith(b'C') and written:
+            self.control_pending = True
+        if data == b'S' and written == 1:
+            self.started = self.control_pending = False
         if data == b'G' and written == 1:
             self.started = True
         return written
@@ -155,7 +174,7 @@ class SerialPort:
         if self.fd is None:
             return
         try:
-            if self.started:
+            if self.started or self.control_pending:
                 self.write(b'S')
         except OSError:
             pass
@@ -169,13 +188,18 @@ class SerialPort:
             self.fd = None
 
 
-def capture(spec, device, seconds, output, consent):
+def capture(spec, device, seconds, output, consent, placement="raw_host"):
+    from .control import DeviceController, configuration
     if not consent:
         raise EdgeError('Serial capture requires explicit recording consent.')
+    capture_started=time.perf_counter()
     compiled = compile_graph(spec)
     if compiled['spec']['source']['adapter'] != 'zephyr_adxl345':
         raise EdgeError('Capture requires the provisional zephyr_adxl345 binding.')
     number(seconds, 1, 30, 'capture duration')
+    if placement!='raw_host' and not compiled['spec']['resources']['raw_validation']:
+        raise EdgeError('Edge capture needs raw_validation=true to retain independently checkable samples.')
+    configuration(spec,placement)  # Reject invalid/over-budget requests before opening a device.
     if not str(device).startswith('/dev/'):
         raise EdgeError('A serial device must be explicitly named under /dev/.')
     sidecar = Path(str(output)+'.json')
@@ -183,6 +207,8 @@ def capture(spec, device, seconds, output, consent):
                 'spec_sha256':compiled['spec_sha256'],'requested_seconds':seconds,
                 'consent_confirmed':True,'firmware_sha256':None,'firmware_identity_basis':'unknown at capture',
                 'physical_acceptance_verified':False,'outcome':'starting'}
+    start_submitted=None
+    port=None
     with Path(output).open('xb') as recording, sidecar.open('x+') as manifest:
         def save_manifest():
             manifest.seek(0)
@@ -193,7 +219,12 @@ def capture(spec, device, seconds, output, consent):
         save_manifest()
         try:
             with SerialPort(device) as port:
-                port.write(b'G')
+                controller=DeviceController(port)
+                metadata['runtime_configuration']=controller.configure(spec,placement)
+                metadata['host_validate_open_and_configure_seconds']=time.perf_counter()-capture_started
+                save_manifest()
+                controller.start()
+                start_submitted=time.perf_counter()
                 deadline = time.monotonic()+seconds
                 heartbeat = 0
                 received_at = time.monotonic()
@@ -207,14 +238,16 @@ def capture(spec, device, seconds, output, consent):
                     if data is not None:
                         if not data:
                             raise EdgeError('Sensor disconnected; partial bytes retained in the trial file.')
+                        if 'host_start_to_first_bytes_seconds' not in metadata:
+                            metadata['host_start_to_first_bytes_seconds']=time.perf_counter()-start_submitted
                         recording.write(data)
                         received += len(data)
-                        received_at = now
+                        received_at = time.monotonic()
                         if received > 16*1024*1024:
                             raise EdgeError('Capture allocation bound reached; partial bytes retained.')
                     if now-received_at > 2:
                         raise EdgeError('No sensor packets for two seconds; partial trial retained.')
-                port.write(b'S')
+                controller.stop()
                 until = time.monotonic()+.4
                 while time.monotonic() < until:
                     data = port.read(.05)
@@ -236,7 +269,14 @@ def capture(spec, device, seconds, output, consent):
             recording.flush()
             os.fsync(recording.fileno())
             metadata['received_bytes']=recording.tell()
+            metadata['host_through_data_flush_seconds']=time.perf_counter()-capture_started
+            metadata['host_control_bytes_sent']=port.bytes_sent if port is not None else 0
+            receipt=metadata.get('runtime_configuration')
+            metadata['device_control_bytes_received']=(68+receipt['discarded_prior_bytes']) if receipt else None
+            metadata['timing_scope']='Host open/configure/start/read/stop/flush durations; no physical sampling aperture or calibrated host-device clock mapping.'
+            metadata['transfer_scope']='IZC1/IZA1/IZP1 and command bytes; UART 8N1/USB electrical framing overhead is not measured.'
             save_manifest()
-    return {'recording': str(output), 'bytes': Path(output).stat().st_size, 'host_control_bytes_sent': port.bytes_sent,
+    return {'recording': str(output), 'bytes': Path(output).stat().st_size, 'host_control_bytes_sent': port.bytes_sent, 'device_control_bytes_received':metadata['device_control_bytes_received'],
+            'host_capture_workflow_seconds':time.perf_counter()-capture_started,
             'status': 'captured bytes; validate with edge protocol before using any result',
             'hardware_acceptance': 'unverified until executed on a supported physical setup'}

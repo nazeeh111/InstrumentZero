@@ -14,6 +14,7 @@ HEADER = struct.Struct("<4sBBH16sIIQIHH32s")
 CRC = struct.Struct("<I")
 MAX_FRAME = HEADER.size + 256 * (4 + 3 * 4) + CRC.size
 MAGIC = b"IZP1"
+CONTROL_RESERVE_BYTES = 6144  # Mirrors iz_control.h; parser/active+pending config/RX/ACK allocation.
 
 
 @dataclass

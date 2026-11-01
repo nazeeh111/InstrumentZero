@@ -6,7 +6,7 @@ flowchart TB
   subgraph MCU[Provisional Zephyr adapter: build verified; hardware unverified]
     IRQ[ADXL345 mature driver / acquisition thread] --> Q[Bounded queue; fail on overrun]
     Q --> EDGE[Calibration and FIR prefix, when selected]
-    STOP[Start / keepalive / synchronized stop] --> IRQ
+    STOP[IZC1 configuration / matching ACK / start / keepalive / stop] --> IRQ
   end
   BIND --> MCU
   EDGE --> WIRE[IZP1: length, kind, UUID, epoch, sequence, timestamps, CRC]

@@ -1,3 +1,9 @@
+# Runtime configuration update (rc2)
+
+The current adapter requires IZC1 configuration and a matching IZA1 acknowledgement before each `G`. It supports rates100/200/400Hz, calibration, FIR/reduction, placement and raw-validation changes within the compiled block/queue envelope. All placement builds now contain the same runtime-capable numerical and control paths. The example total RAM planning budget is40,960 bytes with a6,144-byte control/RX reserve and processing state reserved in every mode. C11 atomics support the interrupt-driven RX ring; the numerical core remains C99-compatible. See [CONTROL.md](CONTROL.md). No physical operation or flashing has been performed.
+
+The following original rc1 notes and build sizes describe the earlier compiled-only adapter; current runtime build receipts are recorded separately.
+
 # Provisional sensor adapter and build
 
 **No actual equipment was available or selected for deployment.** The reproducible build target is a provisional nRF52840 DK plus ADXL345 on I2C. It exercises a mature Zephyr driver and the same C numerical core. A successfully linked image is software evidence, not support established on physical equipment. Do not flash this over unrelated contents. Actual board/carrier revision inspection, voltage/pin verification, backup/recovery of existing firmware and explicit flashing authority are prerequisites for commissioning.

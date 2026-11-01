@@ -10,7 +10,7 @@ InstrumentZero is a local scientific experiment compiler: supported questions be
 
 > **v0.2: validation without physical equipment.** Public calibrated recordings, executable adaptive replay, 600 acoustic stress cases and 18 production acquisition checks extend the Lab. Recorded measurements, replay and simulations remain visibly distinct. [Validation evidence and remaining limits](docs/NO_EQUIPMENT_VALIDATION.md).
 
-## InstrumentZero Edge · v0.3.0-rc.1 software preview
+## InstrumentZero Edge · v0.3.0-rc.2 software preview
 
 One typed specification controls timestamp validation, calibration, filtering, a host ringdown estimator and recording. A deterministic placement planner compares raw-host, fixed-edge and chosen placements under declared resource and numerical-error budgets. Its costs are measured on the host and remain provisional for an MCU.
 
@@ -27,6 +27,8 @@ instrumentzero lab --port 58129
 A free C99 compiler is required. The C core has no heap or I/O, matches float64 references across chunk boundaries and is shared with the provisional Zephyr ADXL345 adapter. Raw and transformed streams use versioned, CRC-checked packets, bounded queues and isolated configuration epochs. Evidence exports include exact samples, timestamps and executable source for independent recomputation.
 
 **No physical setup is available.** Every new cantilever demonstration is synthetic. Physical acquisition, fresh remounts and independently acquired reference comparisons remain unverified. A firmware build is software evidence; this is not a measurement-verified instrument. The original recording Lab remains available.
+
+The rc2 adapter adds bounded runtime configuration with a matching acknowledgement before start, interrupt-driven receive buffering, cancellation cleanup and retained control receipts. Supported rates, calibration, filtering and placement can change within the compiled buffer envelope. This path is software-tested and build-verified; physical behavior remains unverified. [Runtime configuration](docs/edge/CONTROL.md).
 
 ![Actual installed Edge workspace, simulated Mount A](assets/edge-v0.3/mount-a.png)
 
