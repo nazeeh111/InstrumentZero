@@ -1,0 +1,36 @@
+{
+  "schema": "instrumentzero.simulation.software-checks/1",
+  "completion_scope": "User-confirmed simulation-only project, 2026-11-01; physical gates superseded",
+  "hardware_required": false,
+  "physical_measurements_claimed": false,
+  "source_freeze_commit": "696a112",
+  "python_tests_passed": 187,
+  "node_tests_passed": 32,
+  "fresh_confirmation_cases_passed": 13,
+  "initial_confirmation": "12/13; wrong expectation for correctly withheld damping, preserved without changing production thresholds",
+  "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+  "maximum_native_relative_l2_error": 1.9139586502901362e-07,
+  "independent_review": "simulation-independent-review.json",
+  "interface": {
+    "installed_version": "0.3.0",
+    "runtime_files_matched": 38,
+    "desktop_inspected": true,
+    "mobile_viewport": 390,
+    "mobile_body_width": 390,
+    "mobile_document_width": 390,
+    "model_edit_invalidates_export": true,
+    "keyboard_focus_checked": true,
+    "custom_truth_checked": true,
+    "host_favored_checked": true,
+    "silence_rejected": true,
+    "displayed_export_source_recomputed": true
+  },
+  "walkthrough": {
+    "seconds": 28,
+    "frames": 840,
+    "resolution": "1280x720",
+    "kind": "silent edited actual installed UI screenshots",
+    "full_decode": "passed"
+  },
+  "limits": "Analytic signals and ideal sample clock, not a beam/material/analog sensor model. Host costs and framed data bytes only; no MCU or physical performance claims."
+}

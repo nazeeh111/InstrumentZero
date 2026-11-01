@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "Cite this software and the original authors of any reused data."
-title: "InstrumentZero Edge: typed measurement graphs and host/edge processing"
+title: "InstrumentZero Edge: signal and placement simulation studio"
 type: software
 authors:
   - family-names: Abdul-Hadi

@@ -1,0 +1,31 @@
+{
+  "frames_per_second": 30,
+  "scope": "Edited actual installed UI screenshots, simulation only; silent",
+  "shots": [
+    {
+      "image": "01-start.png",
+      "seconds": 4,
+      "caption": "Create a signal experiment. No hardware needed."
+    },
+    {
+      "image": "02-custom.png",
+      "seconds": 7,
+      "caption": "Choose the model and seed. Check the estimate against known truth."
+    },
+    {
+      "image": "03-host.png",
+      "seconds": 6,
+      "caption": "Require raw validation: this model favors host processing."
+    },
+    {
+      "image": "04-rejection.png",
+      "seconds": 5,
+      "caption": "No signal means no result. Rejected evidence stays available."
+    },
+    {
+      "image": "05-export.png",
+      "seconds": 6,
+      "caption": "Export samples, model, costs and executable source. Recompute locally."
+    }
+  ]
+}

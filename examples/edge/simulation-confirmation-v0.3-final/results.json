@@ -1,0 +1,393 @@
+{
+  "schema": "instrumentzero.simulation.acceptance/1",
+  "scope": "simulation_only",
+  "source_commit": "696a112d98594b4cdd37605f941a9a0653ef9d0a",
+  "plan_sha256": "6033d8d2626fd203647ac78ff5d7dad33be850d1f809e806e3bfbbff2f6e5de0",
+  "trials": [
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "custom-1",
+        "scenario": "custom_ringdown",
+        "seed": 9132301,
+        "expected": "fit",
+        "model": {
+          "frequency_hz": 9.75,
+          "decay_per_second": 0.45,
+          "noise_rms": 0.0006,
+          "amplitude": 1
+        }
+      },
+      "passed": true,
+      "raw_sha256": "3e97bbb242d12a96f6f104ec8418e50140b995560cdc11845ee4476dbd24ff38",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "within_budgets",
+        "model_frequency_hz": 9.75,
+        "model_decay_per_second": 0.45,
+        "model_damping_ratio": 0.007345414588722061,
+        "frequency_absolute_error_hz": 6.565575141337376e-06,
+        "damping_relative_error": 0.00017030791102545795,
+        "frequency_budget_hz": 0.05,
+        "damping_relative_budget": 0.1,
+        "frequency_within_budget": true,
+        "damping_within_budget": true,
+        "scope": "Declared analytic signal truth. Numerical simulation accuracy, not physical validation."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "custom-2",
+        "scenario": "custom_ringdown",
+        "seed": 9132302,
+        "expected": "fit",
+        "model": {
+          "frequency_hz": 18.6,
+          "decay_per_second": 0.8,
+          "noise_rms": 0.001,
+          "amplitude": 0.8
+        }
+      },
+      "passed": true,
+      "raw_sha256": "22070fdbfc5db6ed9d3eba2f777407555878b7bf33861fda6d8601ae27191700",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "within_budgets",
+        "model_frequency_hz": 18.6,
+        "model_decay_per_second": 0.8,
+        "model_damping_ratio": 0.006845213517882158,
+        "frequency_absolute_error_hz": 1.9505450588042095e-06,
+        "damping_relative_error": 5.681066124862966e-06,
+        "frequency_budget_hz": 0.05,
+        "damping_relative_budget": 0.1,
+        "frequency_within_budget": true,
+        "damping_within_budget": true,
+        "scope": "Declared analytic signal truth. Numerical simulation accuracy, not physical validation."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "fast-decay-withheld",
+        "scenario": "custom_ringdown",
+        "seed": 9132303,
+        "expected": "frequency_only",
+        "model": {
+          "frequency_hz": 24.25,
+          "decay_per_second": 1.1,
+          "noise_rms": 0.0004,
+          "amplitude": 1
+        }
+      },
+      "passed": true,
+      "raw_sha256": "e02008e0a69533f4fbbbdda75798900583429933962d86b5631165fb29c79581",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "frequency_only",
+        "model_frequency_hz": 24.25,
+        "model_decay_per_second": 1.1,
+        "model_damping_ratio": 0.007219211351239289,
+        "frequency_absolute_error_hz": 2.6687111038370404e-05,
+        "damping_relative_error": null,
+        "frequency_budget_hz": 0.05,
+        "damping_relative_budget": 0.1,
+        "frequency_within_budget": true,
+        "damping_within_budget": false,
+        "scope": "Declared analytic signal truth. Numerical simulation accuracy, not physical validation."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "preset-a",
+        "scenario": "mount_a",
+        "seed": 9132304,
+        "expected": "fit"
+      },
+      "passed": true,
+      "raw_sha256": "0cbaed4662f0efa4217105065c1c0eba3faf4dded9f4fc47dad270cf94288960",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "within_budgets",
+        "model_frequency_hz": 17.25,
+        "model_decay_per_second": 0.65,
+        "model_damping_ratio": 0.005997034940298091,
+        "frequency_absolute_error_hz": 9.11042764428771e-06,
+        "damping_relative_error": 0.00015733702126208282,
+        "frequency_budget_hz": 0.05,
+        "damping_relative_budget": 0.1,
+        "frequency_within_budget": true,
+        "damping_within_budget": true,
+        "scope": "Declared analytic signal truth. Numerical simulation accuracy, not physical validation."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "preset-b",
+        "scenario": "mount_b",
+        "seed": 9132305,
+        "expected": "fit"
+      },
+      "passed": true,
+      "raw_sha256": "419f30af8ce8b4db351eab25dd17c0c6e9406751bfa3ea6bc6961705fac450bc",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "within_budgets",
+        "model_frequency_hz": 22.5,
+        "model_decay_per_second": 0.9,
+        "model_damping_ratio": 0.006366068721459265,
+        "frequency_absolute_error_hz": 1.5652539239852103e-05,
+        "damping_relative_error": 6.436105633111922e-05,
+        "frequency_budget_hz": 0.05,
+        "damping_relative_budget": 0.1,
+        "frequency_within_budget": true,
+        "damping_within_budget": true,
+        "scope": "Declared analytic signal truth. Numerical simulation accuracy, not physical validation."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "no-decay",
+        "scenario": "custom_ringdown",
+        "seed": 9132306,
+        "expected": "frequency_only",
+        "model": {
+          "frequency_hz": 16,
+          "decay_per_second": 0,
+          "noise_rms": 0.0003,
+          "amplitude": 1
+        }
+      },
+      "passed": true,
+      "raw_sha256": "193634129a4c36537909b52a1084d62633cf8f2bcbcc921d39ad56b781397cd2",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "frequency_only",
+        "model_frequency_hz": 16,
+        "model_decay_per_second": 0,
+        "model_damping_ratio": 0.0,
+        "frequency_absolute_error_hz": 3.9761590997500207e-07,
+        "damping_relative_error": null,
+        "frequency_budget_hz": 0.05,
+        "damping_relative_budget": 0.1,
+        "frequency_within_budget": true,
+        "damping_within_budget": false,
+        "scope": "Declared analytic signal truth. Numerical simulation accuracy, not physical validation."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/host-favored-spec.json",
+        "costs": "examples/edge/host-favored-cost-profile.json",
+        "seconds": 8,
+        "id": "raw-validation-favors-host",
+        "scenario": "custom_ringdown",
+        "seed": 9132307,
+        "expected": "fit",
+        "model": {
+          "frequency_hz": 18.6,
+          "decay_per_second": 0.8
+        },
+        "selected": "raw_host"
+      },
+      "passed": true,
+      "raw_sha256": "a1c34d2a77726ce4726d0a450fd88edc3dc87c7abdc9c904740e40b7f22f45cf",
+      "selected": "raw_host",
+      "truth": {
+        "status": "within_budgets",
+        "model_frequency_hz": 18.6,
+        "model_decay_per_second": 0.8,
+        "model_damping_ratio": 0.006845213517882158,
+        "frequency_absolute_error_hz": 1.8552546052319485e-05,
+        "damping_relative_error": 1.6897971611751217e-05,
+        "frequency_budget_hz": 0.05,
+        "damping_relative_budget": 0.1,
+        "frequency_within_budget": true,
+        "damping_within_budget": true,
+        "scope": "Declared analytic signal truth. Numerical simulation accuracy, not physical validation."
+      },
+      "framed_bytes": [
+        30000,
+        60000,
+        40800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "silence",
+        "scenario": "silence",
+        "seed": 9132308,
+        "expected": "reject"
+      },
+      "passed": true,
+      "raw_sha256": "260ebb7103329e21fa84e4efca0b97f951a1cc3cafd4c04e9b2c043905e9547b",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "unavailable",
+        "reason": "No single-mode analytic truth for this source/scenario."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "chirp",
+        "scenario": "chirp",
+        "seed": 9132309,
+        "expected": "reject"
+      },
+      "passed": true,
+      "raw_sha256": "421363bead4498e74403dc87a8da6fb303010d33f692a0b05d404f2bce5586c6",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "unavailable",
+        "reason": "No single-mode analytic truth for this source/scenario."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "close_modes",
+        "scenario": "close_modes",
+        "seed": 9132310,
+        "expected": "reject"
+      },
+      "passed": true,
+      "raw_sha256": "8b015a000baebeccb4398535240b8b24e380165b9af60b70a93a7f252dc05a79",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "unavailable",
+        "reason": "No single-mode analytic truth for this source/scenario."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "impulse",
+        "scenario": "impulse",
+        "seed": 9132311,
+        "expected": "reject"
+      },
+      "passed": true,
+      "raw_sha256": "144f1ab4f5ef442c7c3373e500e38e2aac4e27ccbb32c3b3c4d0a9ed9c6f7a4c",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "unavailable",
+        "reason": "No single-mode analytic truth for this source/scenario."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "saturation",
+        "scenario": "saturation",
+        "seed": 9132312,
+        "expected": "clip"
+      },
+      "passed": true,
+      "raw_sha256": "2b6b145fcced3a62e9ca4203f52f8f6ccb7be2294f5a92ca01bb2e26d9350efd",
+      "rejected_input": "Samples clip the declared input range."
+    },
+    {
+      "case": {
+        "spec": "examples/edge/simulation-spec.json",
+        "costs": "examples/edge/cost-profile.json",
+        "seconds": 8,
+        "id": "disconnect_recover",
+        "scenario": "disconnect_recover",
+        "seed": 9132313,
+        "expected": "recovery"
+      },
+      "passed": true,
+      "raw_sha256": "3df157f4443de95b2e09fcfce4f38a82f2155a6879288a02d0d9a4446747efbb",
+      "selected": "filtered_edge",
+      "truth": {
+        "status": "unavailable",
+        "reason": "No single-mode analytic truth for this source/scenario."
+      },
+      "framed_bytes": [
+        30000,
+        30000,
+        10800
+      ]
+    }
+  ],
+  "hardware_required": false,
+  "physical_measurements_claimed": false,
+  "all_passed": true
+}
