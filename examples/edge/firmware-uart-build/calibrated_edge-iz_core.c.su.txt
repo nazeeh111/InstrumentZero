@@ -1,0 +1,3 @@
+${INSTRUMENTZERO}/src/instrumentzero/edge/core/iz_core.c:4:8:iz_state_bytes	0	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/core/iz_core.c:5:5:iz_init	48	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/core/iz_core.c:25:5:iz_process	64	static

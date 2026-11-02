@@ -1,0 +1,10 @@
+{
+  "binary_control_cases": 4224,
+  "admitted_cases": 4030,
+  "reference": "exact rational bytes from enumerated repeating firmware send schedules",
+  "public_raw_38400_rejected": true,
+  "public_filtered_9600_admitted": true,
+  "simulated_budget_uncapped": true,
+  "packet_wait_stride_exact_for_all_cases": true,
+  "hardware_accessed": false
+}

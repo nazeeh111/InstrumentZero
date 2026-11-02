@@ -1,0 +1,25 @@
+{
+  "schema": "instrumentzero.edge.rc2-software-checks/1",
+  "scope": "software preview; physical gates open",
+  "python_tests_passed": 170,
+  "node_tests_passed": 30,
+  "confirmation_trials_passed": 18,
+  "core_sha256": "7563e2979973ac6c2ef4b4f5637f7197b7cd843512c3aa16794575aeed4c75c4",
+  "control_sha256": "39bbcea3171ce701134c15c8a9a05011137793378558fa5a5058ca509ad79710",
+  "control_sanitizer_and_cortex_m4": "passed",
+  "firmware_report": "firmware-runtime-build/report.json",
+  "firmware_linked_flash_bytes": 33036,
+  "firmware_linked_ram_bytes": 25920,
+  "runtime_config_memory_reserve_bytes": 6144,
+  "main_stack_bytes": 6144,
+  "interface": {
+    "installed_wheel": true,
+    "mount_b_hz": 22.5,
+    "mobile_width": 390,
+    "body_width": 390,
+    "transfer_scope_explicit": true
+  },
+  "physical_acquisition_verified": false,
+  "independent_measurement_verified": false,
+  "limits": "Native parser/core and serial test doubles are software evidence, not physical MCU operation. Power, timing, high-water memory and independent physical comparisons remain unmeasured."
+}

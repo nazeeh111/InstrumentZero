@@ -30,6 +30,13 @@ def test_installed_edge_api_preserves_result_export_and_rejects_bad_signal():
         assert code == 200, data
         result = json.loads(data)
         assert result['comparisons'][0]['result']['frequency_hz'] > 22
+        code, data = request('/api/edge/run', {'scenario':'custom_ringdown', 'seed':6004,
+                                              'model':{'frequency_hz':20.7, 'decay_per_second':.8}})
+        assert code == 200, data
+        result = json.loads(data)
+        assert result['simulation_truth']['status'] == 'within_budgets'
+        assert result['source']['model']['frequency_hz'] == 20.7
+        assert request('/api/edge/run', {'scenario':'custom_ringdown', 'model':{'frequency_hz':True}})[0] == 422
         code, exported = request(result['artifact_url'])
         assert code == 200
         with zipfile.ZipFile(io.BytesIO(exported)) as archive:

@@ -23,6 +23,9 @@ jobs:
           node-version: '22'
       - run: node --test tests/browser-acquisition.mjs tests/browser-validation.mjs tests/browser-edge.mjs
       - run: python scripts/verify_edge_core.py --output /tmp/edge-core
+      - run: python scripts/verify_edge_control.py --output /tmp/edge-control
+      - run: python examples/edge/uart-admission-review/check_transport_only.py
+      - run: python scripts/validate_simulation.py --output /tmp/simulation-confirmation
       - run: instrumentzero edge simulate --scenario mount_b --seconds 4 --export /tmp/edge-mount-b.zip
       - run: python scripts/validate_replay.py --output /tmp/recorded-replay
       - run: instrumentzero validate-calibrated --export /tmp/calibrated-evidence.zip

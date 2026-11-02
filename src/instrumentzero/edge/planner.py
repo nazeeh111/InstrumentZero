@@ -7,7 +7,7 @@ import time
 import numpy as np
 
 from .native import Processor, core_identity, library
-from .protocol import CRC, HEADER
+from .protocol import CONTROL_RESERVE_BYTES, CRC, HEADER, UART_PROTOCOL_CEILING_BYTES_PER_SECOND
 from .spec import EdgeError, _keys, identity, number
 
 
@@ -54,26 +54,34 @@ def plan(compiled, profile):
     # Explicit reserve is a planning bound, not linker-measured full firmware RAM.
     queue_bytes = r["queue_blocks"] * (HEADER.size + CRC.size + block * (12 + 4*ch))
     base_ram = queue_bytes + 3072 + r["fixed_runtime_memory_bytes"]
+    physical_uart = a['adapter'] == 'zephyr_adxl345'
+    effective_link = min(r['link_bytes_per_second'], UART_PROTOCOL_CEILING_BYTES_PER_SECOND) if physical_uart else r['link_bytes_per_second']
     candidates = []
     for mode in ("raw_host", "calibrated_edge", "filtered_edge"):
         edge_d = s["dsp"]["decimation"] if mode == "filtered_edge" else 1
-        bps = rate / edge_d * (4 + 4*ch) + rate / block * (4 + HEADER.size + CRC.size)
+        bps = rate / edge_d * (4 + 4*ch) + rate / max(block, edge_d) * (4 + HEADER.size + CRC.size)
         if r["raw_validation"] and mode != "raw_host":
             bps += rate * (4 + 4*ch) + rate / block * (4 + HEADER.size + CRC.size)
-        ram = base_ram + (profile["state_bytes"] if mode != "raw_host" else 0)
+        # The runtime-configurable board image always allocates its processor,
+        # two configurations and bounded control RX state, even in raw mode.
+        device_control = a['adapter'] == 'zephyr_adxl345'
+        ram = base_ram + (profile["state_bytes"] if mode != "raw_host" or device_control else 0)
+        if device_control:
+            ram += CONTROL_RESERVE_BYTES
         cost_key = "calibration_fir" if mode == "filtered_edge" else "calibration"
         cost = 0 if mode == "raw_host" else profile["primitive_costs"][cost_key]["observed_max_ns_per_input_frame"]
         utilization = cost * rate * 1e-9
         packet_bytes = 4 + HEADER.size + CRC.size + (block // edge_d + (block % edge_d != 0)) * (4 + 4*ch)
         if r["raw_validation"] and mode != "raw_host":
             packet_bytes += 4 + HEADER.size + CRC.size + block * (4+4*ch)
-        latency_ms = 1000 * (block/rate + compiled["filter"]["group_delay_seconds"] +
-                            packet_bytes / r["link_bytes_per_second"] + cost*block*1e-9)
+        packet_wait_frames = block * ((edge_d + block - 1)//block)
+        latency_ms = 1000 * (packet_wait_frames/rate + compiled["filter"]["group_delay_seconds"] +
+                            packet_bytes / effective_link + cost*block*1e-9)
         reasons = []
         if ram > r["edge_memory_bytes"]:
             reasons.append("declared edge RAM bound exceeded")
-        if bps > r["link_bytes_per_second"]:
-            reasons.append("declared link throughput exceeded")
+        if bps > effective_link:
+            reasons.append("effective link throughput exceeded (declared budget / nominal UART ceiling)")
         if latency_ms > r["max_latency_ms"]:
             reasons.append("modeled latency budget exceeded")
         if utilization >= .7:
@@ -81,13 +89,15 @@ def plan(compiled, profile):
         candidates.append({"mode": mode, "legal_under_declared_model": not reasons, "reasons": reasons,
                            "estimated_transfer_bytes_per_second": bps, "reserved_edge_memory_bytes": ram,
                            "modeled_latency_ms": latency_ms, "host_proxy_processing_fraction": utilization,
-                           "score": bps/r["link_bytes_per_second"] + utilization})
+                           "score": bps/effective_link + utilization})
     legal = [c for c in candidates if c["legal_under_declared_model"]]
     if not legal:
         raise EdgeError("No placement meets declared resource bounds: " + str({c["mode"]: c["reasons"] for c in candidates}))
     winner = min(legal, key=lambda c: (c["score"], c["mode"]))
     return {"selected": winner["mode"], "candidates": candidates, "cost_profile_sha256": identity(profile),
-            "rules_version": "prefix-v1", "raw_validation": r["raw_validation"],
+            "rules_version": "prefix-v3", "effective_link_bytes_per_second":effective_link,
+            "link_basis":"nominal 115200-baud 8N1 UART ceiling; actual throughput unmeasured" if physical_uart else "declared virtual/file link budget",
+            "startup_control_traffic":"Not in steady-state data model; actual capture records control bytes and host startup durations separately", "raw_validation": r["raw_validation"],
             "edge_estimator": "Unavailable: ringdown optimization stays on host.",
             "status": "provisional placement using measured host costs; MCU costs unavailable",
             "error_contract": "FIR response checked at compilation; per-input frequency/damping disagreement checked at execution. No universal error guarantee.",

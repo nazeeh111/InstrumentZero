@@ -4,6 +4,16 @@ Software preview: bounded typed measurement graph; shared streaming C99 core; ve
 
 # Changelog
 
+## 0.3.0rc3 · 2026-11-01
+
+Enforces the nominal UART throughput ceiling in host and firmware admission, counts filtered packet cadence and wait correctly for tiny blocks, and explicitly configures/restores a binary serial profile across Python versions. Preserves feasible reduced-stream graphs and virtual link budgets. Adds an independently retained exact-rational 4,224-case transport oracle. Physical verification remains open.
+
+
+## 0.3.0rc2 · 2026-11-01
+
+Adds bounded runtime ADXL345 configuration requests and matching acknowledgements, distinct epochs/sessions, interrupt-driven serial RX with overflow rejection, pre-start cancellation cleanup and retained control receipts. Includes an offline configuration CLI and native C11 parser/ring checks. Numerical core remains C99-compatible. Physical operation and independent measurement remain unverified.
+
+
 ## 0.2.0 — 2026-10-26
 
 Public calibrated-recording validation: paired PTB sound-level surfaces, microphone pressure-sensitivity calibration metadata, retained ADC recordings and source checksums. Reproduces the published 1,089-position comparison with its physical limits explicit.

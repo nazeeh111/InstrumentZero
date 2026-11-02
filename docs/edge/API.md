@@ -1,6 +1,6 @@
 # Edge API and integration examples
 
-The public typed entry points are `EdgeSpec`, `compile_graph`, `EdgeError` and `default_spec` from `instrumentzero.edge`. The bounded specification schema is demonstrated by `examples/edge/simulation-spec.json`, `adxl345-spec.json`, `audio-spec.json` and `host-favored-spec.json`.
+The public typed entry points are `SimulationModel`, `EdgeSpec`, `compile_graph`, `EdgeError` and `default_spec` from `instrumentzero.edge`. The bounded specification schema is demonstrated by `examples/edge/simulation-spec.json`, `adxl345-spec.json`, `audio-spec.json` and `host-favored-spec.json`.
 
 ```python
 from instrumentzero.edge import EdgeSpec, compile_graph, default_spec
@@ -28,7 +28,7 @@ For the reviewed native primitives, `Processor(scale, offset, coefficients, deci
 
 ## Local HTTP integration
 
-Start `instrumentzero lab`. `GET /api/edge/spec` returns the supported default. `POST /api/edge/run` accepts a JSON object with `spec`, `scenario`, `seconds` and `seed`. Simulation is the only source permitted by this web endpoint; it never opens hardware. Browser requests must be same-origin. Non-browser clients obtain `/api/session` and send its token in `X-InstrumentZero-Token`. Bind only to loopback; no public server mode exists.
+Start `instrumentzero lab`. `GET /api/edge/spec` returns the supported default. `POST /api/edge/run` accepts a JSON object with `spec`, `scenario`, `seconds` and `seed` and an optional `model` object for `custom_ringdown`. Simulation is the only source permitted by this web endpoint; it never opens hardware. Browser requests must be same-origin. Non-browser clients obtain `/api/session` and send its token in `X-InstrumentZero-Token`. Bind only to loopback; no public server mode exists.
 
 The response contains the compiled contract, source label, measured host cost profile, all placement outcomes and `artifact_url`. The artifact cache keeps the latest four successful exports. The URL points to the exact result's source/data package, rather than regenerating a different request. Configuration changes invalidate the browser's old result/export. An expired URL returns an explained error.
 
@@ -37,3 +37,20 @@ For consented local recording imports, use `edge recording` or `edge protocol`. 
 ## C++ caller
 
 [cpp-integration.cpp](../../examples/edge/cpp-integration.cpp) wraps the C header in `extern "C"` and links against the separately compiled C99 implementation. `scripts/verify_edge_core.py` builds and executes this C++17 example along with the sanitizer and ARM checks. The numerical implementation stays in C99.
+
+## Optional legacy runtime device configuration
+
+`instrumentzero.edge.control.configuration(spec, placement)` emits offline IZC1 bytes after graph/filter/resource validation. `DeviceController` requires a matching IZA1 acknowledgement before start and supports repeated configuration of one explicitly owned port. The firmware accepts supported rates, calibration, FIR, reduction and placements within its compiled block/queue envelope. [Control layout and lifecycle](CONTROL.md) document the bounds, cancellation, overflow and epoch rules. Physical execution remains unverified.
+
+## Custom simulation model
+
+```python
+from instrumentzero.edge import SimulationModel
+from instrumentzero.edge.simulation import compare
+run = compare(scenario='custom_ringdown', seed=6001,
+              model=SimulationModel(frequency_hz=18.6, decay_per_second=.8,
+                                    noise_rms=.0006, amplitude=1.0))
+print(run['simulation_truth'])
+```
+
+`generate(spec, scenario, seed, seconds, model)` accepts a dictionary or validated `SimulationModel` for the custom scenario. Model bounds follow the declared sample rate/full scale. Other scenarios reject custom parameters. A run records a separate `source.simulation_id` binding graph, model, seed and duration. The `simulation_truth` report compares the selected estimate with declared analytic truth. See [equations and limits](SIMULATION.md). Simulation-only is the primary project scope; recording/hardware commands are optional extensions.

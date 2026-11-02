@@ -17,8 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, required=True, help='New empty confirmation folder')
+    parser.add_argument('--plan',type=Path,default=ROOT/'examples/edge/confirmation-plan-rc3.json')
     args = parser.parse_args()
-    plan_path = ROOT/'examples/edge/confirmation-plan.json'
+    plan_path = args.plan
     plan = json.loads(plan_path.read_text())
     for name, expected in plan['frozen_sha256'].items():
         actual = hashlib.sha256((ROOT/name).read_bytes()).hexdigest()

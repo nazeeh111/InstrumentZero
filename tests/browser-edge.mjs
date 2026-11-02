@@ -41,3 +41,21 @@ test('a delayed initial specification cannot replace locally applied JSON',async
 test('a delayed initial specification cannot erase unapplied JSON or enable Run',async()=>{
  let resolve;const initial=new Promise(r=>{resolve=r;});const h=harness(undefined,()=>initial);h.item('spec-json').value='unapplied text';h.dispatch('spec-json','input');resolve(response(defaultSpec()));await flush();assert.equal(h.item('spec-json').value,'unapplied text');assert.equal(h.item('run').disabled,true);
 });
+
+
+test('custom model and seed are sent together; editing a model invalidates an old export',async()=>{
+ const h=harness();await flush();h.item('scenario').value='custom_ringdown';h.dispatch('scenario','change');
+ assert.equal(h.item('model-controls').hidden,false);assert.equal(h.item('model-controls').disabled,false);
+ for(const [id,value]of Object.entries({'seed':'6005','model-frequency':'20.3','model-decay':'.8','model-noise':'.0006','model-amplitude':'1'}))h.item(id).value=value;
+ await h.dispatch('experiment-form','submit');assert.equal(h.requests[0].payload.seed,6005);assert.equal(h.requests[0].payload.model.frequency_hz,20.3);
+ h.dispatch('model-frequency','input');assert.equal(h.item('export').href,undefined);assert.equal(h.item('result').hidden,true);
+ h.item('scenario').value='silence';h.dispatch('scenario','change');assert.equal(h.item('model-controls').disabled,true);
+ await h.dispatch('experiment-form','submit');assert.equal(h.requests[1].payload.model,undefined);
+});
+
+test('custom model units and bounds follow an applied source specification',async()=>{
+ const h=harness();await flush();const spec={...defaultSpec(),source:{rate_hz:100,unit:'FS',full_scale:1}};
+ h.item('spec-json').value=JSON.stringify(spec);h.dispatch('spec-json','input');h.dispatch('apply-spec');
+ assert.equal(h.item('model-noise-label').textContent,'Noise RMS / FS');assert.equal(h.item('model-amplitude-label').textContent,'Amplitude / FS');
+ assert.equal(h.item('model-frequency').max,'49.9');assert.equal(h.item('model-noise').max,'0.25');assert.equal(h.item('model-amplitude').max,'1');
+});

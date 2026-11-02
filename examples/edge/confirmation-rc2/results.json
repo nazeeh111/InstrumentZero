@@ -1,0 +1,2209 @@
+{
+  "schema": "instrumentzero.edge.confirmation-results/1",
+  "scope": "SYNTHETIC SOFTWARE CONFIRMATION",
+  "plan_sha256": "b146cda5c4f0c3dab21b7dce95387a2a8554597fbcd09c328a8b8a2e24889acf",
+  "trials": [
+    {
+      "case": "standard",
+      "scenario": "mount_a",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_a",
+        "seed": 9131101,
+        "model_frequency_hz": 17.25,
+        "model_decay_per_second": 0.65,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "64bcae770497237b23eb9f9cdcbeb940ae4e2f5393f09f68239d91a50a90a432",
+      "result_file": "standard-mount_a-9131101.json",
+      "frequency_abs_error_hz": 1.3412466369544518e-05,
+      "damping_relative_error": 0.00011497722967501733,
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.24998658753363,
+          "fitted_frequency_hz": 17.24998658753363,
+          "decay_per_second": 0.6499247567740972,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996345417834391,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999984110220431,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.24998658753363,
+          "fitted_frequency_hz": 17.24998658753363,
+          "decay_per_second": 0.6499247567740972,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996345417834391,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999984110220431,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.24998658753363,
+          "fitted_frequency_hz": 17.24998658753363,
+          "decay_per_second": 0.6499247567740972,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996345417834391,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999984110220431,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.4181448750314303,
+          "initialization_seconds": 0.013538625033106655,
+          "processor_chunk_max_observed_ms": 65.829167,
+          "processor_chunk_mean_ms": 2.23780088,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.3806643749703653,
+          "initialization_seconds": 0.02761366596678272,
+          "processor_chunk_max_observed_ms": 18.234707999999998,
+          "processor_chunk_mean_ms": 1.3697291999999999,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.1764446249580942,
+          "initialization_seconds": 0.0057297079474665225,
+          "processor_chunk_max_observed_ms": 0.31124999999999997,
+          "processor_chunk_mean_ms": 0.10609086,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "mount_a",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_a",
+        "seed": 9131102,
+        "model_frequency_hz": 17.25,
+        "model_decay_per_second": 0.65,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "717c035bcf3e4f14f00acc83f923712105c888b0d9543c6697f5caa8c6be112b",
+      "result_file": "standard-mount_a-9131102.json",
+      "frequency_abs_error_hz": 7.766370053730043e-07,
+      "damping_relative_error": 0.00012345096027677194,
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.249999223362995,
+          "fitted_frequency_hz": 17.249999223362995,
+          "decay_per_second": 0.6499197247293826,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996294600575898,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999982772533621,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.249999223362995,
+          "fitted_frequency_hz": 17.249999223362995,
+          "decay_per_second": 0.6499197247293826,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996294600575898,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999982772533621,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.249999223362995,
+          "fitted_frequency_hz": 17.249999223362995,
+          "decay_per_second": 0.6499197247293826,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996294600575898,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999982772533621,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.9064865830005147,
+          "initialization_seconds": 0.020756500016432256,
+          "processor_chunk_max_observed_ms": 57.497459,
+          "processor_chunk_mean_ms": 4.44334752,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.04938970797229558,
+          "initialization_seconds": 0.005175250000320375,
+          "processor_chunk_max_observed_ms": 10.7745,
+          "processor_chunk_mean_ms": 0.2811126,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.2509946250356734,
+          "initialization_seconds": 0.01596833299845457,
+          "processor_chunk_max_observed_ms": 16.010167,
+          "processor_chunk_mean_ms": 0.5399917,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "mount_b",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_b",
+        "seed": 9131101,
+        "model_frequency_hz": 22.5,
+        "model_decay_per_second": 0.9,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "4da85a646b61a2befb12ac31b9bb7f2d2c0325c255e0cc252630ed9044b9ef77",
+      "result_file": "standard-mount_b-9131101.json",
+      "frequency_abs_error_hz": 1.1035320838459484e-05,
+      "damping_relative_error": 0.00015186936067890233,
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998896467916,
+          "fitted_frequency_hz": 22.49998896467916,
+          "decay_per_second": 0.8998628706913271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365101910672499,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999976164835633,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998896467916,
+          "fitted_frequency_hz": 22.49998896467916,
+          "decay_per_second": 0.8998628706913271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365101910672499,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999976164835633,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998896467916,
+          "fitted_frequency_hz": 22.49998896467916,
+          "decay_per_second": 0.8998628706913271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365101910672499,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999976164835633,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.21899462502915412,
+          "initialization_seconds": 0.035343708004802465,
+          "processor_chunk_max_observed_ms": 3.910291,
+          "processor_chunk_mean_ms": 0.36556824,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.26285508304135874,
+          "initialization_seconds": 0.0027370830066502094,
+          "processor_chunk_max_observed_ms": 30.125249999999998,
+          "processor_chunk_mean_ms": 0.9494124599999999,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.1908593749976717,
+          "initialization_seconds": 0.0042823340045288205,
+          "processor_chunk_max_observed_ms": 3.915959,
+          "processor_chunk_mean_ms": 0.38341165999999993,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "mount_b",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_b",
+        "seed": 9131102,
+        "model_frequency_hz": 22.5,
+        "model_decay_per_second": 0.9,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "1a64bdfee5b5b80707286d1e40d12026a81ceb9b42fc208f3258c644a44a0376",
+      "result_file": "standard-mount_b-9131102.json",
+      "frequency_abs_error_hz": 1.751873605826404e-05,
+      "damping_relative_error": 7.784227312868097e-05,
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998248126394,
+          "fitted_frequency_hz": 22.49998248126394,
+          "decay_per_second": 0.8999292384202779,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365573172199093,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999974285518136,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998248126394,
+          "fitted_frequency_hz": 22.49998248126394,
+          "decay_per_second": 0.8999292384202779,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365573172199093,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999974285518136,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998248126394,
+          "fitted_frequency_hz": 22.49998248126394,
+          "decay_per_second": 0.8999292384202779,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365573172199093,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999974285518136,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.3551562500069849,
+          "initialization_seconds": 0.0054534170194529,
+          "processor_chunk_max_observed_ms": 20.468916999999998,
+          "processor_chunk_mean_ms": 1.25980502,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.42644754104549065,
+          "initialization_seconds": 0.038142041012179106,
+          "processor_chunk_max_observed_ms": 96.281291,
+          "processor_chunk_mean_ms": 2.50682664,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.44488254201132804,
+          "initialization_seconds": 0.004888084018602967,
+          "processor_chunk_max_observed_ms": 55.726749999999996,
+          "processor_chunk_mean_ms": 3.5151350199999998,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "silence",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "silence",
+        "seed": 9131101,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "260ebb7103329e21fa84e4efca0b97f951a1cc3cafd4c04e9b2c043905e9547b",
+      "result_file": "standard-silence-9131101.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "No usable signal above absolute floor."
+          ],
+          "frequency_hz": null,
+          "damping_ratio": null
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "No usable signal above absolute floor."
+          ],
+          "frequency_hz": null,
+          "damping_ratio": null
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "No usable signal above absolute floor."
+          ],
+          "frequency_hz": null,
+          "damping_ratio": null
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.08984487497946247,
+          "initialization_seconds": 0.004782833973877132,
+          "processor_chunk_max_observed_ms": 31.403499999999998,
+          "processor_chunk_mean_ms": 1.3094258799999998,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.05218758404953405,
+          "initialization_seconds": 0.004545500036329031,
+          "processor_chunk_max_observed_ms": 18.692166999999998,
+          "processor_chunk_mean_ms": 0.74033918,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.05472612497396767,
+          "initialization_seconds": 0.0031084580114111304,
+          "processor_chunk_max_observed_ms": 4.802582999999999,
+          "processor_chunk_mean_ms": 0.35871838,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "silence",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "silence",
+        "seed": 9131102,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "260ebb7103329e21fa84e4efca0b97f951a1cc3cafd4c04e9b2c043905e9547b",
+      "result_file": "standard-silence-9131102.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "No usable signal above absolute floor."
+          ],
+          "frequency_hz": null,
+          "damping_ratio": null
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "No usable signal above absolute floor."
+          ],
+          "frequency_hz": null,
+          "damping_ratio": null
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "No usable signal above absolute floor."
+          ],
+          "frequency_hz": null,
+          "damping_ratio": null
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.14609691698569804,
+          "initialization_seconds": 0.048466459033079445,
+          "processor_chunk_max_observed_ms": 2.985292,
+          "processor_chunk_mean_ms": 0.20502576,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.11236412497237325,
+          "initialization_seconds": 0.00797883397899568,
+          "processor_chunk_max_observed_ms": 8.315958,
+          "processor_chunk_mean_ms": 0.54398418,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.22031720902305096,
+          "initialization_seconds": 0.0031392499804496765,
+          "processor_chunk_max_observed_ms": 39.409458,
+          "processor_chunk_mean_ms": 1.36406586,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "chirp",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "chirp",
+        "seed": 9131101,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "00380945fca77a2f6b9a04715bbcc98dbbcbf3fc672d4d79fb3454625ee05d1f",
+      "result_file": "standard-chirp-9131101.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 17.002649842768278,
+          "decay_per_second": 2.755393238084493e-34,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Less than 0.7 e-fold decay; damping is not identifiable.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.007581582305604018,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 17.002649842768278,
+          "decay_per_second": 2.755393238084493e-34,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Less than 0.7 e-fold decay; damping is not identifiable.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.007581582305604018,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 17.002649842768278,
+          "decay_per_second": 2.755393238084493e-34,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Less than 0.7 e-fold decay; damping is not identifiable.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.007581582305604018,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.9881633750046603,
+          "initialization_seconds": 0.10671512503176928,
+          "processor_chunk_max_observed_ms": 25.029625,
+          "processor_chunk_mean_ms": 2.86658738,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.8769433749839664,
+          "initialization_seconds": 0.0385657079750672,
+          "processor_chunk_max_observed_ms": 42.141875,
+          "processor_chunk_mean_ms": 2.4947257,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.9742723749950528,
+          "initialization_seconds": 0.03907537501072511,
+          "processor_chunk_max_observed_ms": 78.020375,
+          "processor_chunk_mean_ms": 2.73657166,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "chirp",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "chirp",
+        "seed": 9131102,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "28db71e685b03d881014e714172df871b6ca7e54c6069e03284bb3509a844f19",
+      "result_file": "standard-chirp-9131102.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 17.002854241582583,
+          "decay_per_second": 5.159577892028552e-33,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Less than 0.7 e-fold decay; damping is not identifiable.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.007577373043868296,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 17.002854241582583,
+          "decay_per_second": 5.159577892028552e-33,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Less than 0.7 e-fold decay; damping is not identifiable.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.007577373043868296,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 17.002854241582583,
+          "decay_per_second": 5.159577892028552e-33,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Less than 0.7 e-fold decay; damping is not identifiable.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.007577373043868296,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.44954958400921896,
+          "initialization_seconds": 0.007836541975848377,
+          "processor_chunk_max_observed_ms": 10.956,
+          "processor_chunk_mean_ms": 0.49215665999999997,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.6124948330107145,
+          "initialization_seconds": 0.0231791659607552,
+          "processor_chunk_max_observed_ms": 48.074042,
+          "processor_chunk_mean_ms": 2.8038534399999997,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.4559235839988105,
+          "initialization_seconds": 0.004586125025525689,
+          "processor_chunk_max_observed_ms": 49.948042,
+          "processor_chunk_mean_ms": 1.1586283,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "close_modes",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "close_modes",
+        "seed": 9131101,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "e3209a9d094afd95906940e02c3d6299a450728401df6efc328c93ad176edb8e",
+      "result_file": "standard-close_modes-9131101.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 16.98610208226502,
+          "decay_per_second": 0.2884584039717271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.5719262173483134,
+          "competing_peaks_hz": [
+            17.6513671875
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 16.98610208226502,
+          "decay_per_second": 0.2884584039717271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.5719262173483134,
+          "competing_peaks_hz": [
+            17.6513671875
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 16.98610208226502,
+          "decay_per_second": 0.2884584039717271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.5719262173483134,
+          "competing_peaks_hz": [
+            17.6513671875
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.1833293330273591,
+          "initialization_seconds": 0.1002491670078598,
+          "processor_chunk_max_observed_ms": 11.34775,
+          "processor_chunk_mean_ms": 0.79409336,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.2258839170099236,
+          "initialization_seconds": 0.01829291699687019,
+          "processor_chunk_max_observed_ms": 40.617083,
+          "processor_chunk_mean_ms": 1.10374828,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.36245158297242597,
+          "initialization_seconds": 0.030394333007279783,
+          "processor_chunk_max_observed_ms": 62.44025,
+          "processor_chunk_mean_ms": 2.4700708199999997,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "close_modes",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "close_modes",
+        "seed": 9131102,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "8a3e6ee5143ce0957e947e330f1270371a30a2e346097bc324643358145f6b20",
+      "result_file": "standard-close_modes-9131102.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 16.98610525394305,
+          "decay_per_second": 0.28845919426679756,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.5719135854829465,
+          "competing_peaks_hz": [
+            17.6513671875
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 16.98610525394305,
+          "decay_per_second": 0.28845919426679756,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.5719135854829465,
+          "competing_peaks_hz": [
+            17.6513671875
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 16.98610525394305,
+          "decay_per_second": 0.28845919426679756,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.5719135854829465,
+          "competing_peaks_hz": [
+            17.6513671875
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.3314542919979431,
+          "initialization_seconds": 0.04841304197907448,
+          "processor_chunk_max_observed_ms": 67.59375,
+          "processor_chunk_mean_ms": 3.32804844,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.2813644169946201,
+          "initialization_seconds": 0.005514583957847208,
+          "processor_chunk_max_observed_ms": 27.608458,
+          "processor_chunk_mean_ms": 1.55887328,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.27377770899329334,
+          "initialization_seconds": 0.005719875043723732,
+          "processor_chunk_max_observed_ms": 112.643667,
+          "processor_chunk_mean_ms": 3.40267332,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "saturation",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "saturation",
+        "seed": 9131101,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "2b6b145fcced3a62e9ca4203f52f8f6ccb7be2294f5a92ca01bb2e26d9350efd",
+      "passed": true,
+      "acquisition_rejection": "Samples clip the declared input range."
+    },
+    {
+      "case": "standard",
+      "scenario": "saturation",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "saturation",
+        "seed": 9131102,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "2b6b145fcced3a62e9ca4203f52f8f6ccb7be2294f5a92ca01bb2e26d9350efd",
+      "passed": true,
+      "acquisition_rejection": "Samples clip the declared input range."
+    },
+    {
+      "case": "standard",
+      "scenario": "impulse",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "impulse",
+        "seed": 9131101,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "144f1ab4f5ef442c7c3373e500e38e2aac4e27ccbb32c3b3c4d0a9ed9c6f7a4c",
+      "result_file": "standard-impulse-9131101.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 27.983763300696342,
+          "decay_per_second": 0.1459712402803723,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.004070314192054281,
+          "competing_peaks_hz": [
+            5.078125,
+            5.2734375,
+            5.4443359375,
+            5.6640625,
+            5.810546875,
+            6.0302734375,
+            6.1767578125,
+            6.396484375,
+            6.7626953125,
+            8.740234375,
+            8.935546875,
+            11.6455078125,
+            11.767578125,
+            17.4072265625,
+            22.900390625
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 27.983763300696342,
+          "decay_per_second": 0.1459712402803723,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.004070314192054281,
+          "competing_peaks_hz": [
+            5.078125,
+            5.2734375,
+            5.4443359375,
+            5.6640625,
+            5.810546875,
+            6.0302734375,
+            6.1767578125,
+            6.396484375,
+            6.7626953125,
+            8.740234375,
+            8.935546875,
+            11.6455078125,
+            11.767578125,
+            17.4072265625,
+            22.900390625
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 27.983763300696342,
+          "decay_per_second": 0.1459712402803723,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.004070314192054281,
+          "competing_peaks_hz": [
+            5.078125,
+            5.2734375,
+            5.4443359375,
+            5.6640625,
+            5.810546875,
+            6.0302734375,
+            6.1767578125,
+            6.396484375,
+            6.7626953125,
+            8.740234375,
+            8.935546875,
+            11.6455078125,
+            11.767578125,
+            17.4072265625,
+            22.900390625
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 1.2868297079694457,
+          "initialization_seconds": 0.01021387497894466,
+          "processor_chunk_max_observed_ms": 3.953916,
+          "processor_chunk_mean_ms": 0.46057084,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.9858996249968186,
+          "initialization_seconds": 0.024094040971249342,
+          "processor_chunk_max_observed_ms": 8.394416999999999,
+          "processor_chunk_mean_ms": 0.7970324999999999,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 2.0977832499775104,
+          "initialization_seconds": 0.005376041983254254,
+          "processor_chunk_max_observed_ms": 49.420249999999996,
+          "processor_chunk_mean_ms": 3.59888664,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "standard",
+      "scenario": "impulse",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "impulse",
+        "seed": 9131102,
+        "model_frequency_hz": null,
+        "model_decay_per_second": null,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "144f1ab4f5ef442c7c3373e500e38e2aac4e27ccbb32c3b3c4d0a9ed9c6f7a4c",
+      "result_file": "standard-impulse-9131102.json",
+      "passed": true,
+      "selected": "filtered_edge",
+      "wire_bytes": [
+        30000,
+        30000,
+        10800
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 27.983763300696342,
+          "decay_per_second": 0.1459712402803723,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.004070314192054281,
+          "competing_peaks_hz": [
+            5.078125,
+            5.2734375,
+            5.4443359375,
+            5.6640625,
+            5.810546875,
+            6.0302734375,
+            6.1767578125,
+            6.396484375,
+            6.7626953125,
+            8.740234375,
+            8.935546875,
+            11.6455078125,
+            11.767578125,
+            17.4072265625,
+            22.900390625
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 27.983763300696342,
+          "decay_per_second": 0.1459712402803723,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.004070314192054281,
+          "competing_peaks_hz": [
+            5.078125,
+            5.2734375,
+            5.4443359375,
+            5.6640625,
+            5.810546875,
+            6.0302734375,
+            6.1767578125,
+            6.396484375,
+            6.7626953125,
+            8.740234375,
+            8.935546875,
+            11.6455078125,
+            11.767578125,
+            17.4072265625,
+            22.900390625
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "rejected",
+          "reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous."
+          ],
+          "frequency_hz": null,
+          "fitted_frequency_hz": 27.983763300696342,
+          "decay_per_second": 0.1459712402803723,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": null,
+          "damping_rejection_reasons": [
+            "Single-mode decay fit explains less than 95% of signal energy or did not converge.",
+            "Competing modes make the single-mode interpretation ambiguous.",
+            "Damping requires at least 98% explained energy."
+          ],
+          "explained_energy_fraction": 0.004070314192054281,
+          "competing_peaks_hz": [
+            5.078125,
+            5.2734375,
+            5.4443359375,
+            5.6640625,
+            5.810546875,
+            6.0302734375,
+            6.1767578125,
+            6.396484375,
+            6.7626953125,
+            8.740234375,
+            8.935546875,
+            11.6455078125,
+            11.767578125,
+            17.4072265625,
+            22.900390625
+          ],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 1.4479892500094138,
+          "initialization_seconds": 0.005807167035527527,
+          "processor_chunk_max_observed_ms": 16.07575,
+          "processor_chunk_mean_ms": 0.99736834,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 1.9477717080153525,
+          "initialization_seconds": 0.006591708050109446,
+          "processor_chunk_max_observed_ms": 107.97749999999999,
+          "processor_chunk_mean_ms": 2.6707916800000002,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 1.1781839590403251,
+          "initialization_seconds": 0.007880917051807046,
+          "processor_chunk_max_observed_ms": 166.51358299999998,
+          "processor_chunk_mean_ms": 5.23418836,
+          "wire_bytes_including_headers": 10800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "host_favored",
+      "scenario": "mount_a",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_a",
+        "seed": 9131101,
+        "model_frequency_hz": 17.25,
+        "model_decay_per_second": 0.65,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "64bcae770497237b23eb9f9cdcbeb940ae4e2f5393f09f68239d91a50a90a432",
+      "result_file": "host_favored-mount_a-9131101.json",
+      "frequency_abs_error_hz": 1.3412466369544518e-05,
+      "damping_relative_error": 0.00011497722967501733,
+      "passed": true,
+      "selected": "raw_host",
+      "wire_bytes": [
+        30000,
+        60000,
+        40800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.24998658753363,
+          "fitted_frequency_hz": 17.24998658753363,
+          "decay_per_second": 0.6499247567740972,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996345417834391,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999984110220431,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.24998658753363,
+          "fitted_frequency_hz": 17.24998658753363,
+          "decay_per_second": 0.6499247567740972,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996345417834391,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999984110220431,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.24998658753363,
+          "fitted_frequency_hz": 17.24998658753363,
+          "decay_per_second": 0.6499247567740972,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996345417834391,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999984110220431,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.2282343750121072,
+          "initialization_seconds": 0.031235916016157717,
+          "processor_chunk_max_observed_ms": 8.377917,
+          "processor_chunk_mean_ms": 0.33158828,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.12376083299750462,
+          "initialization_seconds": 0.02668379101669416,
+          "processor_chunk_max_observed_ms": 24.831374999999998,
+          "processor_chunk_mean_ms": 0.86213328,
+          "wire_bytes_including_headers": 60000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.2614778330316767,
+          "initialization_seconds": 0.0037765000015497208,
+          "processor_chunk_max_observed_ms": 52.480042,
+          "processor_chunk_mean_ms": 2.3925758,
+          "wire_bytes_including_headers": 40800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "host_favored",
+      "scenario": "mount_a",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_a",
+        "seed": 9131102,
+        "model_frequency_hz": 17.25,
+        "model_decay_per_second": 0.65,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "717c035bcf3e4f14f00acc83f923712105c888b0d9543c6697f5caa8c6be112b",
+      "result_file": "host_favored-mount_a-9131102.json",
+      "frequency_abs_error_hz": 7.766370053730043e-07,
+      "damping_relative_error": 0.00012345096027677194,
+      "passed": true,
+      "selected": "raw_host",
+      "wire_bytes": [
+        30000,
+        60000,
+        40800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.249999223362995,
+          "fitted_frequency_hz": 17.249999223362995,
+          "decay_per_second": 0.6499197247293826,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996294600575898,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999982772533621,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.249999223362995,
+          "fitted_frequency_hz": 17.249999223362995,
+          "decay_per_second": 0.6499197247293826,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996294600575898,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999982772533621,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 17.249999223362995,
+          "fitted_frequency_hz": 17.249999223362995,
+          "decay_per_second": 0.6499197247293826,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.005996294600575898,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999982772533621,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.07528987497789785,
+          "initialization_seconds": 0.0049569999682717025,
+          "processor_chunk_max_observed_ms": 4.6913339999999994,
+          "processor_chunk_mean_ms": 0.28744912,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.07527566602220759,
+          "initialization_seconds": 0.005993166007101536,
+          "processor_chunk_max_observed_ms": 1.9846249999999999,
+          "processor_chunk_mean_ms": 0.30755756,
+          "wire_bytes_including_headers": 60000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.028096000023651868,
+          "initialization_seconds": 0.005063167016487569,
+          "processor_chunk_max_observed_ms": 0.930666,
+          "processor_chunk_mean_ms": 0.11274661999999999,
+          "wire_bytes_including_headers": 40800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "host_favored",
+      "scenario": "mount_b",
+      "seed": 9131101,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_b",
+        "seed": 9131101,
+        "model_frequency_hz": 22.5,
+        "model_decay_per_second": 0.9,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "4da85a646b61a2befb12ac31b9bb7f2d2c0325c255e0cc252630ed9044b9ef77",
+      "result_file": "host_favored-mount_b-9131101.json",
+      "frequency_abs_error_hz": 1.1035320838459484e-05,
+      "damping_relative_error": 0.00015186936067890233,
+      "passed": true,
+      "selected": "raw_host",
+      "wire_bytes": [
+        30000,
+        60000,
+        40800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998896467916,
+          "fitted_frequency_hz": 22.49998896467916,
+          "decay_per_second": 0.8998628706913271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365101910672499,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999976164835633,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998896467916,
+          "fitted_frequency_hz": 22.49998896467916,
+          "decay_per_second": 0.8998628706913271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365101910672499,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999976164835633,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998896467916,
+          "fitted_frequency_hz": 22.49998896467916,
+          "decay_per_second": 0.8998628706913271,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365101910672499,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999976164835633,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.4637827909900807,
+          "initialization_seconds": 0.15612154098926112,
+          "processor_chunk_max_observed_ms": 23.99375,
+          "processor_chunk_mean_ms": 1.13948172,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.16359483398264274,
+          "initialization_seconds": 0.0052943750051781535,
+          "processor_chunk_max_observed_ms": 51.872499999999995,
+          "processor_chunk_mean_ms": 1.80145922,
+          "wire_bytes_including_headers": 60000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.1992937499890104,
+          "initialization_seconds": 0.019370416004676372,
+          "processor_chunk_max_observed_ms": 22.934084,
+          "processor_chunk_mean_ms": 1.31663412,
+          "wire_bytes_including_headers": 40800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    },
+    {
+      "case": "host_favored",
+      "scenario": "mount_b",
+      "seed": 9131102,
+      "source": {
+        "source_kind": "synthetic",
+        "scenario": "mount_b",
+        "seed": 9131102,
+        "model_frequency_hz": 22.5,
+        "model_decay_per_second": 0.9,
+        "independent_physical_reference": false,
+        "seconds": 8
+      },
+      "raw_sha256": "1a64bdfee5b5b80707286d1e40d12026a81ceb9b42fc208f3258c644a44a0376",
+      "result_file": "host_favored-mount_b-9131102.json",
+      "frequency_abs_error_hz": 1.751873605826404e-05,
+      "damping_relative_error": 7.784227312868097e-05,
+      "passed": true,
+      "selected": "raw_host",
+      "wire_bytes": [
+        30000,
+        60000,
+        40800
+      ],
+      "results": [
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998248126394,
+          "fitted_frequency_hz": 22.49998248126394,
+          "decay_per_second": 0.8999292384202779,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365573172199093,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999974285518136,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998248126394,
+          "fitted_frequency_hz": 22.49998248126394,
+          "decay_per_second": 0.8999292384202779,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365573172199093,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999974285518136,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        },
+        {
+          "status": "accepted_model_fit",
+          "reasons": [],
+          "frequency_hz": 22.49998248126394,
+          "fitted_frequency_hz": 22.49998248126394,
+          "decay_per_second": 0.8999292384202779,
+          "frequency_resolution_clock_envelope_hz": 0.13003901170351104,
+          "envelope_label": "Resolution/declared clock envelope; not a validated coverage interval",
+          "damping_ratio": 0.006365573172199093,
+          "damping_rejection_reasons": [],
+          "explained_energy_fraction": 0.9999974285518136,
+          "competing_peaks_hz": [],
+          "samples": 769,
+          "duration_seconds": 7.69,
+          "model": "A exp(-alpha*t) sin(2*pi*f*t+phase) + offset; no stiffness/damage inference"
+        }
+      ],
+      "metrics": [
+        {
+          "processing_wall_seconds": 0.32996254198951647,
+          "initialization_seconds": 0.1364223340060562,
+          "processor_chunk_max_observed_ms": 6.600375,
+          "processor_chunk_mean_ms": 0.61668492,
+          "wire_bytes_including_headers": 30000,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.14555600000312552,
+          "initialization_seconds": 0.024539041973184794,
+          "processor_chunk_max_observed_ms": 29.328166999999997,
+          "processor_chunk_mean_ms": 1.3044892,
+          "wire_bytes_including_headers": 60000,
+          "transport_frames": 50,
+          "native_state_bytes": 8272,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        },
+        {
+          "processing_wall_seconds": 0.2611077920300886,
+          "initialization_seconds": 0.15729520801687613,
+          "processor_chunk_max_observed_ms": 12.655792,
+          "processor_chunk_mean_ms": 0.4534492,
+          "wire_bytes_including_headers": 40800,
+          "transport_frames": 50,
+          "native_state_bytes": 4136,
+          "input_samples": 3200,
+          "valid_output_samples": 769,
+          "declared_capture_seconds": 7.9975,
+          "drops": 0,
+          "acquisition_to_result_latency_seconds": null,
+          "latency_scope": "Software replay processing measured. No physical acquisition/transport latency or MCU utilization measured.",
+          "power_watts": null
+        }
+      ]
+    }
+  ],
+  "all_passed": true,
+  "physical_acquisition_verified": false,
+  "independent_physical_measurement_verified": false,
+  "limits": "Frozen rules and measured host proxies only; chosen placement ties fixed edge on standard case. Host-favored cases test raw retention cost. No MCU timing/power or physical uncertainty validation."
+}

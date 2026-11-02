@@ -1,0 +1,10 @@
+${ZEPHYR_WORKSPACE}/runtime-configuration-v5/build-calibrated_edge/zephyr/include/generated/zephyr/syscalls/uart.h:97:20:uart_poll_out	0	static
+${ZEPHYR_WORKSPACE}/zephyr/include/zephyr/sys/byteorder.h:442:20:sys_put_le32	0	static
+${ZEPHYR_WORKSPACE}/zephyr/include/zephyr/kernel.h:1883:23:k_uptime_get	8	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:90:13:send_packet	624	static
+${ZEPHYR_WORKSPACE}/zephyr/include/zephyr/sys/atomic_builtin.h:69:28:atomic_set.isra	0	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:44:13:uart_received	48	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:128:12:receive_byte	24	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:78:12:stop_acquisition	16	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:57:13:acquired	56	static
+${INSTRUMENTZERO}/firmware/zephyr/src/main.c:181:5:main	2672	static

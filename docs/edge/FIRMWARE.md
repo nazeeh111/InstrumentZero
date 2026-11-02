@@ -1,3 +1,11 @@
+> Optional extension: physical operation is outside the simulation-only project scope. This document preserves an unexecuted commissioning plan or software/build evidence; it is not a simulation completion gate.
+
+# Runtime configuration update (rc3)
+
+The current adapter requires IZC1 configuration and a matching IZA1 acknowledgement before each `G`. It supports rates of 100, 200 or 400 Hz, calibration, FIR/reduction, placement and raw-validation changes within the compiled block/queue envelope. All placement builds now contain the same runtime-capable numerical and control paths. The example total RAM planning budget is 40,960 bytes with a 6,144-byte control/RX reserve and processing state reserved in every mode. C11 atomics support the interrupt-driven RX ring; the numerical core remains C99-compatible. See [CONTROL.md](CONTROL.md). No physical operation or flashing has been performed.
+
+Current [runtime build receipts](../../examples/edge/firmware-uart-build/report.json) bind the adapter and control source. Historical rc1 receipts remain in their original folder.
+
 # Provisional sensor adapter and build
 
 **No actual equipment was available or selected for deployment.** The reproducible build target is a provisional nRF52840 DK plus ADXL345 on I2C. It exercises a mature Zephyr driver and the same C numerical core. A successfully linked image is software evidence, not support established on physical equipment. Do not flash this over unrelated contents. Actual board/carrier revision inspection, voltage/pin verification, backup/recovery of existing firmware and explicit flashing authority are prerequisites for commissioning.
@@ -39,11 +47,11 @@ instrumentzero edge compile examples/edge/adxl345-spec.json --placement raw_host
 west build -b nrf52840dk/nrf52840 /absolute/path/to/InstrumentZero/firmware/zephyr -d /absolute/path/to/new-build -- -DIZ_BINDINGS_DIR=/absolute/path/to/InstrumentZero/bindings-raw -DDTC_OVERLAY_FILE=/absolute/path/to/InstrumentZero/firmware/zephyr/boards/nrf52840dk_nrf52840.overlay
 ```
 
-Use a fresh build directory for each placement. `--placement calibrated_edge` or `filtered_edge` binds native calibration or FIR/decimation in the consumer thread. Retain raw validation when an exact raw recording is required; filtered-only frames cannot feed the raw recorder/recompute path. The planner includes a fixed runtime reserve in its total RAM budget. Full RTOS/driver linker RAM is checked separately; runtime high-water usage remains unmeasured.
+Use a fresh build directory for each allocation envelope. All runtime images contain the three reviewed placements; `--placement` labels the generated default binding. The acknowledged runtime request selects native calibration or FIR/decimation in the consumer thread. Retain raw validation when an exact raw recording is required; filtered-only frames cannot feed the raw recorder/recompute path. The planner includes a fixed runtime reserve in its total RAM budget. Full RTOS/driver linker RAM is checked separately; runtime high-water usage remains unmeasured.
 
 ## Acquisition lifecycle
 
-Firmware remains idle until the explicitly consented host sends `G`. A `K` keepalive is sent every 0.5 seconds. `S`, a lost keepalive after two seconds, queue overflow or a fetch/clipping fault stops sampling delivery. The source callback performs acquisition only; bounded queue and consumer isolate UART/DSP work. Cancellation sends `S`, restores serial settings and closes the host handle. No flash command exists in the CLI. A new start creates a new UUID. Compiled hardware configuration is fixed for that image; runtime graph reconfiguration on physical hardware is not implemented/verified in this preview.
+Acquisition delivery remains disabled until the consented host configures the device, checks the matching acknowledgement and sends `G`. A `K` keepalive is sent every 0.5 seconds. `S`, a lost keepalive after two seconds, queue overflow or a fetch/clipping fault stops sampling delivery. The source callback performs acquisition only; bounded queue and consumer isolate UART/DSP work. Cancellation sends `S`, restores serial settings and closes the host handle. No flash command exists in the CLI. Every accepted configuration creates a fresh UUID and advances the epoch. Supported rate, signed calibration, FIR/reduction and placement settings may change at runtime; block and queue allocations must match the compiled envelope. An unused accepted configuration expires after two seconds. This path is software-tested and cross-compiled, with physical behavior still unverified.
 
 The raw sensor route is explicit and **has not been executed on actual hardware**:
 

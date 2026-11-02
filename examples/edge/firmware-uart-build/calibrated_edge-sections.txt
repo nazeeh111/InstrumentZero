@@ -1,0 +1,37 @@
+${ZEPHYR_WORKSPACE}/runtime-uart-ceiling-v1/build-calibrated_edge/zephyr/zephyr.elf  :
+section                           size        addr
+rom_start                          256           0
+text                             31100         256
+.ARM.exidx                           8       31356
+initlevel                          104       31364
+device_area                        256       31468
+sw_isr_table                       384       31724
+entropy_driver_api_area              8       32108
+gpio_driver_api_area                36       32116
+i2c_driver_api_area                 24       32152
+sensor_driver_api_area              56       32176
+clock_control_driver_api_area       28       32232
+uart_driver_api_area                68       32260
+tbss                                 4       32328
+rodata                             488       32336
+.ramfunc                             0   536870912
+datas                              228   536870912
+device_states                       16   536871140
+k_mutex_area                        20   536871156
+k_msgq_area                         40   536871176
+.comment                            32           0
+.debug_aranges                    5656           0
+.debug_info                     339098           0
+.debug_abbrev                    55199           0
+.debug_line                     159943           0
+.debug_frame                     14016           0
+.debug_str                       57381           0
+.debug_loc                      157190           0
+.debug_ranges                    25104           0
+.ARM.attributes                     50           0
+.last_section                        4       33128
+bss                              12763   536871232
+noinit                           12800   536884032
+Total                           872360
+
+

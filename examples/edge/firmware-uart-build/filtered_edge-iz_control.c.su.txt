@@ -1,0 +1,10 @@
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:3:17:get32	0	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:4:13:put32	0	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:6:10:iz_crc32	12	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:14:5:iz_config_decode	1168	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:49:6:iz_config_ack	24	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:58:5:iz_control_stage	16	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:67:5:iz_control_start	0	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:72:6:iz_control_stop	0	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:74:8:iz_rx_put	20	static
+${INSTRUMENTZERO}/src/instrumentzero/edge/control/iz_control.c:85:5:iz_rx_get	8	static

@@ -30,7 +30,7 @@ def main():
     env = os.environ.copy()
     env.update(PATH=str(args.tools)+os.pathsep+env['PATH'], ZEPHYR_BASE=str(args.workspace/'zephyr'),
                ZEPHYR_SDK_INSTALL_DIR=str(args.sdk), ZEPHYR_TOOLCHAIN_VARIANT='zephyr')
-    source_paths = sorted((ROOT/'firmware/zephyr').rglob('*.c')) + sorted((ROOT/'firmware/zephyr').rglob('*.conf')) + sorted((ROOT/'firmware/zephyr').rglob('*.overlay')) + [ROOT/'firmware/zephyr/CMakeLists.txt',ROOT/'src/instrumentzero/edge/core/iz_core.c',ROOT/'src/instrumentzero/edge/core/iz_core.h']
+    source_paths = sorted((ROOT/'firmware/zephyr').rglob('*.c')) + sorted((ROOT/'firmware/zephyr').rglob('*.conf')) + sorted((ROOT/'firmware/zephyr').rglob('*.overlay')) + [ROOT/'firmware/zephyr/CMakeLists.txt',ROOT/'src/instrumentzero/edge/core/iz_core.c',ROOT/'src/instrumentzero/edge/core/iz_core.h',ROOT/'src/instrumentzero/edge/control/iz_control.c',ROOT/'src/instrumentzero/edge/control/iz_control.h']
     source_hashes = {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}
     modes = []
     for mode in ('raw_host','calibrated_edge','filtered_edge'):
@@ -60,7 +60,7 @@ def main():
         ['git','-C',str(args.workspace/'zephyr'),'rev-parse','HEAD'],text=True).strip(),
         'sdk_version':(args.sdk/'sdk_version').read_text().strip(), 'board':'nrf52840dk/nrf52840',
         'core_sha256':core_identity(), 'adapter_source_sha256':source_hashes, 'placements':modes,
-        'hardware_operation_verified':False, 'flashed':False,
+        'runtime_configuration':'IZC1/IZA1; every build accepts all three placements within its compiled block/queue envelope', 'hardware_operation_verified':False, 'flashed':False,
         'memory_scope':'Linker sections include fixed RTOS/driver/static stacks; stack high-water and device utilization remain unmeasured.'}
     (args.output/'report.json').write_text(json.dumps(report,indent=2))
     print(json.dumps(report,indent=2))
