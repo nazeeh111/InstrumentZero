@@ -10,13 +10,14 @@
   <link rel="stylesheet" href="/style.css">
   <script src="/acquisition.js" defer></script>
   <script src="/app.js" defer></script>
+  <script src="/runtime-version.js" defer></script>
   <script src="/validation.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to workspace</a>
   <aside class="sidebar">
     <a href="/" class="brand" aria-label="InstrumentZero Lab home"><img src="/mark.svg" width="34" height="34" alt=""><span>INSTRUMENT<span class="brand-zero">ZERO</span><small>THE MEASUREMENT WORKSPACE</small></span></a>
-    <div class="edition"><span class="status-dot"></span> LOCAL LAB <span>v0.2</span></div>
+    <div class="edition"><span class="status-dot"></span> LOCAL LAB <span id="runtime-version">Version unavailable</span></div>
     <nav aria-label="Workspace views" class="view-nav">
       <a href="/edge" class="nav-item" style="text-decoration:none"><span class="nav-symbol">∿</span>Edge placement lab <span>NEW</span></a>
       <button class="nav-item active" data-view="workspace" aria-current="page"><span class="nav-symbol">◫</span> Workspace <span>01</span></button>

@@ -10,11 +10,17 @@ InstrumentZero is a local scientific experiment compiler: supported questions be
 
 > **v0.2: validation without physical equipment.** Public calibrated recordings, executable adaptive replay, 600 acoustic stress cases and 18 production acquisition checks extend the Lab. Recorded measurements, replay and simulations remain visibly distinct. [Validation evidence and remaining limits](docs/NO_EQUIPMENT_VALIDATION.md).
 
+The current source is unreleased `0.3.1.dev0`. It adds a file-only stiffness session workflow and reviewed Lab presentation; the historical `v0.3.0` release predates those changes. Session records retain inputs and calibration revisions, and reopening recomputes the result. Calibration basis is a user declaration, not an independently verified certificate.
+
 ## InstrumentZero Edge · v0.3.0 simulation studio
 
 A complete local simulation workflow: create a seeded signal, estimate resonance and damping when identifiable, compare three processing placements, and export every sample with executable source. No hardware or paid API is required.
 
 ```sh
+git clone https://github.com/nazeeh111/InstrumentZero.git
+cd InstrumentZero
+python3 -m venv .venv
+. .venv/bin/activate
 python -m pip install -r requirements-runtime.lock
 python -m pip install --no-deps .
 instrumentzero edge simulate --scenario custom_ringdown --frequency 18.6 \
@@ -24,7 +30,10 @@ instrumentzero lab --port 58134
 # Open http://127.0.0.1:58134/edge
 ```
 
-A free C99 compiler is required. The interface exposes frequency, decay, noise, amplitude and seed, plus reduction, raw validation and resource budgets. It separates error against the analytic model from C-versus-float64 processing agreement. Rejected signals remain inspectable; every edit invalidates stale results and exports.
+A free C99 compiler is required. In the custom example, frequency is in Hz and
+the exponential decay parameter is per second. These are inputs to an idealized
+signal generator, not measurements from a physical instrument. The interface
+exposes frequency, decay, noise, amplitude and seed, plus reduction, raw validation and resource budgets. It separates error against the analytic model from C-versus-float64 processing agreement. Rejected signals remain inspectable; every edit invalidates stale results and exports.
 
 Raw-host, calibrated-edge and filtered-edge paths run the same C core through actual packet encoding/decoding in software. The planner uses measured host costs and declared models. It can tie fixed edge or prefer the host. These are simulation and numerical results, not physical measurements or MCU performance claims. The analytic generator is not a material or finite-element beam solver.
 
@@ -46,7 +55,9 @@ The **recorded stiffness replay** starts from three source observations, selects
 
 The separate controlled example estimates **80.68 N/m** for a simulated 80 N/m spring and proposes **2 N** as the next load. It is labeled synthetic. Fine-noise inference can reject the authentic nickel curve rather than certify an inconsistent model.
 
-![Working Lab: model, residuals and a proposed next measurement](assets/lab-model-v0.1.jpg)
+![Current Lab showing the synthetic spring model, residuals and proposed next measurement](assets/current-lab/synthetic-0.3.1-dev.png)
+
+[Capture details](assets/current-lab/README.md) · [Historical v0.1 Lab image](assets/lab-model-v0.1.jpg)
 
 [Watch the original Lab walkthrough](https://github.com/nazeeh111/InstrumentZero/releases/download/v0.1.0/instrumentzero-demo.mp4) · [Editable source](assets/launch-v0.1/)
 
@@ -133,6 +144,21 @@ Adaptive design beats uniform video largely by choosing a more precise, better-c
 Ignoring calibration cuts nominal interval coverage to **60.7%**. Unmodeled drift cuts exact-design coverage to **34%**. A wrong linear model produces roughly **24% error and zero coverage** in the nonlinear stress test. These failures are part of the release.
 
 ![Benchmark error under nominal and violated assumptions, all simulated](benchmarks/release-0.1.0/error_by_regime.png)
+
+## Reopenable stiffness sessions
+
+For file-based stiffness observations, keep an immutable history of batches and shared calibration revisions:
+
+```sh
+instrumentzero session start spec.json --out session-0.json
+instrumentzero session append session-0.json initial.csv --label 'Initial observations' --out session-1.json
+instrumentzero session append session-1.json followup.json --label 'Follow-up' --out session-2.json
+instrumentzero session calibrate session-2.json calibration.json --basis "Describe this revision’s calibration basis" --out session-3.json
+instrumentzero session review session-3.json --export session-export.json
+instrumentzero session review session-export.json
+```
+
+Every output must be a fresh path. JSON or CSV observation batches and JSON calibration files are embedded as exact source bytes with labels and hashes. Review recomputes each historical observation prefix with the calibration in force at that revision; earlier inputs and estimates are not rewritten. Each calibration revision uses its own `--basis`; if omitted, its basis explicitly says no revision-specific certificate is verified. The comparison reports changes and existing model diagnostics, not a causal or physical-accuracy claim. Refused analyses remain visible. Export contains the complete session and a review; reopening recomputes instead of trusting saved results. Checksums detect changes but do not authenticate input, calibration values are user-declared, and no sensor or physical action is started. This session workflow currently supports stiffness; the existing separate acoustic commands remain available.
 
 ## Reproduce and contribute
 

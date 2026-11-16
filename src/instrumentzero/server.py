@@ -106,6 +106,7 @@ def make_server(port: int = 8765, data_dir: Path | None = None) -> ThreadingHTTP
                            "/edge-architecture.svg": ("edge-architecture.svg", "image/svg+xml"),
                            "/index.html": ("index.html", "text/html; charset=utf-8"),
                            "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+                           "/runtime-version.js": ("runtime-version.js", "text/javascript; charset=utf-8"),
                            "/acquisition.js": ("acquisition.js", "text/javascript; charset=utf-8"),
                            "/validation.js": ("validation.js", "text/javascript; charset=utf-8"),
                            "/style.css": ("style.css", "text/css; charset=utf-8"),

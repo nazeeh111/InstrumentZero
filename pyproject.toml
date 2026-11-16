@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "instrumentzero"
-version = "0.3.0"
+version = "0.3.1.dev0"
 description = "A local signal simulation studio with typed graphs, host/edge placement and reproducible numerical evidence"
 readme = "README.md"
 requires-python = ">=3.11"

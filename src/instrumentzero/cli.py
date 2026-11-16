@@ -1,4 +1,5 @@
 """Command line entry point. No credentials or physical actions required."""
+
 from __future__ import annotations
 
 import argparse
@@ -30,7 +31,9 @@ def _rows(path: str):
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="instrumentzero", description="Compile questions into calibrated measurement workflows.")
+    parser = argparse.ArgumentParser(
+        prog="instrumentzero", description="Compile questions into calibrated measurement workflows."
+    )
     sub = parser.add_subparsers(dest="command", required=True)
     add_edge_parser(sub)
     plan = sub.add_parser("compile", help="Compile a supported measurement specification")
@@ -43,7 +46,28 @@ def main(argv: list[str] | None = None) -> int:
     demo.add_argument("domain", choices=["stiffness", "acoustic"])
     demo.add_argument("--data-dir", type=Path, default=Path("data"))
     demo.add_argument("--export", metavar="ZIP")
-    demo.add_argument("--recorded", action="store_true", help="Use the authentic nickel-sensor stiffness observations")
+    demo.add_argument(
+        "--recorded", action="store_true", help="Use the authentic nickel-sensor stiffness observations"
+    )
+    session = sub.add_parser("session", help="Save and replay a file-only stiffness experiment")
+    actions = session.add_subparsers(dest="session_action", required=True)
+    start = actions.add_parser("start", help="Start from a JSON specification")
+    start.add_argument("spec")
+    start.add_argument("--out", required=True)
+    append = actions.add_parser("append", help="Add a JSON or CSV observation batch")
+    append.add_argument("session")
+    append.add_argument("data")
+    append.add_argument("--label")
+    append.add_argument("--out", required=True)
+    cal = actions.add_parser("calibrate", help="Add a shared calibration revision from JSON")
+    cal.add_argument("session")
+    cal.add_argument("calibration")
+    cal.add_argument("--label")
+    cal.add_argument("--basis", help="Revision-specific calibration basis; absence is marked unverified")
+    cal.add_argument("--out", required=True)
+    review = actions.add_parser("review", help="Recompute historical analyses and optionally export")
+    review.add_argument("session")
+    review.add_argument("--export", metavar="JSON")
     lab = sub.add_parser("lab", help="Serve the local Lab at http://127.0.0.1:8765")
     lab.add_argument("--port", type=int, default=8765)
     lab.add_argument("--data-dir", type=Path, default=Path("data"))
@@ -53,17 +77,50 @@ def main(argv: list[str] | None = None) -> int:
     replay.add_argument("--policy", default="information_gain", choices=POLICIES)
     replay.add_argument("--seed", type=int, default=0)
     replay.add_argument("--export", metavar="ZIP")
-    ptb = sub.add_parser("validate-calibrated", help="Compare recorded PTB acoustic levels with their reference instrument")
+    ptb = sub.add_parser(
+        "validate-calibrated", help="Compare recorded PTB acoustic levels with their reference instrument"
+    )
     ptb.add_argument("--data-dir", type=Path, default=Path("data"))
     ptb.add_argument("--export", metavar="ZIP")
     args = parser.parse_args(argv)
     try:
+        if args.command == "session":
+            from .session import MAX_SESSION, ExperimentSession, publish, read_file
+
+            if args.session_action == "start":
+                source = Path(args.spec)
+                session_value = ExperimentSession.start(read_file(source), source.name)
+                output = session_value.review()
+                publish(args.out, session_value.to_bytes())
+            else:
+                session_value = ExperimentSession.load(read_file(args.session, MAX_SESSION))
+                if args.session_action in ("append", "calibrate"):
+                    path = Path(args.data if args.session_action == "append" else args.calibration)
+                    kind = "observations" if args.session_action == "append" else "calibration"
+                    fmt = "csv" if kind == "observations" and path.suffix.lower() == ".csv" else "json"
+                    session_value = session_value.append(
+                        kind,
+                        read_file(path),
+                        args.label or path.name,
+                        fmt,
+                        basis=args.basis if kind == "calibration" else None,
+                    )
+                    output = session_value.review()
+                    publish(args.out, session_value.to_bytes())
+                else:
+                    output = session_value.review()
+                    if args.export:
+                        publish(args.export, session_value.export_bytes())
+            print(json.dumps(output, indent=2, allow_nan=False))
+            return 0
         if args.command == "edge":
             from .edge.cli import run
+
             print(json.dumps(run(args), indent=2, allow_nan=False))
             return 0
         if args.command == "lab":
             from .server import serve
+
             serve(args.port, args.data_dir)
             return 0
         if args.command == "replay":

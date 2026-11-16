@@ -1,4 +1,4 @@
-"""Committed validation claims must correspond to the actual checked source."""
+"""Verify retained evidence against its recorded historical or unchanged source."""
 import hashlib
 import json
 from pathlib import Path
@@ -14,7 +14,7 @@ ROOT = Path(__file__).parents[1]
     'examples/ptb-validation-v0.2/results.json',
     'examples/replay-validation/comparison.json',
 ])
-def test_retained_evidence_is_tied_to_current_source(relative):
+def test_retained_evidence_is_tied_to_recorded_source(relative):
     result = json.loads((ROOT/relative).read_text())
     if relative.endswith('comparison.json'):
         checks = {'src/instrumentzero/replay.py': result['replay_source_sha256'],
@@ -24,5 +24,23 @@ def test_retained_evidence_is_tied_to_current_source(relative):
     else:
         checks = result['source_sha256']
     assert checks
+    if relative == 'examples/acquisition-acceptance-v0.2/results.json':
+        assert set(checks) == {
+            'src/instrumentzero/web/acquisition.js',
+            'src/instrumentzero/web/app.js',
+            'tests/browser-acquisition.mjs',
+            'scripts/validate_acquisition.py',
+        }
     for source, expected in checks.items():
-        assert hashlib.sha256((ROOT/source).read_bytes()).hexdigest() == expected, source
+        # The v0.2 acquisition receipt predates the current responsive UI.
+        # Its original app is retained byte-for-byte; current UI behavior is
+        # exercised separately by tests/browser-acquisition.mjs.
+        historical = {
+            'src/instrumentzero/web/app.js': 'app.js',
+            'scripts/validate_acquisition.py': 'validate_acquisition.py',
+        }
+        if relative == 'examples/acquisition-acceptance-v0.2/results.json' and source in historical:
+            path = ROOT/'examples/acquisition-acceptance-v0.2/source-snapshot'/historical[source]
+        else:
+            path = ROOT/source
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, source

@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -18,6 +19,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    if "INSTRUMENTZERO_TEST_APP_REF" in os.environ:
+        parser.error("Unset INSTRUMENTZERO_TEST_APP_REF when generating current acceptance evidence")
     if args.output.exists():
         parser.error('Use a fresh output directory to preserve earlier acceptance evidence')
     root = Path(__file__).resolve().parents[1]

@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/browser-acquisition.mjs tests/browser-validation.mjs tests/browser-edge.mjs
+      - run: node --test tests/browser-acquisition.mjs tests/browser-validation.mjs tests/browser-edge.mjs tests/browser-version.mjs
       - run: python scripts/verify_edge_core.py --output /tmp/edge-core
       - run: python scripts/verify_edge_control.py --output /tmp/edge-control
       - run: python examples/edge/uart-admission-review/check_transport_only.py
