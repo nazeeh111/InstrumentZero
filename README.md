@@ -154,3 +154,18 @@ python scripts/benchmark.py --trials 150 --training-states 1500 --output benchma
 Use fresh evaluation output directories. See [contribution opportunities](CONTRIBUTING.md), [release notes](CHANGELOG.md), [research foundations](docs/FOUNDATIONS.md), and [security boundaries](SECURITY.md).
 
 Code is **MIT**. Data and the retained paper have separate terms in [the data documentation](docs/DATA.md). InstrumentZero builds on NumPy/SciPy and established experimental-design research. It does not claim to invent Bayesian design, learned sequential policies or general autonomous science.
+
+### Reopenable stiffness sessions
+
+For file-based stiffness observations, keep an immutable history of batches and shared calibration revisions:
+
+```sh
+instrumentzero session start spec.json --out session-0.json
+instrumentzero session append session-0.json initial.csv --label 'Initial observations' --out session-1.json
+instrumentzero session append session-1.json followup.json --label 'Follow-up' --out session-2.json
+instrumentzero session calibrate session-2.json calibration.json --basis "Describe this revision’s calibration basis" --out session-3.json
+instrumentzero session review session-3.json --export session-export.json
+instrumentzero session review session-export.json
+```
+
+Every output must be a fresh path. JSON or CSV observation batches and JSON calibration files are embedded as exact source bytes with labels and hashes. Review recomputes each historical observation prefix with the calibration in force at that revision; earlier inputs and estimates are not rewritten. Each calibration revision uses its own `--basis`; if omitted, its basis explicitly says no revision-specific certificate is verified. The comparison reports changes and existing model diagnostics, not a causal or physical-accuracy claim. Refused analyses remain visible. Export contains the complete session and a review; reopening recomputes instead of trusting saved results. Checksums detect changes but do not authenticate input, calibration values are user-declared, and no sensor or physical action is started. This session workflow currently supports stiffness; the existing separate acoustic commands remain available.
