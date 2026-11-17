@@ -1,16 +1,21 @@
-<p align="center"><img src="assets/banner.svg" alt="INSTRUMENTZERO — Questions become evidence" width="100%"></p>
+# InstrumentZero
 
-[![CI](https://github.com/nazeeh111/InstrumentZero/actions/workflows/ci.yml/badge.svg)](https://github.com/nazeeh111/InstrumentZero/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/code-MIT-252d27.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11%2B-375cbd.svg)](pyproject.toml)
+**From a signal to an answer you can inspect.**
 
-**Ask a question about the physical world. Compile a way to measure it.**
+InstrumentZero turns supported measurement questions into a model, a calibration contract, executable analysis and an evidence package. Start with a seeded ringdown, inspect what the estimator can identify, then export the samples and source. The separate Lab supports recorded observations and file-based stiffness sessions.
 
-InstrumentZero is a local scientific experiment compiler: supported questions become a procedure, a calibration contract, executable analysis, an uncertainty estimate, and a proposed next observation. Its Lab shows the assumptions beside the signal. It runs without an API key or paid model service.
+[Run the simulation](#instrumentzero-edge--v030-simulation-studio) · [Model and units](docs/edge/SIMULATION.md) · [Recorded-data Lab](#from-an-ordinary-question-to-a-measurement) · [Validation and limits](docs/NO_EQUIPMENT_VALIDATION.md)
 
-> **v0.2: validation without physical equipment.** Public calibrated recordings, executable adaptive replay, 600 acoustic stress cases and 18 production acquisition checks extend the Lab. Recorded measurements, replay and simulations remain visibly distinct. [Validation evidence and remaining limits](docs/NO_EQUIPMENT_VALIDATION.md).
+<a href="docs/presentation/seeded-ringdown.svg">
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/presentation/seeded-ringdown-mobile.png">
+  <img src="docs/presentation/seeded-ringdown.png" alt="All 769 plotted samples from a retained synthetic ringdown with model frequency 9.75 Hz, decay 0.45 per second and seed 9132301. The complete eight-second run is simulated, not physically measured." width="1000">
+</picture>
+</a>
 
-The current source is unreleased `0.3.1.dev0`. It adds a file-only stiffness session workflow and reviewed Lab presentation; the historical `v0.3.0` release predates those changes. Session records retain inputs and calibration revisions, and reopening recomputes the result. Calibration basis is a user declaration, not an independently verified certificate.
+This retained run starts from an analytic signal. Its float64 reference fit estimates **9.75000657 Hz** and **0.44992366 s⁻¹** decay. The complete source record also contains the C processing results, placement comparison and explicit refusal/verification status. A small simulation error does not establish sensor calibration, interval coverage or physical accuracy. [Open the exact run](examples/edge/simulation-confirmation-v0.3-final/custom-1.json) · [Figure data and interpretation](docs/presentation/README.md).
+
+Current source is unreleased `0.3.1.dev0`; the historical `v0.3.0` release predates the file-only stiffness sessions and reviewed Lab presentation. Those sessions retain inputs and calibration revisions, and reopening recomputes the result. Calibration basis is a user declaration, not an independently verified certificate. Public recorded-data checks, synthetic studies and physical validation remain distinct throughout the Lab.
 
 ## InstrumentZero Edge · v0.3.0 simulation studio
 
@@ -23,8 +28,8 @@ python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install -r requirements-runtime.lock
 python -m pip install --no-deps .
-instrumentzero edge simulate --scenario custom_ringdown --frequency 18.6 \
-  --decay .8 --noise .0006 --amplitude 1 --seed 6001 --export custom.zip
+instrumentzero edge simulate --scenario custom_ringdown --frequency 9.75 \
+  --decay .45 --noise .0006 --amplitude 1 --seed 9132301 --export custom.zip
 instrumentzero edge simulate --scenario silence --export rejected.zip
 instrumentzero lab --port 58134
 # Open http://127.0.0.1:58134/edge
@@ -180,3 +185,4 @@ python scripts/benchmark.py --trials 150 --training-states 1500 --output benchma
 Use fresh evaluation output directories. See [contribution opportunities](CONTRIBUTING.md), [release notes](CHANGELOG.md), [research foundations](docs/FOUNDATIONS.md), and [security boundaries](SECURITY.md).
 
 Code is **MIT**. Data and the retained paper have separate terms in [the data documentation](docs/DATA.md). InstrumentZero builds on NumPy/SciPy and established experimental-design research. It does not claim to invent Bayesian design, learned sequential policies or general autonomous science.
+
