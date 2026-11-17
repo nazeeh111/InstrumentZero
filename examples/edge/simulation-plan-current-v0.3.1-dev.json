@@ -165,7 +165,7 @@
     "src/instrumentzero/acoustic.py": "6e9a4bb01e51feb4179f36573ea4696579a41acaa42fd43eb3d606774f6dba9d",
     "src/instrumentzero/adapters.py": "bc3af96795c7ec483d0e6b13d73a223cdf2145c13c7b3310725beafc54fb0460",
     "src/instrumentzero/calibrated.py": "eb9f00043cbc21ff373e18e1d51469d5ff1ae6118b3bf7a01fd8021613e3e4ed",
-    "src/instrumentzero/cli.py": "45e9e09800a5b744b4624478d1e8bb4cbfd5338ceba2e74b3d30f4cf144565cd",
+    "src/instrumentzero/cli.py": "33e3c61c18a440bd263f5a53897955140d98290a2d997fc99be18b84a305be68",
     "src/instrumentzero/design.py": "7daca39d1ec4b8dfb75c8190f7b5723342ebe1a675e0cacea50dd072f4abc702",
     "src/instrumentzero/edge/__init__.py": "b55e5d848fb5d2a0993b86de1c96636e969d7ebf6f0500bcac4f112e20c9424f",
     "src/instrumentzero/edge/acquisition.py": "c3e8a4e0c7ff0927b59e5dfede2d8dc93a32bafd9e518e16f6f17aa80018924d",

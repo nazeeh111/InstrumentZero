@@ -121,6 +121,8 @@ instrumentzero analyze examples/stiffness-spec.json examples/stiffness.csv --exp
 instrumentzero analyze examples/acoustic-spec.json data/tuning-fork-440Hz.wav --export resonance.zip
 ```
 
+CLI exports require a new destination. Existing files, including observation inputs and earlier evidence, are never replaced. Exports are staged and flushed before publication; after a failed write, retry the same unoccupied destination.
+
 ```python
 import csv, json
 from instrumentzero import MeasurementSpec, compile_experiment, analyze_stiffness

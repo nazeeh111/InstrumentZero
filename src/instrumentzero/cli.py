@@ -15,6 +15,7 @@ from .engine import analyze_stiffness, compile_experiment
 from .examples import acoustic_example, recorded_stiffness_example, stiffness_example
 from .export import export_package
 from .replay import POLICIES, export_replay_package, recorded_stiffness_replay
+from .session import publish
 from .spec import MeasurementError
 
 
@@ -85,7 +86,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         if args.command == "session":
-            from .session import MAX_SESSION, ExperimentSession, publish, read_file
+            from .session import MAX_SESSION, ExperimentSession, read_file
 
             if args.session_action == "start":
                 source = Path(args.spec)
@@ -127,11 +128,11 @@ def main(argv: list[str] | None = None) -> int:
             options = {"measurement_budget": args.budget, "policy": args.policy, "random_seed": args.seed}
             output = recorded_stiffness_replay(args.data_dir, **options)
             if args.export:
-                Path(args.export).write_bytes(export_replay_package(args.data_dir, **options))
+                publish(args.export, export_replay_package(args.data_dir, **options))
         elif args.command == "validate-calibrated":
             output = calibrated_acoustic_validation(args.data_dir)
             if args.export:
-                Path(args.export).write_bytes(export_calibrated_package(args.data_dir))
+                publish(args.export, export_calibrated_package(args.data_dir))
         elif args.command == "compile":
             output = compile_experiment(_json(args.spec))
         elif args.command == "demo":
@@ -144,7 +145,7 @@ def main(argv: list[str] | None = None) -> int:
                     wav = next(args.data_dir.glob("*440*.wav"))
                     samples, rate = load_wav(wav)
                     payload.update(samples=samples.tolist(), sample_rate_hz=rate)
-                Path(args.export).write_bytes(export_package(payload))
+                publish(args.export, export_package(payload))
         else:
             spec = _json(args.spec)
             payload = {"spec": spec}
@@ -157,7 +158,7 @@ def main(argv: list[str] | None = None) -> int:
                 output = analyze_stiffness(spec, rows)
                 payload["rows"] = rows
             if args.export:
-                Path(args.export).write_bytes(export_package(payload))
+                publish(args.export, export_package(payload))
         print(json.dumps(output, indent=2, allow_nan=False))
         return 0
     except (MeasurementError, OSError, ValueError) as exc:
