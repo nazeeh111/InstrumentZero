@@ -1,0 +1,46 @@
+{
+  "method": "Matplotlib source-derived figures from exact retained JSON; no solver, inference, new experiment, image enhancement or smoothing",
+  "runtime": {
+    "python": "3.13.2 (v3.13.2:4f8bb3947cf, Feb  4 2025, 11:51:10) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4"
+  },
+  "font_policy": [
+    "DejaVu Sans",
+    "Arial",
+    "sans-serif"
+  ],
+  "figures": [
+    {
+      "repository": "InstrumentZero",
+      "inputs": [
+        {
+          "path": "examples/edge/simulation-confirmation-v0.3-final/custom-1.json",
+          "sha256": "b125672b6b58af1c39d9361a55bd4a9c14f1ba22680755ccc77ffebd2e9365ba"
+        }
+      ],
+      "transformations": [
+        "All stored time_seconds and signal values retained unchanged.",
+        "No new fit; printed estimate read from retained independent_numerical_reference.",
+        "Acceleration unit from stored plot metadata checked against compiled calibration."
+      ],
+      "outputs": [
+        {
+          "path": "docs/presentation/seeded-ringdown.png",
+          "sha256": "d5a52409dcaad13258dcccf8965a5738ab94ddc5c2f05550c964255abf787cfd"
+        },
+        {
+          "path": "docs/presentation/seeded-ringdown.svg",
+          "sha256": "d906e57330da1c5a6136f87c6f8bbd5de7831635e2a9f54479d7447389ddcfdb"
+        }
+      ]
+    }
+  ],
+  "source_to_svg": {
+    "series": "source-signal",
+    "source_samples": 769,
+    "exported_vertices": 769,
+    "maximum_svg_coordinate_error": 4.995117706130259e-07,
+    "path_simplify": false
+  }
+}
