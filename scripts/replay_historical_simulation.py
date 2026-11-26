@@ -18,7 +18,7 @@ SNAPSHOT_ROOT = 'examples/edge/historical-simulation-v0.3-source'
 RESTORED = {
     name: f'{SNAPSHOT_ROOT}/{name}' for name in (
         'src/instrumentzero/__init__.py', 'src/instrumentzero/cli.py',
-        'src/instrumentzero/edge/estimator.py', 'src/instrumentzero/edge/simulation.py',
+        'src/instrumentzero/edge/cli.py', 'src/instrumentzero/edge/estimator.py', 'src/instrumentzero/edge/simulation.py',
         'src/instrumentzero/server.py', 'src/instrumentzero/web/edge.css',
         'src/instrumentzero/web/edge.html', 'src/instrumentzero/web/edge.js',
         'src/instrumentzero/web/index.html', 'src/instrumentzero/web/style.css',
