@@ -1,19 +1,17 @@
 # InstrumentZero
 
-**From a signal to an answer you can inspect.**
+**Estimate how fast a vibration dies away.**
 
-InstrumentZero turns supported measurement questions into a model, a calibration contract, executable analysis and an evidence package. Start with a seeded ringdown, inspect what the estimator can identify, then export the samples and source. The separate Lab supports recorded observations and file-based stiffness sessions.
+The Ringdown studio generates a seeded vibration and estimates its frequency and decay. Inspect the processed samples against the fitted envelope, then export the record, inputs and executable source. The separate Lab supports recorded observations and file-based stiffness sessions.
 
 [Run the simulation](#instrumentzero-edge--v030-simulation-studio) · [Model and units](docs/edge/SIMULATION.md) · [Recorded-data Lab](#from-an-ordinary-question-to-a-measurement) · [Validation and limits](docs/NO_EQUIPMENT_VALIDATION.md)
 
-<a href="docs/presentation/seeded-ringdown.svg">
 <picture>
-  <source media="(max-width: 600px)" srcset="docs/presentation/seeded-ringdown-mobile.png">
-  <img src="docs/presentation/seeded-ringdown.png" alt="All 769 plotted samples from a retained synthetic ringdown with model frequency 9.75 Hz, decay 0.45 per second and seed 9132301. The complete eight-second run is simulated, not physically measured." width="1000">
+  <source media="(max-width: 600px)" srcset="docs/presentation/studio-trace-mobile.png">
+  <img src="docs/presentation/studio-trace.png" alt="Ringdown studio showing the processed acceleration samples and fitted upper and lower envelopes. Seed 9132301 gives a fitted decay of 0.44992 per second." width="840">
 </picture>
-</a>
 
-This retained run starts from an analytic signal. Its float64 reference fit estimates **9.75000657 Hz** and **0.44992366 s⁻¹** decay. The complete source record also contains the C processing results, placement comparison and explicit refusal/verification status. A small simulation error does not establish sensor calibration, interval coverage or physical accuracy. [Open the exact run](examples/edge/simulation-confirmation-v0.3-final/custom-1.json) · [Figure data and interpretation](docs/presentation/README.md).
+The custom example below starts at **9.75 Hz** with an exponential decay rate of **0.45 s⁻¹**. The plotted signal starts after filter startup. Its fitted envelope describes attenuation, and the sample control reads individual plotted values in seconds and m/s². The frequency resolution and declared clock envelope carries no validated confidence level. [Recorded float64 reference and original case](examples/edge/simulation-confirmation-v0.3-final/custom-1.json) · [Figure provenance](docs/presentation/README.md).
 
 Current source is unreleased `0.3.1.dev0`; the historical `v0.3.0` release predates the file-only stiffness sessions and reviewed Lab presentation. Those sessions retain inputs and calibration revisions, and reopening recomputes the result. Calibration basis is a user declaration, not an independently verified certificate. Public recorded-data checks, synthetic studies and physical validation remain distinct throughout the Lab.
 
