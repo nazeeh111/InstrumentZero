@@ -175,7 +175,7 @@ def compare(spec=None, samples=None, timestamps_us=None, profile=None, source=No
     chosen = next(c for c in result["comparisons"] if c["selected"])
     if chosen["result"]["frequency_hz"] is not None and not chosen["measurement_error_budget_passed_for_this_input"]:
         chosen["unchecked_fit"] = dict(chosen["result"])
-        chosen["result"].update(status="rejected", frequency_hz=None, damping_ratio=None,
+        chosen["result"].update(status="rejected", frequency_hz=None, damping_ratio=None, fit_envelope=None,
                                reasons=["Selected placement failed the declared numerical measurement-preservation budget."])
     result['simulation_truth'] = truth_check(result['source'], chosen['result'], compiled['spec']['estimator'])
     result["workflow_metrics"] = {"wall_seconds_including_graph_planning_reference_and_native_startup": time.perf_counter()-started,

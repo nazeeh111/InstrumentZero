@@ -1,5 +1,9 @@
 # Ringdown figure provenance
 
+The current README images, `studio-trace.png` and `studio-trace-mobile.png`, are live Chrome captures of the local Ringdown studio at 1280 and 390 CSS pixels. Run the README’s custom model in the studio with 8 seconds and 4× decimation. Both plots show the selected placement’s processed samples after FIR startup, with time zero at the first plotted sample. The dashed upper and lower curves use the fitted offset plus or minus fitted initial amplitude times exp(−decay × time). Their separation describes signal magnitude. Frequency resolution, declared clock error and confidence coverage are separate concepts. Use the sample slider for exact stored plotted values, then export `run.json` and the original sample array.
+
+## Earlier stored-trace illustration
+
 `seeded-ringdown.png` and the editable SVG render `../../examples/edge/simulation-confirmation-v0.3-final/custom-1.json` at source commit `c1a252300159e2e8e161db43191aafcbea701077`.
 
 Every one of the 769 stored `plot.time_seconds` / `plot.signal` samples is displayed, without filtering, interpolation, smoothing, fitting, exclusions or normalization. Time is seconds; the stored signal unit is m/s². Connecting lines aid reading between stored plot samples; they are not extra observations. The run is eight seconds; the captured, processed plot segment ends at 7.68 s after the pipeline's boundaries.

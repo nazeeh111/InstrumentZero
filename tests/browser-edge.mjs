@@ -59,3 +59,19 @@ test('custom model units and bounds follow an applied source specification',asyn
  assert.equal(h.item('model-noise-label').textContent,'Noise RMS / FS');assert.equal(h.item('model-amplitude-label').textContent,'Amplitude / FS');
  assert.equal(h.item('model-frequency').max,'49.9');assert.equal(h.item('model-noise').max,'0.25');assert.equal(h.item('model-amplitude').max,'1');
 });
+
+test('envelope labels distinguish earlier accepted results, current fits and withheld damping',async()=>{
+ const cases=[
+   [{},'Envelope unavailable in this saved result',true],
+   [{fit_envelope:{initial_amplitude:1,offset:.1},decay_per_second:.45},'Fitted decay 0.45000 s⁻¹',false],
+   [{damping_ratio:null},'Decay fit withheld',true],
+ ];
+ for(const [fields,expected,hidden] of cases){
+   const run=bundle();
+   Object.assign(run.comparisons.find(c=>c.selected).result,fields);
+   const h=harness(async()=>response(run));await flush();
+   await h.dispatch('experiment-form','submit');
+   assert.equal(h.item('decay-reading').textContent,expected);
+   assert.equal(h.item('fit-key').hidden,hidden);
+ }
+});

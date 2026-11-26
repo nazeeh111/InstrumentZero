@@ -15,18 +15,67 @@
     el('export').removeAttribute('href');text('epoch',`${epoch} / no result for this configuration`);status(message);
   }
   function updateSpec(){if(!spec)return;if(unapplied){invalidate('Apply the edited specification before changing basic controls.');return;}spec.dsp.decimation=Number(el('decimation').value);spec.resources.raw_validation=el('raw-validation').checked;spec.resources.link_bytes_per_second=Number(el('bandwidth').value);el('spec-json').value=JSON.stringify(spec,null,2);invalidate();}
-  function waveform(plot){
-    const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 800 180');svg.setAttribute('role','img');
-    const title=document.createElementNS(ns,'title');title.textContent='Processed synthetic signal after FIR startup removal';svg.append(title);
-    for(let i=0;i<7;i++){const line=document.createElementNS(ns,'line');for(const [k,v]of Object.entries({x1:0,x2:800,y1:i*30,y2:i*30,stroke:'#e2e4db'}))line.setAttribute(k,String(v));svg.append(line);}
-    const y=plot.signal,extent=Math.max(...y.map(Math.abs),.001),path=document.createElementNS(ns,'path');
-    path.setAttribute('d',y.map((v,i)=>`${i?'L':'M'}${(i*800/Math.max(1,y.length-1)).toFixed(2)},${(90-v*78/extent).toFixed(2)}`).join(' '));path.setAttribute('fill','none');path.setAttribute('stroke','#c84424');path.setAttribute('stroke-width','1.2');svg.append(path);el('waveform').replaceChildren(svg);
-    text('plot-unit',`TIME / 0–${plot.time_seconds.at(-1).toFixed(2)} s · ${plot.unit}`);
+  function waveform(run,fit){
+    const plot=run.plot;
+    const ns='http://www.w3.org/2000/svg';
+    function shape(tag,attrs){
+      const node=document.createElementNS(ns,tag);
+      for(const [key,value] of Object.entries(attrs))node.setAttribute(key,String(value));
+      return node;
+    }
+    const samples=plot.signal,times=plot.time_seconds,start=times[0],end=times.at(-1);
+    const unit=plot.unit==='m/s^2'?'m/s²':plot.unit;
+    const envelope=fit.damping_ratio!=null?fit.fit_envelope:null;
+    const extent=Math.max(.001,...samples.map(Math.abs),
+      envelope?Math.abs(envelope.offset)+envelope.initial_amplitude:0);
+    const x=t=>1000*(t-start)/(end-start||1);
+    const y=value=>100-95*value/extent;
+    const svg=shape('svg',{viewBox:'0 0 1000 200',preserveAspectRatio:'none','aria-hidden':'true'});
+    for(const level of [-1,0,1]){
+      const h=y(level*extent);
+      svg.append(shape('line',{x1:0,x2:1000,y1:h,y2:h,class:'trace-grid'}));
+    }
+    function trace(values,kind){
+      const d=values.map((v,i)=>(i?'L':'M')+x(times[i]).toFixed(2)+' '+y(v).toFixed(2)).join(' ');
+      svg.append(shape('path',{d,class:kind,fill:'none','vector-effect':'non-scaling-stroke'}));
+    }
+    trace(samples,'signal-trace');
+    if(envelope){
+      for(const sign of [-1,1])
+        trace(times.map(t=>envelope.offset+sign*envelope.initial_amplitude*
+          Math.exp(-fit.decay_per_second*(t-start))),'fit-trace');
+    }
+    const cursor=shape('line',{y1:0,y2:200,class:'trace-cursor','vector-effect':'non-scaling-stroke'});
+    svg.append(cursor);
+    el('waveform').replaceChildren(svg);
+    text('amplitude-unit',unit);
+    const calibration=run.compiled.spec?.calibration;
+    text('trace-source',[run.source?.seed!=null?'Seed '+run.source.seed:null,
+      calibration?'Calibration '+calibration.id:null].filter(Boolean).join(' · '));
+    text('trace-high',extent.toPrecision(3));text('trace-low','−'+extent.toPrecision(3));
+    text('trace-start',start.toFixed(2)+' s');text('trace-end',end.toFixed(2)+' s');
+    el('fit-key').hidden=!envelope;
+    let decayLabel='Decay fit withheld';
+    if(fit.damping_ratio!=null){
+      decayLabel=envelope?`Fitted decay ${fit.decay_per_second.toPrecision(5)} s⁻¹`:
+        'Envelope unavailable in this saved result';
+    }
+    text('decay-reading',decayLabel);
+    const slider=el('sample-index');
+    slider.max=String(samples.length-1);slider.value='0';
+    function inspect(){
+      const i=Number(slider.value);
+      cursor.setAttribute('x1',x(times[i]));cursor.setAttribute('x2',x(times[i]));
+      const reading=`${times[i].toFixed(3)} s · ${samples[i].toPrecision(5)} ${unit}`;
+      text('sample-reading',reading);slider.setAttribute('aria-valuetext',reading);
+    }
+    slider.oninput=inspect;
+    inspect();
   }
   function render(run){
     loaded=run;const chosen=run.comparisons.find(c=>c.selected),fit=chosen.result;
     el('result').hidden=false;el('comparison').hidden=false;el('empty').hidden=true;el('comparison-empty').hidden=true;
-    text('frequency',fit.frequency_hz===null?'Rejected':fit.frequency_hz.toFixed(4));text('frequency-note',fit.frequency_hz===null?'No supported estimate':`Model fit · resolution envelope ±${fit.frequency_resolution_clock_envelope_hz.toFixed(3)} Hz`);
+    text('frequency',fit.frequency_hz===null?'Rejected':fit.frequency_hz.toFixed(4));text('frequency-note',fit.frequency_hz===null?'No supported estimate':`Resolution / declared clock ±${fit.frequency_resolution_clock_envelope_hz.toFixed(3)} Hz · not a confidence interval`);
     text('damping',fit.damping_ratio===null?'Unavailable':fit.damping_ratio.toFixed(5));text('damping-note',fit.damping_ratio===null?'Decay/model criteria not met':'Single-mode decay model only');text('placement',names[chosen.mode]);text('epoch',`${epoch} / ${(run.source?.simulation_id||run.compiled.spec_sha256).slice(0,16)}`);
     const truth=run.simulation_truth;el('truth').hidden=!truth;
     if(truth){
@@ -35,7 +84,7 @@
       text('truth-values',truth.status==='unavailable'?truth.reason:`Model ${truth.model_frequency_hz.toFixed(4)} Hz · |error| ${truth.frequency_absolute_error_hz===null?'unavailable':truth.frequency_absolute_error_hz.toExponential(2)+' Hz'} · model damping ${truth.model_damping_ratio.toFixed(5)}${truth.damping_relative_error===null?'':` · damping error ${(truth.damping_relative_error*100).toFixed(3)}%`}`);
     }
     const reasons=[...new Set([...(fit.reasons||[]),...(fit.damping_rejection_reasons||[])])];el('rejection').hidden=!reasons.length;
-    const heading=document.createElement('strong');heading.textContent=fit.status==='rejected'?'Signal rejected':'Damping withheld';const reason=document.createElement('span');reason.textContent=reasons.join(' ');el('rejection').replaceChildren(heading,reason);waveform(run.plot);
+    const heading=document.createElement('strong');heading.textContent=fit.status==='rejected'?'Signal rejected':'Damping withheld';const reason=document.createElement('span');reason.textContent=reasons.join(' ');el('rejection').replaceChildren(heading,reason);waveform(run,fit);
     const max=Math.max(...run.comparisons.map(c=>c.metrics.wire_bytes_including_headers));el('transfer-bars').replaceChildren();el('comparison-rows').replaceChildren();
     run.comparisons.forEach(c=>{
       const bar=document.createElement('div');bar.className=`transfer-bar ${c.selected?'chosen':''}`;const label=document.createElement('span');label.textContent=names[c.mode];const track=document.createElement('div');track.className='bar-track';const fill=document.createElement('div');fill.className='bar-fill';fill.style.width=`${100*c.metrics.wire_bytes_including_headers/max}%`;track.append(fill);const bytes=document.createElement('code');bytes.textContent=`${c.metrics.wire_bytes_including_headers.toLocaleString()} B`;bar.append(label,track,bytes);el('transfer-bars').append(bar);

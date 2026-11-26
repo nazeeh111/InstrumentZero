@@ -54,11 +54,21 @@ def test_clipping_and_mismatched_clock_are_acquisition_failures():
         execute(c, y, np.rint(t*1.01).astype(np.int64))
 
 
+def test_fit_envelope_recovers_signal_origin_and_amplitude():
+    t = np.arange(800) / 100
+    y = 2.5 + 1.7*np.exp(-.45*t)*np.sin(2*np.pi*9.75*t+.83)
+    fit = ringdown(y, 100, default_spec()["estimator"])
+    assert fit["fit_envelope"]["initial_amplitude"] == pytest.approx(1.7, rel=1e-5)
+    assert fit["fit_envelope"]["offset"] == pytest.approx(2.5, rel=1e-5)
+    assert fit["decay_per_second"] == pytest.approx(.45, rel=1e-5)
+
+
 def test_stationary_tone_does_not_identify_damping():
     s = default_spec()
     result = ringdown(np.sin(2*np.pi*17*np.arange(800)/100), 100, s["estimator"])
     assert result["frequency_hz"] == pytest.approx(17, abs=.001)
     assert result["damping_ratio"] is None
+    assert result["fit_envelope"] is None
     assert any("not identifiable" in r for r in result["damping_rejection_reasons"])
 
 

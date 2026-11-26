@@ -13,7 +13,8 @@ def ringdown(samples, rate, settings, clock_ppm=0):
         raise EdgeError("Ringdown needs at least 32 finite mono samples.")
     t = np.arange(len(y)) / rate
     duration = len(y)/rate
-    y = y - np.mean(y)
+    mean = float(np.mean(y))
+    y = y - mean
     energy = float(np.dot(y, y))
     if energy < len(y) * 1e-12:
         return {"status": "rejected", "reasons": ["No usable signal above absolute floor."], "frequency_hz": None, "damping_ratio": None}
@@ -57,7 +58,12 @@ def ringdown(samples, rate, settings, clock_ppm=0):
     if explained < .98:
         damping_reasons.append("Damping requires at least 98% explained energy.")
     damping = decay / np.sqrt(decay**2 + (2*np.pi*frequency)**2)
-    return {"status": "rejected" if reasons else "accepted_model_fit", "reasons": reasons,
+    envelope = None
+    if not damping_reasons:
+        sine, cosine, centered_offset = np.linalg.lstsq(design(frequency, decay), y, rcond=None)[0]
+        envelope = {"initial_amplitude": float(np.hypot(sine, cosine)),
+                    "offset": float(centered_offset + mean)}
+    return {"fit_envelope": envelope, "status": "rejected" if reasons else "accepted_model_fit", "reasons": reasons,
             "frequency_hz": None if reasons else frequency,
             "fitted_frequency_hz": frequency, "decay_per_second": decay,
             "frequency_resolution_clock_envelope_hz": frequency_envelope,
