@@ -6,6 +6,7 @@ from pathlib import Path
 
 from scipy.io import wavfile
 
+from ..publication import publish
 from .artifacts import export_run, generated_header
 from .planner import measure_costs, plan
 from .simulation import SCENARIOS, compare, generate
@@ -140,7 +141,13 @@ def run(args):
             raise EdgeError("A frozen cost profile must be a JSON object.")
         result = compare(spec, y, ticks, costs, source)
     if args.export:
-        with args.export.open("xb") as stream:
-            stream.write(export_run(result, y, ticks, original_protocol=args.data.read_bytes() if args.edge_command == "protocol" else None,
-                                    original_control=Path(str(args.data)+'.json').read_bytes() if args.edge_command == 'protocol' and Path(str(args.data)+'.json').is_file() else None))
+        original_protocol = None
+        original_control = None
+        if args.edge_command == "protocol":
+            original_protocol = args.data.read_bytes()
+            sidecar = Path(f"{args.data}.json")
+            if sidecar.is_file():
+                original_control = sidecar.read_bytes()
+        archive = export_run(result, y, ticks, original_protocol=original_protocol, original_control=original_control)
+        publish(args.export, archive)
     return result

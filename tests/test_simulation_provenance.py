@@ -20,8 +20,8 @@ def test_current_plan_keeps_historical_cases_and_acceptance():
     new = json.loads((ROOT / CURRENT).read_text())
     assert new['cases'] == old['cases']
     assert new['acceptance'] == old['acceptance']
-    assert set(new['frozen_sha256']) == set(old['frozen_sha256'])
-    assert len(new['frozen_sha256']) == 43
+    assert set(new['frozen_sha256']) == set(old['frozen_sha256']) | {'src/instrumentzero/publication.py'}
+    assert len(old['frozen_sha256']) == 43
 
 
 def test_historical_snapshot_tampering_refused_before_output(tmp_path):

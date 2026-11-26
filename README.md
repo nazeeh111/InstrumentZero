@@ -33,7 +33,8 @@ instrumentzero lab --port 58134
 # Open http://127.0.0.1:58134/edge
 ```
 
-A free C99 compiler is required. In the custom example, frequency is in Hz and
+A free C99 compiler is required. CLI exports preserve any existing file at the destination and require a filesystem that supports hard links.
+In the custom example, frequency is in Hz and
 the exponential decay parameter is per second. These are inputs to an idealized
 signal generator, not measurements from a physical instrument. The interface
 exposes frequency, decay, noise, amplitude and seed, plus reduction, raw validation and resource budgets. It separates error against the analytic model from C-versus-float64 processing agreement. Rejected signals remain inspectable; every edit invalidates stale results and exports.

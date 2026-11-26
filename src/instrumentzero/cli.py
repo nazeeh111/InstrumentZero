@@ -14,8 +14,8 @@ from .edge.cli import add_parser as add_edge_parser
 from .engine import analyze_stiffness, compile_experiment
 from .examples import acoustic_example, recorded_stiffness_example, stiffness_example
 from .export import export_package
+from .publication import publish
 from .replay import POLICIES, export_replay_package, recorded_stiffness_replay
-from .session import publish
 from .spec import MeasurementError
 
 

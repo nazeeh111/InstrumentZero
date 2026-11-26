@@ -11,13 +11,13 @@ import json
 import os
 import platform
 import stat
-import tempfile
 from pathlib import Path
 
 import numpy as np
 import scipy
 
 from .engine import analyze_stiffness, compile_experiment, digest
+from .publication import publish as publish
 from .spec import MeasurementError, MeasurementSpec
 
 MAX_INPUT = 2_000_000
@@ -283,16 +283,3 @@ class ExperimentSession:
                 "Checksums detect changes but do not authenticate a source.",
             ],
         }
-
-
-def publish(path, data):
-    path = Path(path)
-    fd, temporary = tempfile.mkstemp(prefix="." + path.name + ".", suffix=".pending", dir=path.parent)
-    try:
-        with os.fdopen(fd, "wb") as stream:
-            stream.write(data)
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.link(temporary, path)
-    finally:
-        os.unlink(temporary)

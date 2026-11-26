@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from instrumentzero.cli import main
+from instrumentzero.session import publish
 
 SPEC = {
     "domain": "stiffness",
@@ -86,12 +87,41 @@ class CliExportTests(unittest.TestCase):
     def test_late_flush_failure_preserves_input_and_same_path_retry_succeeds(self):
         target = self.root / "evidence.zip"
         before = self.data.read_bytes()
-        with patch("instrumentzero.session.os.fsync", side_effect=OSError("flush failed")):
+        with patch("instrumentzero.publication.os.fsync", side_effect=OSError("flush failed")):
             self.assertEqual(self.analyze(target)[0], 2)
         self.assertFalse(target.exists())
         self.assertFalse(list(self.root.glob("*.pending")))
         self.assertEqual(self.data.read_bytes(), before)
         self.assertEqual(self.analyze(target)[0], 0)
+
+    def test_edge_zip_can_retry_after_flush_failure(self):
+        target = self.root / "edge.zip"
+        command = ["edge", "simulate", "--scenario", "custom_ringdown", "--frequency", "9.75",
+                   "--export", str(target)]
+        with patch("instrumentzero.publication.os.fsync", side_effect=OSError("flush failed")):
+            code, _, error = self.call(command)
+        self.assertEqual(code, 2)
+        self.assertIn("flush failed", error)
+        self.assertFalse(target.exists())
+        self.assertFalse(list(self.root.glob("*.pending")))
+        code, _, error = self.call(command)
+        self.assertEqual(code, 0, error)
+        original = target.read_bytes()
+        with zipfile.ZipFile(target) as archive:
+            self.assertIsNone(archive.testzip())
+            self.assertEqual(json.loads(archive.read("run.json"))["source"]["model_frequency_hz"], 9.75)
+        self.assertEqual(self.call(command)[0], 2)
+        self.assertEqual(target.read_bytes(), original)
+
+    def test_publication_succeeds_when_final_cleanup_fails(self):
+        target = self.root / "export.bin"
+        error = io.StringIO()
+        with (patch("instrumentzero.publication.os.unlink", side_effect=OSError("cleanup failed")),
+              contextlib.redirect_stderr(error)):
+            publish(target, b"complete evidence")
+        self.assertEqual(target.read_bytes(), b"complete evidence")
+        self.assertIn("Export saved", error.getvalue())
+        self.assertIn("could not remove staging file", error.getvalue())
 
     def test_replay_and_calibrated_routes_preserve_existing_exports(self):
         for command, calculation, exporter in (
